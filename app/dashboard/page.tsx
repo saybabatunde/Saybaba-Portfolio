@@ -63,8 +63,6 @@ const projects = {
   ],
 }
 
-type ProjectCategory = 'AWS' | 'Azure' | 'Python' | 'Apps'
-
 export default function DashboardPage() {
   const router = useRouter()
   const [username, setUsername] = useState('')
