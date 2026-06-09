@@ -41,3 +41,10 @@ yarn-error.log*
 
 # Local dev
 .env.local
+
+# Lambda build artifacts
+lambda/package/
+lambda/lambda_package.zip
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate*

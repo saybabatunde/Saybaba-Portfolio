@@ -69,6 +69,36 @@ export default function DashboardPage() {
           </p>
         </div>
 
+        {/* Live Projects / Interactive Demos */}
+        <section className="mb-16 animate-fade-in">
+          <h3 className="text-2xl font-bold text-white mb-8 border-b border-green-600 pb-4">
+            🔴 Live Projects (Interactive Demos)
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* AWS User Onboarding Portal */}
+            <Link href="/dashboard/onboarding">
+              <div className="bg-gradient-to-br from-orange-900/30 to-gray-900 rounded-lg border-2 border-orange-600 hover:border-orange-400 hover:shadow-lg hover:shadow-orange-600/30 transition duration-300 p-6 cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">⚙️</span>
+                  <div>
+                    <h4 className="text-xl font-bold text-white group-hover:text-orange-300">AWS User Onboarding</h4>
+                    <p className="text-sm text-orange-400">Live Demo with Real AWS Integration</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4">
+                  Create real IAM users with a single click. See real AWS API calls, audit logs, and infrastructure in action. Built with Lambda, API Gateway, and DynamoDB.
+                </p>
+                <div className="flex items-center gap-2 text-orange-400 font-semibold group-hover:gap-3">
+                  Open Demo <span>→</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <p className="text-sm text-gray-400 mt-4">
+            💡 <span className="text-yellow-400">Demo Mode:</span> Creates real AWS IAM users. Full audit trail of all actions. Clean up anytime from AWS console.
+          </p>
+        </section>
+
         {/* Project Sections */}
         <div className="space-y-16">
           {categories.map((category) => {

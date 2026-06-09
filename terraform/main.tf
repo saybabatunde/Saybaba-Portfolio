@@ -153,31 +153,39 @@ resource "aws_lambda_function" "create_user" {
   depends_on = [aws_iam_role_policy.lambda_dynamodb_policy]
 }
 
-# API Gateway
-resource "aws_apigatewayv2_api" "user_onboarding_api" {
-  name          = "UserOnboarding-API"
-  protocol_type = "HTTP"
-  cors_configuration {
-    allow_origins = ["*"]
-    allow_methods = ["POST", "GET", "OPTIONS"]
-    allow_headers = ["content-type"]
+# API Gateway REST API
+resource "aws_api_gateway_rest_api" "user_onboarding_api" {
+  name        = "UserOnboarding-API"
+  description = "API for user onboarding portal"
+
+  endpoint_configuration {
+    types = ["REGIONAL"]
   }
 }
 
-# API Gateway Integration with Lambda (Create User)
-resource "aws_apigatewayv2_integration" "create_user_integration" {
-  api_id           = aws_apigatewayv2_api.user_onboarding_api.id
-  integration_type = "AWS_PROXY"
-  integration_method = "POST"
-  payload_format_version = "2.0"
-  target           = "arn:aws:apigatewayv2:${var.aws_region}:lambda:path/2015-03-31/functions/${aws_lambda_function.create_user.arn}/invocations"
+# Create User Resource
+resource "aws_api_gateway_resource" "create_user" {
+  rest_api_id = aws_api_gateway_rest_api.user_onboarding_api.id
+  parent_id   = aws_api_gateway_rest_api.user_onboarding_api.root_resource_id
+  path_part   = "create-user"
 }
 
-# API Gateway Route for Create User
-resource "aws_apigatewayv2_route" "create_user_route" {
-  api_id    = aws_apigatewayv2_api.user_onboarding_api.id
-  route_key = "POST /create-user"
-  target    = "integrations/${aws_apigatewayv2_integration.create_user_integration.id}"
+# Create User Method
+resource "aws_api_gateway_method" "create_user_method" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.create_user.id
+  http_method      = "POST"
+  authorization    = "NONE"
+}
+
+# Lambda Integration
+resource "aws_api_gateway_integration" "create_user_lambda" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.create_user.id
+  http_method      = aws_api_gateway_method.create_user_method.http_method
+  type             = "AWS_PROXY"
+  integration_http_method = "POST"
+  uri              = aws_lambda_function.create_user.invoke_arn
 }
 
 # Lambda Permission for API Gateway
@@ -186,20 +194,29 @@ resource "aws_lambda_permission" "api_gateway" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.create_user.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_apigatewayv2_api.user_onboarding_api.execution_arn}/*/*"
+  source_arn    = "${aws_api_gateway_rest_api.user_onboarding_api.execution_arn}/*/*"
+}
+
+# Deploy API
+resource "aws_api_gateway_deployment" "user_onboarding" {
+  rest_api_id = aws_api_gateway_rest_api.user_onboarding_api.id
+
+  depends_on = [
+    aws_api_gateway_integration.create_user_lambda
+  ]
 }
 
 # API Gateway Stage
-resource "aws_apigatewayv2_stage" "default" {
-  api_id      = aws_apigatewayv2_api.user_onboarding_api.id
-  name        = "$default"
-  auto_deploy = true
+resource "aws_api_gateway_stage" "prod" {
+  deployment_id = aws_api_gateway_deployment.user_onboarding.id
+  rest_api_id   = aws_api_gateway_rest_api.user_onboarding_api.id
+  stage_name    = "prod"
 }
 
 # Outputs
 output "api_endpoint" {
   description = "API Gateway endpoint URL"
-  value       = "${aws_apigatewayv2_api.user_onboarding_api.api_endpoint}/create-user"
+  value       = "${aws_api_gateway_stage.prod.invoke_url}/create-user"
 }
 
 output "dynamodb_table" {
