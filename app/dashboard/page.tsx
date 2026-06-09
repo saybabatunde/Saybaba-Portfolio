@@ -2,66 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import ProjectCard from '@/components/ProjectCard'
-
-const projects = {
-  AWS: [
-    {
-      id: 1,
-      title: 'AWS Infrastructure Automation',
-      description: 'Terraform modules for EC2, RDS, S3, and VPC setup',
-      link: '#',
-    },
-    {
-      id: 2,
-      title: 'AWS Lambda Microservices',
-      description: 'Serverless REST APIs using Lambda and API Gateway',
-      link: '#',
-    },
-  ],
-  Azure: [
-    {
-      id: 3,
-      title: 'Azure Bicep Templates',
-      description: 'IaC templates for App Service, SQL, Storage deployment',
-      link: '#',
-    },
-    {
-      id: 4,
-      title: 'Azure Kubernetes Service',
-      description: 'Kubernetes cluster setup and pod deployment',
-      link: '#',
-    },
-  ],
-  Python: [
-    {
-      id: 5,
-      title: 'Data Pipeline ETL',
-      description: 'Python-based data processing and transformation pipeline',
-      link: '#',
-    },
-    {
-      id: 6,
-      title: 'API with FastAPI',
-      description: 'RESTful API with async request handling',
-      link: '#',
-    },
-  ],
-  Apps: [
-    {
-      id: 7,
-      title: 'Portfolio Website',
-      description: 'Next.js + Tailwind CSS responsive portfolio',
-      link: '#',
-    },
-    {
-      id: 8,
-      title: 'Task Management App',
-      description: 'React app with local storage and drag-and-drop',
-      link: '#',
-    },
-  ],
-}
+import { projects, type Project } from '@/lib/projects'
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -69,7 +12,6 @@ export default function DashboardPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    // Check if user is logged in
     const logged_in = localStorage.getItem('logged_in')
     const user = localStorage.getItem('username')
 
@@ -95,6 +37,9 @@ export default function DashboardPage() {
       </div>
     )
   }
+
+  // Group projects by category
+  const categories = Array.from(new Set(projects.map((p) => p.category)))
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
@@ -126,18 +71,21 @@ export default function DashboardPage() {
 
         {/* Project Sections */}
         <div className="space-y-16">
-          {Object.entries(projects).map(([category, categoryProjects]) => (
-            <section key={category} className="animate-fade-in">
-              <h3 className="text-2xl font-bold text-white mb-8 border-b border-blue-600 pb-4">
-                {category} Projects
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                {categoryProjects.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
-                ))}
-              </div>
-            </section>
-          ))}
+          {categories.map((category) => {
+            const categoryProjects = projects.filter((p) => p.category === category)
+            return (
+              <section key={category} className="animate-fade-in">
+                <h3 className="text-2xl font-bold text-white mb-8 border-b border-blue-600 pb-4">
+                  {category} Projects
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                  {categoryProjects.map((project) => (
+                    <ProjectCard key={project.id} project={project} />
+                  ))}
+                </div>
+              </section>
+            )
+          })}
         </div>
 
         {/* Call to Action */}
@@ -150,7 +98,7 @@ export default function DashboardPage() {
           </p>
           <div className="flex justify-center gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/saybabatunde"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200"
@@ -158,7 +106,7 @@ export default function DashboardPage() {
               GitHub
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/babatundeolawale"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200"
