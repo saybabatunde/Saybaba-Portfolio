@@ -1,6 +1,6 @@
 import type { CreateUserRequest, AuditLog } from './types'
 
-const API_ENDPOINT = process.env.NEXT_PUBLIC_API_ENDPOINT || 'http://localhost:3001/api'
+const API_ENDPOINT = 'https://8fk4y0txyd.execute-api.us-east-1.amazonaws.com/prod'
 
 export async function createUser(data: CreateUserRequest): Promise<AuditLog> {
   const response = await fetch(`${API_ENDPOINT}/create-user`, {
