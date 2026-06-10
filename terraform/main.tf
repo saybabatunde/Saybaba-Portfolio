@@ -137,12 +137,13 @@ resource "aws_iam_role_policy" "lambda_logs_policy" {
 
 # Lambda Function (Create User)
 resource "aws_lambda_function" "create_user" {
-  filename      = "lambda_package.zip"
-  function_name = "UserOnboarding-CreateUser"
-  role          = aws_iam_role.lambda_role.arn
-  handler       = "create_user.lambda_handler"
-  runtime       = "python3.11"
-  timeout       = 30
+  filename         = "lambda_package.zip"
+  function_name    = "UserOnboarding-CreateUser"
+  role             = aws_iam_role.lambda_role.arn
+  handler          = "create_user.lambda_handler"
+  runtime          = "python3.11"
+  timeout          = 30
+  source_code_hash = filebase64sha256("lambda_package.zip")
 
   environment {
     variables = {
@@ -272,7 +273,10 @@ resource "aws_api_gateway_deployment" "user_onboarding" {
   rest_api_id = aws_api_gateway_rest_api.user_onboarding_api.id
 
   depends_on = [
-    aws_api_gateway_integration.create_user_lambda
+    aws_api_gateway_integration.create_user_lambda,
+    aws_api_gateway_integration_response.create_user_integration_response,
+    aws_api_gateway_integration.create_user_options_integration,
+    aws_api_gateway_integration_response.create_user_options_response
   ]
 }
 
