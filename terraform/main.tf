@@ -188,6 +188,76 @@ resource "aws_api_gateway_integration" "create_user_lambda" {
   uri              = aws_lambda_function.create_user.invoke_arn
 }
 
+# Integration Response for POST (to add CORS headers)
+resource "aws_api_gateway_integration_response" "create_user_integration_response" {
+  rest_api_id       = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id       = aws_api_gateway_resource.create_user.id
+  http_method       = aws_api_gateway_method.create_user_method.http_method
+  status_code       = "200"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,PUT,DELETE,OPTIONS'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+  }
+  depends_on = [aws_api_gateway_method_response.create_user_method_response]
+}
+
+# Method Response for POST
+resource "aws_api_gateway_method_response" "create_user_method_response" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.create_user.id
+  http_method      = aws_api_gateway_method.create_user_method.http_method
+  status_code      = "200"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
+# OPTIONS Method for CORS Preflight
+resource "aws_api_gateway_method" "create_user_options" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.create_user.id
+  http_method      = "OPTIONS"
+  authorization    = "NONE"
+}
+
+# OPTIONS Integration (Mock)
+resource "aws_api_gateway_integration" "create_user_options_integration" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.create_user.id
+  http_method      = aws_api_gateway_method.create_user_options.http_method
+  type             = "MOCK"
+}
+
+# OPTIONS Integration Response
+resource "aws_api_gateway_integration_response" "create_user_options_response" {
+  rest_api_id       = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id       = aws_api_gateway_resource.create_user.id
+  http_method       = aws_api_gateway_method.create_user_options.http_method
+  status_code       = "200"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,PUT,DELETE,OPTIONS'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+  }
+  depends_on = [aws_api_gateway_integration.create_user_options_integration]
+}
+
+# OPTIONS Method Response
+resource "aws_api_gateway_method_response" "create_user_options_method_response" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.create_user.id
+  http_method      = aws_api_gateway_method.create_user_options.http_method
+  status_code      = "200"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
 # Lambda Permission for API Gateway
 resource "aws_lambda_permission" "api_gateway" {
   statement_id  = "AllowAPIGatewayInvoke"
