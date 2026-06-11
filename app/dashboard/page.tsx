@@ -93,9 +93,28 @@ export default function DashboardPage() {
                 </div>
               </div>
             </Link>
+
+            {/* Azure User Onboarding Portal */}
+            <Link href="/projects/azure-onboarding">
+              <div className="bg-gradient-to-br from-blue-900/30 to-gray-900 rounded-lg border-2 border-blue-600 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-600/30 transition duration-300 p-6 cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">☁️</span>
+                  <div>
+                    <h4 className="text-xl font-bold text-white group-hover:text-blue-300">Azure User Onboarding</h4>
+                    <p className="text-sm text-blue-400">Live Demo on Azure Static Web Apps</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4">
+                  Experience Azure cloud deployment. Frontend hosted on Azure Static Web Apps with serverless architecture. See multi-cloud infrastructure in action.
+                </p>
+                <div className="flex items-center gap-2 text-blue-400 font-semibold group-hover:gap-3">
+                  Open Demo <span>→</span>
+                </div>
+              </div>
+            </Link>
           </div>
           <p className="text-sm text-gray-400 mt-4">
-            💡 <span className="text-yellow-400">Demo Mode:</span> Creates real AWS IAM users. Full audit trail of all actions. Clean up anytime from AWS console.
+            💡 <span className="text-yellow-400">Demo Mode:</span> Both demos are fully functional and show multi-cloud architecture. Full audit trails for all actions.
           </p>
         </section>
 
