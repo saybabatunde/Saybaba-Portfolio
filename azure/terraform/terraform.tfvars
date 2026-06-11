@@ -1,0 +1,7 @@
+azure_subscription_id = "5d21d59c-5088-4cf8-bf31-93d67492c9fb"
+azure_tenant_id       = "66adbd19-08ab-4dc3-bc15-387d4da0ba61"
+azure_client_id       = "bb05ee7b-fc2e-47ee-95a2-1053773fa70c"
+azure_client_secret   = "1m58Q~Q0Jfff3RLeyHvM-N3HN6b9DEEkjeidtaxn"
+azure_region          = "eastus"
+environment           = "dev"
+project_name          = "useronboarding"
