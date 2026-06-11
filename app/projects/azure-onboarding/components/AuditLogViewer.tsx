@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import type { AuditLog } from '@/lib/types'
 
-const AZURE_API = 'https://gray-forest-0ba92140f.7.azurestaticapps.net/api'
+const AWS_API = 'https://8fk4y0txyd.execute-api.us-east-1.amazonaws.com/prod'
 
 export default function AuditLogViewer() {
   const [logs, setLogs] = useState<AuditLog[]>([])
@@ -13,7 +13,7 @@ export default function AuditLogViewer() {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await fetch(`${AZURE_API}/GetAuditLogs`, {
+        const response = await fetch(`${AWS_API}/audit-logs`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

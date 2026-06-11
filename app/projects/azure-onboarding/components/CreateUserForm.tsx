@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import type { AuditLog } from '@/lib/types'
 
-const AZURE_API = 'https://gray-forest-0ba92140f.7.azurestaticapps.net/api'
+const AWS_API = 'https://8fk4y0txyd.execute-api.us-east-1.amazonaws.com/prod'
 
 export default function CreateUserForm() {
   const [formData, setFormData] = useState({
@@ -30,7 +30,7 @@ export default function CreateUserForm() {
     setResult(null)
 
     try {
-      const response = await fetch(`${AZURE_API}/CreateUser`, {
+      const response = await fetch(`${AWS_API}/create-user`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
