@@ -196,9 +196,9 @@ resource "aws_api_gateway_integration_response" "create_user_integration_respons
   http_method       = aws_api_gateway_method.create_user_method.http_method
   status_code       = "200"
   response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin"  = "'https://babatundeportfolio.com'"
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
     "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,PUT,DELETE,OPTIONS'"
-    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
   }
   depends_on = [aws_api_gateway_method_response.create_user_method_response]
 }
@@ -210,9 +210,9 @@ resource "aws_api_gateway_method_response" "create_user_method_response" {
   http_method      = aws_api_gateway_method.create_user_method.http_method
   status_code      = "200"
   response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin"  = true
     "method.response.header.Access-Control-Allow-Headers" = true
     "method.response.header.Access-Control-Allow-Methods" = true
-    "method.response.header.Access-Control-Allow-Origin"  = true
   }
 }
 
@@ -241,7 +241,7 @@ resource "aws_api_gateway_integration_response" "create_user_options_response" {
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
     "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,PUT,DELETE,OPTIONS'"
-    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'https://babatundeportfolio.com'"
   }
   depends_on = [aws_api_gateway_integration.create_user_options_integration]
 }
@@ -259,11 +259,132 @@ resource "aws_api_gateway_method_response" "create_user_options_method_response"
   }
 }
 
-# Lambda Permission for API Gateway
+# Lambda Function (Get Audit Logs)
+resource "aws_lambda_function" "get_audit_logs" {
+  filename         = "lambda_package.zip"
+  function_name    = "UserOnboarding-GetAuditLogs"
+  role             = aws_iam_role.lambda_role.arn
+  handler          = "get_audit_logs.lambda_handler"
+  runtime          = "python3.11"
+  timeout          = 30
+  source_code_hash = filebase64sha256("lambda_package.zip")
+
+  environment {
+    variables = {
+      AUDIT_TABLE = aws_dynamodb_table.audit_logs.name
+    }
+  }
+
+  depends_on = [aws_iam_role_policy.lambda_dynamodb_policy]
+}
+
+# Audit Logs Resource
+resource "aws_api_gateway_resource" "audit_logs" {
+  rest_api_id = aws_api_gateway_rest_api.user_onboarding_api.id
+  parent_id   = aws_api_gateway_rest_api.user_onboarding_api.root_resource_id
+  path_part   = "audit-logs"
+}
+
+# Audit Logs GET Method
+resource "aws_api_gateway_method" "audit_logs_method" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.audit_logs.id
+  http_method      = "GET"
+  authorization    = "NONE"
+}
+
+# Audit Logs Lambda Integration
+resource "aws_api_gateway_integration" "audit_logs_lambda" {
+  rest_api_id             = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id             = aws_api_gateway_resource.audit_logs.id
+  http_method             = aws_api_gateway_method.audit_logs_method.http_method
+  type                    = "AWS_PROXY"
+  integration_http_method = "POST"
+  uri                     = aws_lambda_function.get_audit_logs.invoke_arn
+}
+
+# Audit Logs Integration Response
+resource "aws_api_gateway_integration_response" "audit_logs_integration_response" {
+  rest_api_id       = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id       = aws_api_gateway_resource.audit_logs.id
+  http_method       = aws_api_gateway_method.audit_logs_method.http_method
+  status_code       = "200"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "'https://babatundeportfolio.com'"
+  }
+  depends_on = [aws_api_gateway_integration.audit_logs_lambda, aws_api_gateway_method_response.audit_logs_method_response]
+}
+
+# Audit Logs Method Response
+resource "aws_api_gateway_method_response" "audit_logs_method_response" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.audit_logs.id
+  http_method      = aws_api_gateway_method.audit_logs_method.http_method
+  status_code      = "200"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin"  = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Headers" = true
+  }
+}
+
+# Audit Logs OPTIONS Method
+resource "aws_api_gateway_method" "audit_logs_options" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.audit_logs.id
+  http_method      = "OPTIONS"
+  authorization    = "NONE"
+}
+
+# Audit Logs OPTIONS Integration
+resource "aws_api_gateway_integration" "audit_logs_options_integration" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.audit_logs.id
+  http_method      = aws_api_gateway_method.audit_logs_options.http_method
+  type             = "MOCK"
+}
+
+# Audit Logs OPTIONS Response
+resource "aws_api_gateway_integration_response" "audit_logs_options_response" {
+  rest_api_id       = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id       = aws_api_gateway_resource.audit_logs.id
+  http_method       = aws_api_gateway_method.audit_logs_options.http_method
+  status_code       = "200"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,POST,PUT,DELETE,OPTIONS'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'https://babatundeportfolio.com'"
+  }
+  depends_on = [aws_api_gateway_integration.audit_logs_options_integration]
+}
+
+# Audit Logs OPTIONS Method Response
+resource "aws_api_gateway_method_response" "audit_logs_options_method_response" {
+  rest_api_id      = aws_api_gateway_rest_api.user_onboarding_api.id
+  resource_id      = aws_api_gateway_resource.audit_logs.id
+  http_method      = aws_api_gateway_method.audit_logs_options.http_method
+  status_code      = "200"
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
+# Lambda Permission for API Gateway (Create User)
 resource "aws_lambda_permission" "api_gateway" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.create_user.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.user_onboarding_api.execution_arn}/*/*"
+}
+
+# Lambda Permission for API Gateway (Audit Logs)
+resource "aws_lambda_permission" "api_gateway_audit_logs" {
+  statement_id  = "AllowAPIGatewayInvokeAuditLogs"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.get_audit_logs.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_api_gateway_rest_api.user_onboarding_api.execution_arn}/*/*"
 }
@@ -276,7 +397,11 @@ resource "aws_api_gateway_deployment" "user_onboarding" {
     aws_api_gateway_integration.create_user_lambda,
     aws_api_gateway_integration_response.create_user_integration_response,
     aws_api_gateway_integration.create_user_options_integration,
-    aws_api_gateway_integration_response.create_user_options_response
+    aws_api_gateway_integration_response.create_user_options_response,
+    aws_api_gateway_integration.audit_logs_lambda,
+    aws_api_gateway_integration_response.audit_logs_integration_response,
+    aws_api_gateway_integration.audit_logs_options_integration,
+    aws_api_gateway_integration_response.audit_logs_options_response
   ]
 }
 
@@ -293,6 +418,11 @@ output "api_endpoint" {
   value       = "${aws_api_gateway_stage.prod.invoke_url}/create-user"
 }
 
+output "audit_logs_endpoint" {
+  description = "Audit logs endpoint URL"
+  value       = "${aws_api_gateway_stage.prod.invoke_url}/audit-logs"
+}
+
 output "dynamodb_table" {
   description = "DynamoDB table name"
   value       = aws_dynamodb_table.audit_logs.name
@@ -301,4 +431,9 @@ output "dynamodb_table" {
 output "lambda_function_name" {
   description = "Lambda function name"
   value       = aws_lambda_function.create_user.function_name
+}
+
+output "lambda_audit_logs_function_name" {
+  description = "Audit logs Lambda function name"
+  value       = aws_lambda_function.get_audit_logs.function_name
 }
