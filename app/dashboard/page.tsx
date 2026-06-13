@@ -74,7 +74,7 @@ export default function DashboardPage() {
           <h3 className="text-2xl font-bold text-white mb-8 border-b border-green-600 pb-4">
             🔴 Live Projects (Interactive Demos)
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* AWS User Onboarding Portal */}
             <Link href="/dashboard/onboarding">
               <div className="bg-gradient-to-br from-orange-900/30 to-gray-900 rounded-lg border-2 border-orange-600 hover:border-orange-400 hover:shadow-lg hover:shadow-orange-600/30 transition duration-300 p-6 cursor-pointer group">
@@ -112,9 +112,28 @@ export default function DashboardPage() {
                 </div>
               </div>
             </Link>
+
+            {/* Infrastructure Health Dashboard */}
+            <Link href="/dashboard/monitoring">
+              <div className="bg-gradient-to-br from-purple-900/30 to-gray-900 rounded-lg border-2 border-purple-600 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-600/30 transition duration-300 p-6 cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">📊</span>
+                  <div>
+                    <h4 className="text-xl font-bold text-white group-hover:text-purple-300">Infrastructure Health Dashboard</h4>
+                    <p className="text-sm text-purple-400">Real-Time Cloud Monitoring</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4">
+                  Monitor all connected services in real-time. Track GitHub, Supabase, Vercel, Resend, AWS, and Azure health. View CPU/RAM metrics and uptime percentages.
+                </p>
+                <div className="flex items-center gap-2 text-purple-400 font-semibold group-hover:gap-3">
+                  Open Dashboard <span>→</span>
+                </div>
+              </div>
+            </Link>
           </div>
           <p className="text-sm text-gray-400 mt-4">
-            💡 <span className="text-yellow-400">Demo Mode:</span> Both demos are fully functional and show multi-cloud architecture. Full audit trails for all actions.
+            💡 <span className="text-yellow-400">Demo Mode:</span> All three interactive demos are fully functional. Real API integrations, live data, and complete system monitoring. Click any card to explore.
           </p>
         </section>
 
