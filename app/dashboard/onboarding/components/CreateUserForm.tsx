@@ -62,6 +62,13 @@ export default function CreateUserForm() {
 
   return (
     <div className="bg-gray-800 rounded-lg border border-gray-700 p-8">
+      {/* Demo Notice */}
+      <div className="mb-6 p-4 bg-blue-900/30 border border-blue-600 rounded-lg">
+        <p className="text-blue-300 text-sm">
+          <span className="font-semibold">📋 Demo Mode:</span> This is a test environment. Feel free to supply your username and email to test the system and receive a confirmation notification. You'll be able to verify the onboarding flow works end-to-end.
+        </p>
+      </div>
+
       <h2 className="text-2xl font-bold text-white mb-6">Create New User</h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -136,11 +143,16 @@ export default function CreateUserForm() {
             <span className="text-2xl">✓</span>
             <p className="text-green-300 font-semibold">User Created Successfully!</p>
           </div>
-          <div className="space-y-2 text-green-300 text-sm">
+          <div className="space-y-2 text-green-300 text-sm mb-4">
             <p><span className="font-semibold">Username:</span> {result.username}</p>
             <p><span className="font-semibold">Email:</span> {result.email}</p>
             <p><span className="font-semibold">Group:</span> {result.group}</p>
             <p><span className="font-semibold">Audit ID:</span> {result.auditId}</p>
+          </div>
+          <div className="border-t border-green-600 pt-4">
+            <p className="text-green-300 text-sm">
+              ✉️ <span className="font-semibold">Check your email</span> to confirm you received the onboarding notification. This demonstrates the system's notification and audit capabilities working end-to-end.
+            </p>
           </div>
         </div>
       )}
