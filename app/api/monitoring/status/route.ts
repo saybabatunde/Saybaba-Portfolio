@@ -34,14 +34,14 @@ async function checkServiceHealth() {
 
   // Check Supabase
   try {
-    const supabaseRes = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/`, {
+    const supabaseRes = await fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/users?limit=1`, {
       headers: {
         apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
       },
     })
     services.push({
       name: 'Supabase',
-      status: supabaseRes.ok || supabaseRes.status === 404 ? 'operational' : 'degraded',
+      status: supabaseRes.ok || supabaseRes.status === 401 || supabaseRes.status === 404 ? 'operational' : 'degraded',
       icon: '🔋',
       message: 'Database connected and responsive',
     })
