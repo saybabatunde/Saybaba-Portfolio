@@ -157,6 +157,26 @@ export const projects: Project[] = [
     ],
     github: 'https://github.com/saybabatunde/task-management-app',
   },
+  {
+    id: 9,
+    slug: 'azure-k8s-cicd-demo',
+    title: 'CI/CD Pipeline on Azure Kubernetes',
+    description: 'Production-ready DevOps pipeline: GitHub Actions → AKS → Azure Monitor',
+    fullDescription: 'Complete CI/CD pipeline demonstrating modern DevOps practices. Automated testing, containerization, Kubernetes orchestration, and observability on Azure.',
+    category: 'DevOps',
+    techStack: ['GitHub Actions', 'Terraform', 'Kubernetes', 'Docker', 'Azure AKS', 'Application Insights', 'Python', 'Flask'],
+    features: [
+      'Automated CI/CD pipeline with GitHub Actions',
+      'Infrastructure as Code with Terraform',
+      'Docker multi-stage builds and registry',
+      'Kubernetes deployment with health probes',
+      'Zero-downtime rolling updates',
+      'Azure Monitor alerts and dashboards',
+      'Production-grade security and RBAC',
+      'Comprehensive monitoring and logging'
+    ],
+    github: 'https://github.com/saybabatunde/azure-k8s-cicd-demo',
+  },
 ]
 
 export const getProjectBySlug = (slug: string): Project | undefined => {

@@ -131,9 +131,28 @@ export default function DashboardPage() {
                 </div>
               </div>
             </Link>
+
+            {/* CI/CD Pipeline Project */}
+            <Link href="/projects/cicd-pipeline">
+              <div className="bg-gradient-to-br from-green-900/30 to-gray-900 rounded-lg border-2 border-green-600 hover:border-green-400 hover:shadow-lg hover:shadow-green-600/30 transition duration-300 p-6 cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🔄</span>
+                  <div>
+                    <h4 className="text-xl font-bold text-white group-hover:text-green-300">CI/CD Pipeline on Kubernetes</h4>
+                    <p className="text-sm text-green-400">Production DevOps Project</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 mb-4">
+                  Complete DevOps pipeline from code to production. GitHub Actions → Docker → Azure ACR → Kubernetes (AKS) → Azure Monitor. 5 phases of production-ready infrastructure.
+                </p>
+                <div className="flex items-center gap-2 text-green-400 font-semibold group-hover:gap-3">
+                  View Project <span>→</span>
+                </div>
+              </div>
+            </Link>
           </div>
           <p className="text-sm text-gray-400 mt-4">
-            💡 <span className="text-yellow-400">Demo Mode:</span> All three interactive demos are fully functional. Real API integrations, live data, and complete system monitoring. Click any card to explore.
+            💡 <span className="text-yellow-400">Live Projects:</span> All demos are fully functional with real integrations. Explore interactive dashboards and production DevOps pipeline.
           </p>
         </section>
 
