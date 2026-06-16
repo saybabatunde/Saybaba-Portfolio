@@ -1,8 +1,72 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { createClient } from '@supabase/supabase-js'
 import { addAuditLog } from '../store'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+
+function getSupabaseClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  )
+}
+
+async function logError(errorType: string, errorMessage: string, userName: string, userEmail: string, stackTrace: string) {
+  try {
+    const supabase = getSupabaseClient()
+    await supabase.from('error_logs').insert([
+      {
+        error_type: errorType,
+        error_message: errorMessage,
+        user_name: userName,
+        user_email: userEmail,
+        stack_trace: stackTrace,
+        status: 'open'
+      }
+    ])
+  } catch (err) {
+    console.error('Failed to log error to Supabase:', err)
+  }
+}
+
+async function sendAdminNotification(errorType: string, errorMessage: string, userName: string, userEmail: string) {
+  try {
+    await resend.emails.send({
+      from: 'alerts@babatundeportfolio.com',
+      to: process.env.ADMIN_EMAIL || 'olawalebabatunde98@gmail.com',
+      subject: `⚠️ ONBOARDING ERROR - ${errorType}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #d32f2f;">⚠️ Onboarding Error Alert</h2>
+
+          <div style="background-color: #ffebee; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 4px solid #d32f2f;">
+            <p><strong>Error Type:</strong> ${errorType}</p>
+            <p><strong>Error Message:</strong> ${errorMessage}</p>
+          </div>
+
+          <div style="background-color: #f5f5f5; padding: 15px; border-radius: 8px; margin: 15px 0;">
+            <h3 style="margin-top: 0;">User Information:</h3>
+            <p><strong>Name:</strong> ${userName}</p>
+            <p><strong>Email:</strong> ${userEmail}</p>
+          </div>
+
+          <p style="color: #666; font-size: 14px; margin-top: 20px;">
+            <strong>Action Required:</strong> Please investigate and resolve this issue immediately.
+          </p>
+          <p style="color: #666; font-size: 14px;">
+            Check your error logs dashboard for more details.
+          </p>
+          <p style="color: #999; font-size: 12px;">
+            © 2024 Saybaba Portfolio. All rights reserved.
+          </p>
+        </div>
+      `
+    })
+  } catch (err) {
+    console.error('Failed to send admin notification:', err)
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -42,6 +106,7 @@ export async function POST(request: NextRequest) {
     addAuditLog(auditLog)
 
     // Send welcome email
+    let emailSent = true
     try {
       await resend.emails.send({
         from: 'onboarding@babatundeportfolio.com',
@@ -71,11 +136,16 @@ export async function POST(request: NextRequest) {
         `
       })
     } catch (emailError) {
+      emailSent = false
+      const errorMsg = emailError instanceof Error ? emailError.message : 'Unknown email error'
       console.error('Failed to send email:', emailError)
-      // Don't fail the user creation if email fails
+
+      // Log error and notify admin
+      await logError('EMAIL_SEND_FAILURE', errorMsg, name, email, JSON.stringify(emailError))
+      await sendAdminNotification('EMAIL_SEND_FAILURE', errorMsg, name, email)
     }
 
-    return NextResponse.json(auditLog, {
+    return NextResponse.json({ ...auditLog, emailSent }, {
       status: 200,
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -83,9 +153,32 @@ export async function POST(request: NextRequest) {
       }
     })
   } catch (error) {
+    const errorMsg = error instanceof Error ? error.message : 'Unknown error'
+    const errorStack = error instanceof Error ? (error.stack || 'No stack trace available') : 'No stack trace available'
+
     console.error('Error creating user:', error)
+
+    // Extract user info from request if possible
+    let userName = 'Unknown'
+    let userEmail = 'unknown@example.com'
+    try {
+      const body = await request.json()
+      userName = body.name || 'Unknown'
+      userEmail = body.email || 'unknown@example.com'
+    } catch (parseErr) {
+      console.error('Could not parse request body:', parseErr)
+    }
+
+    // Log error and notify admin
+    await logError('USER_CREATION_FAILURE', errorMsg, userName, userEmail, errorStack)
+    await sendAdminNotification('USER_CREATION_FAILURE', errorMsg, userName, userEmail)
+
     return NextResponse.json(
-      { error: 'Failed to create user' },
+      {
+        error: 'Something went wrong with your submission',
+        message: 'Admin has been notified and will investigate immediately. Please check back in 5 minutes.',
+        errorId: crypto.randomUUID()
+      },
       { status: 500, headers: { 'Access-Control-Allow-Origin': '*' } }
     )
   }

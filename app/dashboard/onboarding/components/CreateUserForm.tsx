@@ -13,7 +13,7 @@ export default function CreateUserForm() {
   })
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<AuditLog | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<{ title: string; message: string } | null>(null)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -38,16 +38,23 @@ export default function CreateUserForm() {
         body: JSON.stringify(formData),
       })
 
+      const data = await response.json()
+
       if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.error || 'Failed to create user')
+        setError({
+          title: data.error || 'Oops! Something went wrong',
+          message: data.message || 'Failed to create user. Please try again.'
+        })
+        return
       }
 
-      const data = await response.json()
       setResult(data)
       setFormData({ name: '', email: '', group: 'developers' })
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create user')
+      setError({
+        title: 'Connection Error',
+        message: 'Unable to connect to the server. Please check your connection and try again.'
+      })
     } finally {
       setLoading(false)
     }
@@ -113,9 +120,12 @@ export default function CreateUserForm() {
 
       {/* Error Message */}
       {error && (
-        <div className="mt-6 p-4 bg-red-900/30 border border-red-600 rounded-lg text-red-300">
-          <p className="font-semibold">Error</p>
-          <p>{error}</p>
+        <div className="mt-6 p-4 bg-red-900/30 border border-red-600 rounded-lg">
+          <p className="text-red-300 font-semibold">{error.title}</p>
+          <p className="text-red-200 text-sm mt-2">{error.message}</p>
+          <p className="text-red-400 text-xs mt-3">
+            ℹ️ If the issue persists, our team has been notified and will resolve it shortly.
+          </p>
         </div>
       )}
 
