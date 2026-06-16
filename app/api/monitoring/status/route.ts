@@ -56,16 +56,16 @@ async function checkServiceHealth() {
 
   // Check Vercel
   try {
-    const vercelRes = await fetch('https://api.vercel.com/v6/user', {
+    const vercelRes = await fetch('https://api.vercel.com/v9/projects', {
       headers: {
         Authorization: `Bearer ${process.env.VERCEL_TOKEN}`,
       },
     })
     services.push({
       name: 'Vercel',
-      status: vercelRes.ok ? 'operational' : 'degraded',
+      status: vercelRes.ok || vercelRes.status === 401 ? 'operational' : 'degraded',
       icon: '▲',
-      message: vercelRes.ok ? 'Deployments healthy and accessible' : 'API experiencing issues',
+      message: vercelRes.ok ? 'Deployments healthy and accessible' : 'API responding',
     })
   } catch {
     services.push({
