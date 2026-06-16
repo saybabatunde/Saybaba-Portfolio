@@ -69,9 +69,15 @@ async function sendAdminNotification(errorType: string, errorMessage: string, us
 }
 
 export async function POST(request: NextRequest) {
+  let userName = 'Unknown'
+  let userEmail = 'unknown@example.com'
+
   try {
     const body = await request.json()
     const { name, email, group } = body
+
+    userName = name || 'Unknown'
+    userEmail = email || 'unknown@example.com'
 
     if (!name || !email) {
       return NextResponse.json(
@@ -180,18 +186,7 @@ export async function POST(request: NextRequest) {
 
     console.error('Error creating user:', error)
 
-    // Extract user info from request if possible
-    let userName = 'Unknown'
-    let userEmail = 'unknown@example.com'
-    try {
-      const body = await request.json()
-      userName = body.name || 'Unknown'
-      userEmail = body.email || 'unknown@example.com'
-    } catch (parseErr) {
-      console.error('Could not parse request body:', parseErr)
-    }
-
-    // Log error and notify admin
+    // Log error and notify admin (userName and userEmail already captured at top of function)
     await logError('USER_CREATION_FAILURE', errorMsg, userName, userEmail, errorStack)
     await sendAdminNotification('USER_CREATION_FAILURE', errorMsg, userName, userEmail)
 
