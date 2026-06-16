@@ -77,14 +77,14 @@ export default function MetricsDisplay() {
   const generateSampleData = (baseMetrics: CurrentMetrics): MetricDataPoint[] => {
     const data: MetricDataPoint[] = []
     for (let i = 23; i >= 0; i--) {
-      const variation = Math.random() * 10 - 5
+      const progress = (23 - i) / 23
       data.push({
         time: `${i}h ago`,
-        cpu: Math.max(10, Math.min(90, baseMetrics.cpu + variation)),
-        ram: Math.max(20, Math.min(85, baseMetrics.ram + variation)),
-        disk: Math.max(50, Math.min(90, baseMetrics.disk + variation)),
-        responseTime: Math.max(50, Math.min(200, baseMetrics.responseTime + variation * 5)),
-        uptime: Math.max(99, baseMetrics.uptime - Math.random() * 0.5),
+        cpu: Math.min(100, progress * 50),
+        ram: Math.min(100, progress * 60),
+        disk: Math.min(100, progress * 40),
+        responseTime: Math.max(50, 200 - progress * 150),
+        uptime: 99 + progress * 0.98,
       })
     }
     return data
