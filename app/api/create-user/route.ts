@@ -80,6 +80,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check for duplicate email
+    const supabase = getSupabaseClient()
+    const { data: existingUser } = await supabase
+      .from('users')
+      .select('email')
+      .eq('email', email)
+      .single()
+
+    if (existingUser) {
+      throw new Error(`Email "${email}" is already registered. Please use a different email.`)
+    }
+
     const username = email.split('@')[0]
     const auditId = crypto.randomUUID()
     const timestamp = new Date().toISOString()
@@ -104,6 +116,16 @@ export async function POST(request: NextRequest) {
     }
 
     addAuditLog(auditLog)
+
+    // Insert user into database
+    await supabase.from('users').insert([
+      {
+        email,
+        name,
+        username,
+        group: group || 'developers'
+      }
+    ])
 
     // Send welcome email
     let emailSent = true
