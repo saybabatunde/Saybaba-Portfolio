@@ -143,11 +143,11 @@ export default function MetricsDisplay() {
           <LineChart data={historicalData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#444" />
             <XAxis dataKey="time" stroke="#888" />
-            <YAxis stroke="#888" />
+            <YAxis domain={[0, 100]} stroke="#888" />
             <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444' }} />
             <Legend />
-            <Line type="monotone" dataKey="cpu" stroke="#60a5fa" strokeWidth={2} name="CPU %" isAnimationActive={false} />
-            <Line type="monotone" dataKey="ram" stroke="#a78bfa" strokeWidth={2} name="RAM %" isAnimationActive={false} />
+            <Line type="linear" dataKey="cpu" stroke="#60a5fa" strokeWidth={2} name="CPU %" isAnimationActive={false} />
+            <Line type="linear" dataKey="ram" stroke="#a78bfa" strokeWidth={2} name="RAM %" isAnimationActive={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -157,10 +157,10 @@ export default function MetricsDisplay() {
           <LineChart data={historicalData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#444" />
             <XAxis dataKey="time" stroke="#888" />
-            <YAxis stroke="#888" />
+            <YAxis domain={[0, 100]} stroke="#888" />
             <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444' }} />
             <Legend />
-            <Line type="monotone" dataKey="disk" stroke="#fb923c" strokeWidth={2} name="Disk %" isAnimationActive={false} />
+            <Line type="linear" dataKey="disk" stroke="#fb923c" strokeWidth={2} name="Disk %" isAnimationActive={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -170,11 +170,12 @@ export default function MetricsDisplay() {
           <LineChart data={historicalData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#444" />
             <XAxis dataKey="time" stroke="#888" />
-            <YAxis stroke="#888" />
+            <YAxis yAxisId="left" domain={[0, 300]} stroke="#888" />
+            <YAxis yAxisId="right" orientation="right" domain={[98, 100]} stroke="#888" />
             <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444' }} />
             <Legend />
-            <Line type="monotone" dataKey="responseTime" stroke="#34d399" strokeWidth={2} name="Response Time (ms)" isAnimationActive={false} />
-            <Line type="monotone" dataKey="uptime" stroke="#10b981" strokeWidth={2} name="Uptime %" isAnimationActive={false} />
+            <Line yAxisId="left" type="linear" dataKey="responseTime" stroke="#34d399" strokeWidth={2} name="Response Time (ms)" isAnimationActive={false} />
+            <Line yAxisId="right" type="linear" dataKey="uptime" stroke="#10b981" strokeWidth={2} name="Uptime %" isAnimationActive={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartCard>
