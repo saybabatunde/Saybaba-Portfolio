@@ -149,9 +149,9 @@ export default function CreateUserForm() {
             <p><span className="font-semibold">Group:</span> {result.group}</p>
             <p><span className="font-semibold">Audit ID:</span> {result.auditId}</p>
           </div>
-          <div className="border-t border-green-600 pt-4">
-            <p className="text-green-300 text-sm">
-              ✉️ <span className="font-semibold">Check your email</span> to confirm you received the onboarding notification. This demonstrates the system's notification and audit capabilities working end-to-end.
+          <div className="border-t border-green-600 pt-4 mt-4 p-3 bg-yellow-900/40 border border-yellow-600 rounded-lg">
+            <p className="text-yellow-300 text-sm font-semibold">
+              ✉️ Check your email to confirm you received the onboarding notification. This demonstrates the system's notification and audit capabilities working end-to-end.
             </p>
           </div>
         </div>
