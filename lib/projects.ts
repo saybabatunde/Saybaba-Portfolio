@@ -177,6 +177,48 @@ export const projects: Project[] = [
     ],
     github: 'https://github.com/saybabatunde/azure-k8s-cicd-demo',
   },
+  {
+    id: 10,
+    slug: 'cloud-cost-roi-calculator',
+    title: 'Cloud Cost ROI Calculator',
+    description: 'Calculate return on investment for cloud infrastructure deployments',
+    fullDescription: 'Interactive calculator for determining ROI on cloud infrastructure investments. Input infrastructure costs, business metrics, and get detailed ROI analysis with visual charts and export capabilities.',
+    category: 'AI-Assisted Development',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Recharts', 'Claude API'],
+    features: [
+      'Calculate ROI, payback period, cost savings',
+      'Input infrastructure and business metrics',
+      'Visual charts for ROI visualization',
+      'Export reports as PDF/CSV',
+      'Real-time calculations',
+      'Responsive design for all devices',
+      'Built with Claude AI assistance',
+      'Cost scenario comparison'
+    ],
+    github: 'https://github.com/saybabatunde/cloud-cost-roi-calculator',
+    deployment: 'https://cloud-roi-calculator.vercel.app'
+  },
+  {
+    id: 11,
+    slug: 'ai-quote-generator',
+    title: 'AI-Powered Quote Generator',
+    description: 'Generate unique quotes using Claude AI based on themes and categories',
+    fullDescription: 'Intelligent quote generator powered by Claude AI. Select themes and get AI-generated unique quotes. Features favorites, export, and beautiful UI with dark mode.',
+    category: 'AI-Assisted Development',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Claude API', 'Vercel'],
+    features: [
+      'AI-generated quotes using Claude',
+      'Multiple theme categories',
+      'Save favorite quotes',
+      'Export quotes as images',
+      'Share quotes on social media',
+      'Dark mode UI',
+      'Daily quote notifications',
+      'Responsive mobile design'
+    ],
+    github: 'https://github.com/saybabatunde/ai-quote-generator',
+    deployment: 'https://ai-quote-generator.vercel.app'
+  },
 ]
 
 export const getProjectBySlug = (slug: string): Project | undefined => {
