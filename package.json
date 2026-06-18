@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.105.0",
     "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.38.0",
+    "html2canvas": "^1.4.1",
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
