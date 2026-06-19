@@ -44,11 +44,20 @@ export default function GeneratorPage() {
         body: JSON.stringify({ theme: selectedTheme }),
       })
 
-      if (!response.ok) throw new Error('Failed to generate quote')
-
       const data = await response.json()
-      setQuote(data.quote)
-      setAuthor(data.author)
+      console.log('API Response:', data, 'Status:', response.status)
+
+      if (!response.ok) {
+        console.error('API Error:', data)
+        throw new Error(data.error || 'Failed to generate quote')
+      }
+
+      if (data.quote) {
+        setQuote(data.quote)
+        setAuthor(data.author)
+      } else {
+        throw new Error('No quote in response')
+      }
     } catch (error) {
       console.error('Error generating quote:', error)
       setQuote('The only way to do great work is to love what you do.')
