@@ -52,12 +52,20 @@ Make sure the quote is unique, not a famous quote. Create something original.`,
     // Extract the response text
     const responseText = message.content[0].type === 'text' ? message.content[0].text : ''
 
+    console.log('Claude Response:', responseText)
+
     // Parse the response
     const quoteMatch = responseText.match(/QUOTE:\s*(.+)/i)
     const authorMatch = responseText.match(/AUTHOR:\s*(.+)/i)
 
-    const quote = quoteMatch ? quoteMatch[1].trim() : 'Be yourself; everyone else is already taken.'
-    const author = authorMatch ? authorMatch[1].trim() : 'Oscar Wilde'
+    console.log('Parsed Quote:', quoteMatch?.[1], 'Author:', authorMatch?.[1])
+
+    if (!quoteMatch || !authorMatch) {
+      throw new Error(`Failed to parse response. Got: ${responseText}`)
+    }
+
+    const quote = quoteMatch[1].trim()
+    const author = authorMatch[1].trim()
 
     return NextResponse.json({
       quote,
