@@ -6,13 +6,13 @@ export default function CICDPipelinePage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'architecture' | 'features' | 'tech'>('overview')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700">
       {/* Header */}
-      <header className="bg-gray-800/50 border-b border-gray-700 sticky top-0 z-50">
+      <header className="bg-gray-950/80 border-b border-gray-700 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <button
             onClick={() => window.history.back()}
-            className="text-blue-400 hover:text-blue-300 flex items-center gap-2 mb-4"
+            className="text-gray-400 hover:text-white flex items-center gap-2 mb-4"
           >
             ← Back
           </button>
@@ -20,7 +20,7 @@ export default function CICDPipelinePage() {
             <h1 className="text-4xl font-bold text-white flex items-center gap-3">
               <span>🔄</span> CI/CD Pipeline on Azure Kubernetes
             </h1>
-            <p className="text-gray-400 text-lg mt-2">
+            <p className="text-gray-300 text-lg mt-2">
               Production-ready DevOps project: GitHub Actions → ACR → AKS → Azure Monitor
             </p>
           </div>
@@ -35,9 +35,9 @@ export default function CICDPipelinePage() {
             href="https://github.com/saybabatunde/azure-k8s-cicd-demo"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:border-blue-500 transition"
+            className="bg-gray-800/50 border border-gray-600 rounded-lg p-6 hover:border-blue-500 transition"
           >
-            <p className="text-gray-400 text-sm mb-2">📦 GitHub Repository</p>
+            <p className="text-white text-sm mb-2">📦 GitHub Repository</p>
             <p className="text-white font-semibold">azure-k8s-cicd-demo</p>
             <p className="text-xs text-gray-500 mt-2">View full source code</p>
           </a>
@@ -46,22 +46,22 @@ export default function CICDPipelinePage() {
             href="https://github.com/saybabatunde/azure-k8s-cicd-demo/actions"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:border-green-500 transition"
+            className="bg-gray-800/50 border border-gray-600 rounded-lg p-6 hover:border-green-500 transition"
           >
-            <p className="text-gray-400 text-sm mb-2">⚡ GitHub Actions</p>
+            <p className="text-white text-sm mb-2">⚡ GitHub Actions</p>
             <p className="text-white font-semibold">CI/CD Workflows</p>
             <p className="text-xs text-gray-500 mt-2">Watch builds in real-time</p>
           </a>
 
-          <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-            <p className="text-gray-400 text-sm mb-2">🎯 Project Status</p>
+          <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-6">
+            <p className="text-white text-sm mb-2">🎯 Project Status</p>
             <p className="text-white font-semibold">5 Phases Complete</p>
             <p className="text-xs text-green-400 mt-2">✓ Production Ready</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="mb-8 border-b border-gray-700">
+        <div className="mb-8 border-b border-gray-600">
           <div className="flex gap-4 overflow-x-auto">
             {(['overview', 'architecture', 'features', 'tech'] as const).map((tab) => (
               <button
@@ -69,8 +69,8 @@ export default function CICDPipelinePage() {
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-3 font-semibold border-b-2 transition ${
                   activeTab === tab
-                    ? 'text-blue-400 border-blue-500'
-                    : 'text-gray-400 border-transparent hover:text-white'
+                    ? 'text-gray-300 border-blue-500'
+                    : 'text-white border-transparent hover:text-white'
                 }`}
               >
                 {tab === 'overview' && '📋 Overview'}
@@ -83,24 +83,24 @@ export default function CICDPipelinePage() {
         </div>
 
         {/* Tab Content */}
-        <div className="bg-gray-800 border border-gray-700 rounded-lg p-8">
+        <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-8">
           {/* Overview Tab */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
               <div>
                 <h2 className="text-2xl font-bold text-white mb-4">Project Overview</h2>
-                <p className="text-gray-300 text-lg mb-4">
+                <p className="text-white text-lg mb-4">
                   A complete, production-ready CI/CD pipeline demonstrating modern DevOps practices and cloud-native architecture on Azure.
                 </p>
-                <p className="text-gray-300 mb-4">
+                <p className="text-white mb-4">
                   This project showcases the entire DevOps lifecycle: from code commit through automated testing, containerization, infrastructure provisioning, Kubernetes orchestration, and observability.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-gray-900 rounded-lg p-6 border border-gray-700">
-                  <h3 className="text-lg font-semibold text-blue-400 mb-3">🎯 What It Demonstrates</h3>
-                  <ul className="space-y-2 text-gray-300">
+                <div className="bg-gray-700/40 rounded-lg p-6 border border-gray-600">
+                  <h3 className="text-lg font-semibold text-gray-300 mb-3">🎯 What It Demonstrates</h3>
+                  <ul className="space-y-2 text-white">
                     <li>✓ CI/CD Pipeline automation</li>
                     <li>✓ Infrastructure as Code (Terraform)</li>
                     <li>✓ Container orchestration (Kubernetes)</li>
@@ -110,9 +110,9 @@ export default function CICDPipelinePage() {
                   </ul>
                 </div>
 
-                <div className="bg-gray-900 rounded-lg p-6 border border-gray-700">
+                <div className="bg-gray-700/40 rounded-lg p-6 border border-gray-600">
                   <h3 className="text-lg font-semibold text-green-400 mb-3">🚀 Key Capabilities</h3>
-                  <ul className="space-y-2 text-gray-300">
+                  <ul className="space-y-2 text-white">
                     <li>✓ Automated code quality checks</li>
                     <li>✓ Multi-stage Docker builds</li>
                     <li>✓ Automatic deployment to K8s</li>
@@ -123,9 +123,9 @@ export default function CICDPipelinePage() {
                 </div>
               </div>
 
-              <div className="bg-blue-900/20 border border-blue-600 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-300 mb-2">💡 Why This Project</h3>
-                <p className="text-gray-300">
+              <div className="bg-gray-700/40 border border-gray-600 rounded-lg p-6">
+                <h3 className="text-lg font-semibold text-gray-300 mb-2">💡 Why This Project</h3>
+                <p className="text-white">
                   This project is one of the strongest portfolio pieces for cloud engineering roles because it demonstrates that you can actually build and deploy production systems, not just talk about them. It shows real-world skills that companies need.
                 </p>
               </div>
@@ -137,8 +137,8 @@ export default function CICDPipelinePage() {
             <div className="space-y-6">
               <h2 className="text-2xl font-bold text-white mb-6">System Architecture</h2>
 
-              <div className="bg-gray-900 rounded-lg p-6 border border-gray-700 font-mono text-sm">
-                <pre className="text-gray-300 overflow-x-auto">
+              <div className="bg-gray-700/40 rounded-lg p-6 border border-gray-600 font-mono text-sm">
+                <pre className="text-white overflow-x-auto">
 {`┌──────────────────────────────────────────────────────┐
 │                  Git Repository                      │
 │              (azure-k8s-cicd-demo)                   │
@@ -180,9 +180,9 @@ export default function CICDPipelinePage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-gray-900 rounded-lg p-6 border border-gray-700">
+                <div className="bg-gray-700/40 rounded-lg p-6 border border-gray-600">
                   <h3 className="font-semibold text-white mb-3">Infrastructure</h3>
-                  <ul className="space-y-2 text-gray-300 text-sm">
+                  <ul className="space-y-2 text-white text-sm">
                     <li>• Virtual Network (10.0.0.0/16)</li>
                     <li>• AKS Cluster (managed Kubernetes)</li>
                     <li>• Container Registry (image storage)</li>
@@ -190,9 +190,9 @@ export default function CICDPipelinePage() {
                   </ul>
                 </div>
 
-                <div className="bg-gray-900 rounded-lg p-6 border border-gray-700">
+                <div className="bg-gray-700/40 rounded-lg p-6 border border-gray-600">
                   <h3 className="font-semibold text-white mb-3">Deployment</h3>
-                  <ul className="space-y-2 text-gray-300 text-sm">
+                  <ul className="space-y-2 text-white text-sm">
                     <li>• 2 replicas (high availability)</li>
                     <li>• Rolling update strategy</li>
                     <li>• Liveness/Readiness probes</li>
@@ -251,12 +251,12 @@ export default function CICDPipelinePage() {
                     desc: 'Cluster scales 1-5 nodes based on demand, cost-optimized for development',
                   },
                 ].map((feature, idx) => (
-                  <div key={idx} className="bg-gray-900 rounded-lg p-6 border border-gray-700">
+                  <div key={idx} className="bg-gray-700/40 rounded-lg p-6 border border-gray-600">
                     <div className="flex gap-4">
                       <div className="text-3xl">{feature.icon}</div>
                       <div>
                         <h3 className="font-semibold text-white mb-2">{feature.title}</h3>
-                        <p className="text-gray-400 text-sm">{feature.desc}</p>
+                        <p className="text-white text-sm">{feature.desc}</p>
                       </div>
                     </div>
                   </div>
@@ -297,11 +297,11 @@ export default function CICDPipelinePage() {
                     tech: ['Application Insights', 'Azure Monitor', 'Log Analytics', 'Alerts'],
                   },
                 ].map((stack, idx) => (
-                  <div key={idx} className="bg-gray-900 rounded-lg p-6 border border-gray-700">
-                    <h3 className="font-semibold text-blue-400 mb-4">{stack.category}</h3>
+                  <div key={idx} className="bg-gray-700/40 rounded-lg p-6 border border-gray-600">
+                    <h3 className="font-semibold text-gray-300 mb-4">{stack.category}</h3>
                     <ul className="space-y-2">
                       {stack.tech.map((tech, i) => (
-                        <li key={i} className="text-gray-300 flex items-center gap-2">
+                        <li key={i} className="text-white flex items-center gap-2">
                           <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                           {tech}
                         </li>
@@ -325,7 +325,7 @@ export default function CICDPipelinePage() {
               { phase: 4, title: 'Kubernetes Manifests & Auto-Deploy', status: '✓ Complete' },
               { phase: 5, title: 'Azure Monitor & Observability', status: '✓ Complete' },
             ].map((p, idx) => (
-              <div key={idx} className="bg-gray-800 border border-gray-700 rounded-lg p-4 flex items-center justify-between">
+              <div key={idx} className="bg-gray-800/50 border border-gray-600 rounded-lg p-4 flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">
                     {p.phase}
@@ -341,16 +341,16 @@ export default function CICDPipelinePage() {
         </section>
 
         {/* CTA */}
-        <section className="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-center">
+        <section className="mt-12 bg-gradient-to-r from-gray-800 to-gray-700 rounded-lg p-8 text-center border border-gray-600">
           <h2 className="text-2xl font-bold text-white mb-4">Ready to Deploy?</h2>
-          <p className="text-white mb-6">
+          <p className="text-gray-300 mb-6">
             This project is production-ready and demonstrates full-stack DevOps capabilities.
           </p>
           <a
             href="https://github.com/saybabatunde/azure-k8s-cicd-demo"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-white text-blue-600 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition"
+            className="inline-block bg-gray-700 hover:bg-gray-600 text-white font-bold px-8 py-3 rounded-lg transition border border-gray-600"
           >
             View on GitHub →
           </a>
@@ -358,8 +358,8 @@ export default function CICDPipelinePage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 border-t border-gray-700 mt-20">
-        <div className="max-w-6xl mx-auto px-4 py-8 text-center text-gray-400">
+      <footer className="bg-gray-800/50 border-t border-gray-600 mt-20">
+        <div className="max-w-6xl mx-auto px-4 py-8 text-center text-white">
           <p>&copy; 2024 Saybaba CI/CD Portfolio Project. All rights reserved.</p>
         </div>
       </footer>

@@ -94,18 +94,18 @@ export default function MetricsDisplay() {
     return (
       <div className="space-y-6">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="bg-gray-800 rounded-lg border border-gray-700 p-6 animate-pulse h-64" />
+          <div key={i} className="bg-blue-900/20 rounded-lg border border-gray-600 p-6 animate-pulse h-64" />
         ))}
       </div>
     )
   }
 
   if (!currentMetrics) {
-    return <div className="text-gray-400">Unable to load metrics</div>
+    return <div className="text-white">Unable to load metrics</div>
   }
 
   const ChartCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <div className="bg-gray-800 rounded-lg border border-gray-700 p-6">
+    <div className="bg-blue-900/20 rounded-lg border border-gray-600 p-6">
       <h3 className="text-white font-semibold mb-4">{title}</h3>
       {children}
     </div>
@@ -115,24 +115,24 @@ export default function MetricsDisplay() {
     <div className="space-y-6">
       {/* Current Metrics Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div className="bg-gray-900 rounded-lg border border-blue-600/30 p-4">
-          <p className="text-gray-400 text-sm mb-2">CPU Usage</p>
+        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
+          <p className="text-white text-sm mb-2">CPU Usage</p>
           <p className="text-2xl font-bold text-blue-400">{currentMetrics.cpu.toFixed(1)}%</p>
         </div>
-        <div className="bg-gray-900 rounded-lg border border-purple-600/30 p-4">
-          <p className="text-gray-400 text-sm mb-2">RAM Usage</p>
+        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
+          <p className="text-white text-sm mb-2">RAM Usage</p>
           <p className="text-2xl font-bold text-purple-400">{currentMetrics.ram.toFixed(1)}%</p>
         </div>
-        <div className="bg-gray-900 rounded-lg border border-orange-600/30 p-4">
-          <p className="text-gray-400 text-sm mb-2">Disk Usage</p>
+        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
+          <p className="text-white text-sm mb-2">Disk Usage</p>
           <p className="text-2xl font-bold text-orange-400">{currentMetrics.disk.toFixed(1)}%</p>
         </div>
-        <div className="bg-gray-900 rounded-lg border border-green-600/30 p-4">
-          <p className="text-gray-400 text-sm mb-2">Response Time</p>
+        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
+          <p className="text-white text-sm mb-2">Response Time</p>
           <p className="text-2xl font-bold text-green-400">{currentMetrics.responseTime.toFixed(0)}ms</p>
         </div>
-        <div className="bg-gray-900 rounded-lg border border-emerald-600/30 p-4">
-          <p className="text-gray-400 text-sm mb-2">Uptime (30d)</p>
+        <div className="bg-white/20 rounded-lg border border-emerald-600/30 p-4">
+          <p className="text-white text-sm mb-2">Uptime (30d)</p>
           <p className="text-2xl font-bold text-emerald-400">{currentMetrics.uptime.toFixed(2)}%</p>
         </div>
       </div>

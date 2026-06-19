@@ -47,7 +47,7 @@ export default function StatusCards() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="bg-gray-800 rounded-lg border border-gray-700 p-4 animate-pulse h-24" />
+          <div key={i} className="bg-white rounded-lg border border-gray-600 p-4 animate-pulse h-24" />
         ))}
       </div>
     )
@@ -57,9 +57,9 @@ export default function StatusCards() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {services.map((service) => {
         const statusColors = {
-          operational: { bg: 'bg-green-900/20', border: 'border-green-600', text: 'text-green-400', dot: 'bg-green-500' },
-          degraded: { bg: 'bg-yellow-900/20', border: 'border-yellow-600', text: 'text-yellow-400', dot: 'bg-yellow-500' },
-          down: { bg: 'bg-red-900/20', border: 'border-red-600', text: 'text-red-400', dot: 'bg-red-500' },
+          operational: { bg: 'bg-white/20', border: 'border-gray-600', text: 'text-green-400', dot: 'bg-green-500' },
+          degraded: { bg: 'bg-white/20', border: 'border-yellow-600', text: 'text-yellow-400', dot: 'bg-yellow-500' },
+          down: { bg: 'bg-white/20', border: 'border-red-600', text: 'text-red-400', dot: 'bg-red-500' },
         }
         const colors = statusColors[service.status]
 
@@ -76,7 +76,7 @@ export default function StatusCards() {
               <div className={`w-3 h-3 rounded-full ${colors.dot} animate-pulse`} />
             </div>
             <p className={`text-sm ${colors.text}`}>{service.message}</p>
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-white mt-2">
               {service.status === 'operational' && '✓ Operational'}
               {service.status === 'degraded' && '⚠ Degraded'}
               {service.status === 'down' && '✗ Down'}

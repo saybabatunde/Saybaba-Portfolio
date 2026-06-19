@@ -61,20 +61,13 @@ export default function CreateUserForm() {
   }
 
   return (
-    <div className="bg-gray-800 rounded-lg border border-gray-700 p-8">
-      {/* Demo Notice */}
-      <div className="mb-6 p-4 bg-blue-900/30 border border-blue-600 rounded-lg">
-        <p className="text-blue-300 text-sm">
-          <span className="font-semibold">📋 Demo Mode:</span> This is a test environment. Feel free to supply your username and email to test the system and receive a confirmation notification. You'll be able to verify the onboarding flow works end-to-end.
-        </p>
-      </div>
-
-      <h2 className="text-2xl font-bold text-white mb-6">Create New User</h2>
+    <div className="bg-white rounded-lg border border-cyan-400 p-8">
+      <h2 className="text-2xl font-bold text-black mb-6">Create New User</h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Full Name */}
         <div>
-          <label className="block text-gray-300 font-semibold mb-2">Full Name</label>
+          <label className="block text-black font-semibold mb-2">Full Name</label>
           <input
             type="text"
             name="name"
@@ -82,13 +75,13 @@ export default function CreateUserForm() {
             onChange={handleChange}
             placeholder="e.g., Sarah Johnson"
             required
-            className="w-full bg-gray-700 border border-gray-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500"
+            className="w-full bg-white700 border border-cyan-400 text-black px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500"
           />
         </div>
 
         {/* Email */}
         <div>
-          <label className="block text-gray-300 font-semibold mb-2">Email</label>
+          <label className="block text-black font-semibold mb-2">Email</label>
           <input
             type="email"
             name="email"
@@ -96,18 +89,18 @@ export default function CreateUserForm() {
             onChange={handleChange}
             placeholder="e.g., sarah@company.com"
             required
-            className="w-full bg-gray-700 border border-gray-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500"
+            className="w-full bg-white700 border border-cyan-400 text-black px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500"
           />
         </div>
 
         {/* Group */}
         <div>
-          <label className="block text-gray-300 font-semibold mb-2">Group</label>
+          <label className="block text-black font-semibold mb-2">Group</label>
           <select
             name="group"
             value={formData.group}
             onChange={handleChange}
-            className="w-full bg-gray-700 border border-gray-600 text-white px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500"
+            className="w-full bg-white700 border border-cyan-400 text-black px-4 py-2 rounded-lg focus:outline-none focus:border-blue-500"
           >
             <option value="developers">Developers</option>
             <option value="admins">Admins</option>
@@ -119,7 +112,7 @@ export default function CreateUserForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white font-semibold py-3 rounded-lg transition duration-200"
+          className="w-full bg-orange-600 hover:bg-orange-700 disabled:bg-white600 text-black font-semibold py-3 rounded-lg transition duration-200"
         >
           {loading ? 'Creating User...' : 'Approve & Create User'}
         </button>
@@ -127,10 +120,10 @@ export default function CreateUserForm() {
 
       {/* Error Message */}
       {error && (
-        <div className="mt-6 p-4 bg-red-900/30 border border-red-600 rounded-lg">
-          <p className="text-red-300 font-semibold">{error.title}</p>
-          <p className="text-red-200 text-sm mt-2">{error.message}</p>
-          <p className="text-red-400 text-xs mt-3">
+        <div className="mt-6 p-4 bg-slate-800 border border-slate-600 rounded-lg">
+          <p className="text-white font-semibold">{error.title}</p>
+          <p className="text-gray-300 text-sm mt-2">{error.message}</p>
+          <p className="text-gray-400 text-xs mt-3">
             ℹ️ If the issue persists, our team has been notified and will resolve it shortly.
           </p>
         </div>
@@ -138,7 +131,7 @@ export default function CreateUserForm() {
 
       {/* Success Result */}
       {result && (
-        <div className="mt-6 p-4 bg-green-900/30 border border-green-600 rounded-lg">
+        <div className="mt-6 p-4 bg-green-900/30 border border-cyan-400 rounded-lg">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-2xl">✓</span>
             <p className="text-green-300 font-semibold">User Created Successfully!</p>
@@ -149,7 +142,7 @@ export default function CreateUserForm() {
             <p><span className="font-semibold">Group:</span> {result.group}</p>
             <p><span className="font-semibold">Audit ID:</span> {result.auditId}</p>
           </div>
-          <div className="border-t border-green-600 pt-4 mt-4 p-3 bg-yellow-900/40 border border-yellow-600 rounded-lg">
+          <div className="border-t border-cyan-400 pt-4 mt-4 p-3 bg-yellow-900/40 border border-yellow-600 rounded-lg">
             <p className="text-yellow-300 text-sm font-semibold">
               ✉️ Check your email to confirm you received the onboarding notification. This demonstrates the system's notification and audit capabilities working end-to-end.
             </p>

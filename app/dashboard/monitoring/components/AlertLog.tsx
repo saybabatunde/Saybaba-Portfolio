@@ -49,13 +49,13 @@ export default function AlertLog() {
   const getSeverityColor = (severity: string) => {
     switch (severity) {
       case 'critical':
-        return 'bg-red-900/30 border-red-600 text-red-300'
+        return 'bg-white/20 border-red-600 text-red-300'
       case 'warning':
-        return 'bg-yellow-900/30 border-yellow-600 text-yellow-300'
+        return 'bg-white/20 border-yellow-600 text-yellow-300'
       case 'info':
-        return 'bg-blue-900/30 border-blue-600 text-blue-300'
+        return 'bg-white/20 border-gray-600 text-blue-300'
       default:
-        return 'bg-gray-800 border-gray-700 text-gray-300'
+        return 'bg-white/20 border-gray-600 text-white'
     }
   }
 
@@ -76,7 +76,7 @@ export default function AlertLog() {
     return (
       <div className="space-y-3">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="bg-gray-800 rounded-lg border border-gray-700 p-4 animate-pulse h-20" />
+          <div key={i} className="bg-white/20 rounded-lg border border-gray-600 p-4 animate-pulse h-20" />
         ))}
       </div>
     )
@@ -85,7 +85,7 @@ export default function AlertLog() {
   return (
     <div className="space-y-3">
       {alerts.length === 0 ? (
-        <div className="bg-green-900/20 border border-green-600 rounded-lg p-4 text-green-300">
+        <div className="bg-white/20 border border-gray-600 rounded-lg p-4 text-green-300">
           <p className="font-semibold">✓ No active alerts</p>
           <p className="text-sm mt-1">All systems operating normally</p>
         </div>

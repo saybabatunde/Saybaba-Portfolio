@@ -32,8 +32,8 @@ export default function DashboardPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <p className="text-gray-400">Loading...</p>
+      <div className="min-h-screen bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600 flex items-center justify-center">
+        <p className="text-white">Loading...</p>
       </div>
     )
   }
@@ -42,13 +42,13 @@ export default function DashboardPage() {
   const categories = Array.from(new Set(projects.map((p) => p.category)))
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600">
       {/* Header */}
-      <header className="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
+      <header className="bg-gradient-to-r from-slate-900 to-cyan-900 border-b border-cyan-400 sticky top-0 z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-white">Saybaba Portfolio</h1>
-            <p className="text-gray-400 text-sm">Welcome, {username}!</p>
+            <p className="text-cyan-300 text-sm">Welcome, {username}!</p>
           </div>
           <button
             onClick={handleLogout}
@@ -64,31 +64,31 @@ export default function DashboardPage() {
         {/* Intro Section */}
         <div className="mb-16 animate-fade-in">
           <h2 className="text-4xl font-bold text-white mb-4">My Portfolio</h2>
-          <p className="text-gray-400 text-lg max-w-2xl">
+          <p className="text-white text-lg max-w-2xl">
             Explore my projects across cloud platforms (AWS, Azure), Python development, and full-stack applications. Each project showcases my expertise in infrastructure, automation, and software development.
           </p>
         </div>
 
         {/* Live Projects / Interactive Demos */}
         <section className="mb-16 animate-fade-in">
-          <h3 className="text-2xl font-bold text-white mb-8 border-b border-green-600 pb-4">
+          <h3 className="text-2xl font-bold text-white mb-8 border-b-2 border-sky-600 pb-4">
             🔴 Live Projects (Interactive Demos)
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* AWS User Onboarding Portal */}
             <Link href="/dashboard/onboarding">
-              <div className="bg-gradient-to-br from-orange-900/30 to-gray-900 rounded-lg border-2 border-orange-600 hover:border-orange-400 hover:shadow-lg hover:shadow-orange-600/30 transition duration-300 p-6 cursor-pointer group">
+              <div className="bg-gradient-to-br from-orange-500 to-orange-700 rounded-lg border-2 border-orange-400 hover:border-orange-300 hover:shadow-lg hover:shadow-orange-600/40 transition duration-300 p-6 cursor-pointer group">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">⚙️</span>
                   <div>
-                    <h4 className="text-xl font-bold text-white group-hover:text-orange-300">AWS User Onboarding</h4>
-                    <p className="text-sm text-orange-400">Live Demo with Real AWS Integration</p>
+                    <h4 className="text-xl font-bold text-slate-900 group-hover:text-slate-800">AWS User Onboarding</h4>
+                    <p className="text-sm text-slate-800 font-semibold">Live Demo with Real AWS Integration</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-4">
+                <p className="text-slate-900 mb-4 font-medium">
                   Create real IAM users with a single click. See real AWS API calls, audit logs, and infrastructure in action. Built with Lambda, API Gateway, and DynamoDB.
                 </p>
-                <div className="flex items-center gap-2 text-orange-400 font-semibold group-hover:gap-3">
+                <div className="flex items-center gap-2 text-slate-900 font-bold group-hover:gap-3">
                   Open Demo <span>→</span>
                 </div>
               </div>
@@ -96,18 +96,18 @@ export default function DashboardPage() {
 
             {/* Azure User Onboarding Portal */}
             <Link href="/projects/azure-onboarding">
-              <div className="bg-gradient-to-br from-blue-900/30 to-gray-900 rounded-lg border-2 border-blue-600 hover:border-blue-400 hover:shadow-lg hover:shadow-blue-600/30 transition duration-300 p-6 cursor-pointer group">
+              <div className="bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg border-2 border-cyan-400 hover:border-cyan-300 hover:shadow-lg hover:shadow-blue-500/40 transition duration-300 p-6 cursor-pointer group">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">☁️</span>
                   <div>
-                    <h4 className="text-xl font-bold text-white group-hover:text-blue-300">Azure User Onboarding</h4>
-                    <p className="text-sm text-blue-400">Live Demo on Azure Static Web Apps</p>
+                    <h4 className="text-xl font-bold text-white group-hover:text-cyan-100">Azure User Onboarding</h4>
+                    <p className="text-sm text-white font-semibold">Live Demo on Azure Static Web Apps</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-4">
+                <p className="text-white mb-4 font-medium">
                   Experience Azure cloud deployment. Frontend hosted on Azure Static Web Apps with serverless architecture. See multi-cloud infrastructure in action.
                 </p>
-                <div className="flex items-center gap-2 text-blue-400 font-semibold group-hover:gap-3">
+                <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
                   Open Demo <span>→</span>
                 </div>
               </div>
@@ -115,18 +115,18 @@ export default function DashboardPage() {
 
             {/* Infrastructure Health Dashboard */}
             <Link href="/dashboard/monitoring">
-              <div className="bg-gradient-to-br from-purple-900/30 to-gray-900 rounded-lg border-2 border-purple-600 hover:border-purple-400 hover:shadow-lg hover:shadow-purple-600/30 transition duration-300 p-6 cursor-pointer group">
+              <div className="bg-gradient-to-br from-purple-600 to-violet-700 rounded-lg border-2 border-purple-400 hover:border-purple-300 hover:shadow-lg hover:shadow-purple-600/40 transition duration-300 p-6 cursor-pointer group">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">📊</span>
                   <div>
-                    <h4 className="text-xl font-bold text-white group-hover:text-purple-300">Infrastructure Health Dashboard</h4>
-                    <p className="text-sm text-purple-400">Real-Time Cloud Monitoring</p>
+                    <h4 className="text-xl font-bold text-white group-hover:text-purple-100">Infrastructure Health Dashboard</h4>
+                    <p className="text-sm text-white font-semibold">Real-Time Cloud Monitoring</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-4">
+                <p className="text-white mb-4 font-medium">
                   Monitor all connected services in real-time. Track GitHub, Supabase, Vercel, Resend, AWS, and Azure health. View CPU/RAM metrics and uptime percentages.
                 </p>
-                <div className="flex items-center gap-2 text-purple-400 font-semibold group-hover:gap-3">
+                <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
                   Open Dashboard <span>→</span>
                 </div>
               </div>
@@ -134,37 +134,37 @@ export default function DashboardPage() {
 
             {/* CI/CD Pipeline Project */}
             <Link href="/projects/cicd-pipeline">
-              <div className="bg-gradient-to-br from-green-900/30 to-gray-900 rounded-lg border-2 border-green-600 hover:border-green-400 hover:shadow-lg hover:shadow-green-600/30 transition duration-300 p-6 cursor-pointer group">
+              <div className="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-lg border-2 border-emerald-400 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-600/40 transition duration-300 p-6 cursor-pointer group">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🔄</span>
                   <div>
-                    <h4 className="text-xl font-bold text-white group-hover:text-green-300">CI/CD Pipeline on Kubernetes</h4>
-                    <p className="text-sm text-green-400">Production DevOps Project</p>
+                    <h4 className="text-xl font-bold text-white group-hover:text-emerald-100">CI/CD Pipeline on Kubernetes</h4>
+                    <p className="text-sm text-white font-semibold">Production DevOps Project</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-4">
+                <p className="text-white mb-4 font-medium">
                   Complete DevOps pipeline from code to production. GitHub Actions → Docker → Azure ACR → Kubernetes (AKS) → Azure Monitor. 5 phases of production-ready infrastructure.
                 </p>
-                <div className="flex items-center gap-2 text-green-400 font-semibold group-hover:gap-3">
+                <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
                   View Project <span>→</span>
                 </div>
               </div>
             </Link>
           </div>
-          <p className="text-sm text-gray-400 mt-4">
+          <p className="text-sm text-white mt-4">
             💡 <span className="text-yellow-400">Live Projects:</span> All demos are fully functional with real integrations. Explore interactive dashboards and production DevOps pipeline.
           </p>
         </section>
 
         {/* AI-Assisted Development Projects */}
         <section className="mb-16 animate-fade-in">
-          <h3 className="text-2xl font-bold text-white mb-8 border-b border-cyan-600 pb-4">
+          <h3 className="text-2xl font-bold text-white mb-8 border-b border-cyan-400 pb-4">
             🤖 AI-Assisted Development Projects (Claude Build)
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Cloud Cost ROI Calculator */}
             <Link href="/projects/cloud-cost-roi-calculator">
-              <div className="bg-gradient-to-br from-cyan-900/30 to-gray-900 rounded-lg border-2 border-cyan-600 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/30 transition duration-300 p-6 cursor-pointer group">
+              <div className="bg-indigo-900 rounded-lg border-2 border-cyan-400 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/30 transition duration-300 p-6 cursor-pointer group">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">💰</span>
                   <div>
@@ -172,7 +172,7 @@ export default function DashboardPage() {
                     <p className="text-sm text-cyan-400">AI-Assisted Development</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-4">
+                <p className="text-white mb-4">
                   Calculate return on investment for cloud infrastructure deployments. Input costs and metrics, get instant ROI analysis with visual charts and exportable reports.
                 </p>
                 <div className="flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-3">
@@ -183,7 +183,7 @@ export default function DashboardPage() {
 
             {/* AI-Powered Quote Generator */}
             <Link href="/projects/ai-quote-generator">
-              <div className="bg-gradient-to-br from-cyan-900/30 to-gray-900 rounded-lg border-2 border-cyan-600 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/30 transition duration-300 p-6 cursor-pointer group">
+              <div className="bg-indigo-900 rounded-lg border-2 border-cyan-400 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-600/30 transition duration-300 p-6 cursor-pointer group">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">✨</span>
                   <div>
@@ -191,7 +191,7 @@ export default function DashboardPage() {
                     <p className="text-sm text-cyan-400">AI-Assisted Development</p>
                   </div>
                 </div>
-                <p className="text-gray-300 mb-4">
+                <p className="text-white mb-4">
                   Generate unique quotes powered by Claude AI. Select themes, save favorites, export as images, and share on social media. Built with Next.js and Claude API.
                 </p>
                 <div className="flex items-center gap-2 text-cyan-400 font-semibold group-hover:gap-3">
@@ -200,7 +200,7 @@ export default function DashboardPage() {
               </div>
             </Link>
           </div>
-          <p className="text-sm text-gray-400 mt-4">
+          <p className="text-sm text-white mt-4">
             ✨ <span className="text-cyan-400">AI-Built:</span> Showcasing rapid development with Claude AI and MCP servers. These projects demonstrate modern AI-assisted development practices.
           </p>
         </section>
@@ -211,7 +211,7 @@ export default function DashboardPage() {
             const categoryProjects = projects.filter((p) => p.category === category)
             return (
               <section key={category} className="animate-fade-in">
-                <h3 className="text-2xl font-bold text-white mb-8 border-b border-blue-600 pb-4">
+                <h3 className="text-2xl font-bold text-white mb-8 border-b border-cyan-400 pb-4">
                   {category} Projects
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
@@ -225,11 +225,11 @@ export default function DashboardPage() {
         </div>
 
         {/* Call to Action */}
-        <section className="mt-20 text-center py-12 bg-gray-800 rounded-lg border border-gray-700">
+        <section className="mt-20 text-center py-12 bg-blue-800 rounded-lg border border-cyan-400">
           <h3 className="text-2xl font-bold text-white mb-4">
             Want to learn more?
           </h3>
-          <p className="text-gray-400 mb-6">
+          <p className="text-white mb-6">
             Check out my GitHub, LinkedIn, or contact me directly for collaboration opportunities.
           </p>
           <div className="flex justify-center gap-4">
@@ -254,8 +254,8 @@ export default function DashboardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 border-t border-gray-700 mt-20">
-        <div className="max-w-7xl mx-auto px-4 py-8 text-center text-gray-400 text-sm">
+      <footer className="bg-blue-800 border-t border-cyan-400 mt-20">
+        <div className="max-w-7xl mx-auto px-4 py-8 text-center text-white text-sm">
           <p>&copy; 2024 Saybaba. Built with Next.js and Tailwind CSS.</p>
         </div>
       </footer>

@@ -92,21 +92,27 @@ export default function GeneratorPage() {
     window.open(twitterUrl, '_blank')
   }
 
+  const clearQuote = () => {
+    setQuote('')
+    setAuthor('')
+    setCopied(false)
+  }
+
   const themeColor = THEMES.find((t) => t.id === selectedTheme)?.color || '#3b82f6'
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-350 via-gray-300 to-gray-200 p-4">
       {/* Header */}
-      <header className="bg-gray-800/50 border-b border-gray-700 sticky top-0 z-50 mb-8">
+      <header className="bg-gray-500/80 border-b border-gray-400 sticky top-0 z-50 mb-8">
         <div className="max-w-4xl mx-auto px-4 py-6">
           <button
             onClick={() => window.history.back()}
-            className="text-blue-400 hover:text-blue-300 flex items-center gap-2 mb-4"
+            className="text-gray-200 hover:text-white flex items-center gap-2 mb-4"
           >
             ← Back
           </button>
           <h1 className="text-3xl font-bold text-white">✨ AI-Powered Quote Generator</h1>
-          <p className="text-gray-400">Generate unique quotes powered by Claude AI</p>
+          <p className="text-gray-100">Generate unique quotes powered by Claude AI</p>
         </div>
       </header>
 
@@ -115,8 +121,8 @@ export default function GeneratorPage() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Theme Selection */}
-            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
-              <h2 className="text-lg font-bold text-white mb-4">Select Theme</h2>
+            <div className="bg-white border border-gray-400 rounded-lg p-6">
+              <h2 className="text-lg font-bold text-gray-800 mb-4">Select Theme</h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {THEMES.map((theme) => (
                   <button
@@ -125,7 +131,7 @@ export default function GeneratorPage() {
                     className={`px-4 py-2 rounded-lg font-semibold transition ${
                       selectedTheme === theme.id
                         ? `bg-opacity-100 text-white`
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                        : 'bg-white700 text-white hover:bg-white600'
                     }`}
                     style={
                       selectedTheme === theme.id ? { backgroundColor: theme.color } : {}
@@ -140,7 +146,7 @@ export default function GeneratorPage() {
             {/* Quote Display */}
             <div
               ref={quoteRef}
-              className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-lg p-8 text-center"
+              className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-400 rounded-lg p-8 text-center"
               style={{
                 borderLeft: `4px solid ${themeColor}`,
               }}
@@ -148,7 +154,7 @@ export default function GeneratorPage() {
               {quote ? (
                 <div className="space-y-4">
                   <p className="text-3xl font-bold text-white leading-relaxed">"{quote}"</p>
-                  <p className="text-xl text-gray-400">— {author}</p>
+                  <p className="text-xl text-white">— {author}</p>
                 </div>
               ) : (
                 <div className="text-gray-500 text-lg">
@@ -161,37 +167,45 @@ export default function GeneratorPage() {
             <button
               onClick={generateQuote}
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white font-bold py-4 rounded-lg transition text-lg"
+              className="w-full bg-gray-500 hover:bg-gray-600 disabled:bg-white600 text-white font-bold py-4 rounded-lg transition text-lg"
             >
               {loading ? '🔄 Generating...' : '✨ Generate Quote'}
             </button>
 
             {/* Action Buttons */}
             {quote && (
-              <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={copyToClipboard}
+                    className="bg-white700 hover:bg-white600 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                  >
+                    {copied ? '✓ Copied!' : '📋 Copy'}
+                  </button>
+                  <button
+                    onClick={exportAsImage}
+                    className="bg-white700 hover:bg-white600 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                  >
+                    🖼️ Export
+                  </button>
+                  <button
+                    onClick={shareToTwitter}
+                    className="bg-gray-500 hover:bg-gray-500 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                  >
+                    𝕏 Share
+                  </button>
+                  <button
+                    onClick={saveFavorite}
+                    className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                  >
+                    ❤️ Save
+                  </button>
+                </div>
                 <button
-                  onClick={copyToClipboard}
-                  className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                  onClick={clearQuote}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
                 >
-                  {copied ? '✓ Copied!' : '📋 Copy'}
-                </button>
-                <button
-                  onClick={exportAsImage}
-                  className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                >
-                  🖼️ Export
-                </button>
-                <button
-                  onClick={shareToTwitter}
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                >
-                  𝕏 Share
-                </button>
-                <button
-                  onClick={saveFavorite}
-                  className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                >
-                  ❤️ Save
+                  🗑️ Clear
                 </button>
               </div>
             )}
@@ -199,27 +213,27 @@ export default function GeneratorPage() {
 
           {/* Sidebar - Favorites */}
           <div className="lg:col-span-1">
-            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6 sticky top-24">
+            <div className="bg-white border border-gray-400 rounded-lg p-6 sticky top-24">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-white">❤️ Favorites</h2>
-                <span className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded">
+                <span className="bg-gray-500 text-white text-xs font-bold px-2 py-1 rounded">
                   {favorites.length}
                 </span>
               </div>
 
               <div className="space-y-3 max-h-96 overflow-y-auto">
                 {favorites.length === 0 ? (
-                  <p className="text-gray-400 text-sm text-center py-4">
+                  <p className="text-white text-sm text-center py-4">
                     Save quotes to see them here
                   </p>
                 ) : (
                   favorites.map((fav, index) => (
                     <div
                       key={index}
-                      className="bg-gray-900 rounded-lg p-3 border border-gray-700 hover:border-gray-600 transition group"
+                      className="bg-blue-50 rounded-lg p-3 border border-gray-400 hover:border-gray-400 transition group"
                     >
                       <p className="text-white text-sm line-clamp-2 mb-2">"{fav.quote}"</p>
-                      <p className="text-gray-400 text-xs mb-2">— {fav.author}</p>
+                      <p className="text-white text-xs mb-2">— {fav.author}</p>
                       <div className="flex items-center justify-between">
                         <span
                           className="text-xs px-2 py-1 rounded text-white"
@@ -254,7 +268,7 @@ export default function GeneratorPage() {
         </div>
 
         {/* Info Section */}
-        <section className="mt-12 bg-gray-800 border border-gray-700 rounded-lg p-6">
+        <section className="mt-12 bg-white border border-gray-400 rounded-lg p-6">
           <h2 className="text-2xl font-bold text-white mb-4">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -275,11 +289,11 @@ export default function GeneratorPage() {
               },
             ].map((step) => (
               <div key={step.num} className="text-center">
-                <div className="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-3">
+                <div className="bg-gray-500 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-3">
                   {step.num}
                 </div>
                 <h3 className="font-bold text-white mb-2">{step.title}</h3>
-                <p className="text-gray-400 text-sm">{step.desc}</p>
+                <p className="text-white text-sm">{step.desc}</p>
               </div>
             ))}
           </div>

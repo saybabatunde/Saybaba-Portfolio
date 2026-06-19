@@ -41,42 +41,42 @@ export default function AuditLogViewer() {
 
   if (loading) {
     return (
-      <div className="bg-gray-800 rounded-lg border border-gray-700 p-8 text-center">
-        <p className="text-gray-400">Loading audit logs...</p>
+      <div className="bg-white rounded-lg border border-cyan-400 p-8 text-center">
+        <p className="text-black">Loading audit logs...</p>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="bg-gray-800 rounded-lg border border-gray-700 p-8">
-        <p className="text-red-400">{error}</p>
+      <div className="bg-white rounded-lg border border-cyan-400 p-8">
+        <p className="text-black">{error}</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-gray-800 rounded-lg border border-gray-700 p-8">
-      <h2 className="text-2xl font-bold text-white mb-6">Audit Logs</h2>
+    <div className="bg-white rounded-lg border border-cyan-400 p-8">
+      <h2 className="text-2xl font-bold text-black mb-6">Audit Logs</h2>
 
       {logs.length === 0 ? (
-        <p className="text-gray-400">No audit logs yet</p>
+        <p className="text-black">No audit logs yet</p>
       ) : (
         <div className="space-y-4">
           {logs.map((log) => (
-            <div key={log.auditId} className="border border-gray-700 rounded-lg p-4 bg-gray-900">
+            <div key={log.auditId} className="border border-cyan-400 rounded-lg p-4 bg-blue-50">
               <div className="flex justify-between items-start mb-3">
                 <div>
-                  <p className="text-white font-semibold">{log.fullName}</p>
-                  <p className="text-blue-400 text-sm">{log.email}</p>
+                  <p className="text-black font-semibold">{log.fullName}</p>
+                  <p className="text-black text-sm">{log.email}</p>
                 </div>
-                <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">
+                <span className="bg-blue-600 text-black text-xs px-2 py-1 rounded">
                   {log.group}
                 </span>
               </div>
 
               <div className="mb-3">
-                <p className="text-gray-400 text-sm">
+                <p className="text-black text-sm">
                   Created: {new Date(log.timestamp).toLocaleString()}
                 </p>
               </div>
@@ -85,20 +85,20 @@ export default function AuditLogViewer() {
               <div className="space-y-2 bg-black/30 rounded p-3 mt-3">
                 {log.logs?.map((action, idx) => (
                   <div key={idx} className="flex items-start gap-2 text-sm">
-                    <span className={action.status === 'SUCCESS' ? 'text-green-400' : 'text-red-400'}>
+                    <span className={action.status === 'SUCCESS' ? 'text-black' : 'text-black'}>
                       {action.status === 'SUCCESS' ? '✓' : '✗'}
                     </span>
                     <div className="flex-1">
-                      <p className="text-gray-300">{action.details}</p>
-                      <p className="text-gray-500 text-xs">{action.action}</p>
+                      <p className="text-black">{action.details}</p>
+                      <p className="text-black text-xs">{action.action}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
               {/* Audit ID */}
-              <div className="mt-3 pt-3 border-t border-gray-700">
-                <p className="text-gray-500 text-xs break-all">
+              <div className="mt-3 pt-3 border-t border-cyan-400">
+                <p className="text-black text-xs break-all">
                   Audit ID: {log.auditId}
                 </p>
               </div>
