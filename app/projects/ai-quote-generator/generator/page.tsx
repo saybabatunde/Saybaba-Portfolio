@@ -121,8 +121,8 @@ export default function GeneratorPage() {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Theme Selection */}
-            <div className="bg-white border border-gray-400 rounded-lg p-6">
-              <h2 className="text-lg font-bold text-gray-800 mb-4">Select Theme</h2>
+            <div className="bg-slate-900 border border-slate-700 rounded-lg p-6">
+              <h2 className="text-lg font-bold text-white mb-4">Select Theme</h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {THEMES.map((theme) => (
                   <button
@@ -213,7 +213,7 @@ export default function GeneratorPage() {
 
           {/* Sidebar - Favorites */}
           <div className="lg:col-span-1">
-            <div className="bg-white border border-gray-400 rounded-lg p-6 sticky top-24">
+            <div className="bg-slate-900 border border-slate-700 rounded-lg p-6 sticky top-24">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold text-white">❤️ Favorites</h2>
                 <span className="bg-gray-500 text-white text-xs font-bold px-2 py-1 rounded">
@@ -268,7 +268,7 @@ export default function GeneratorPage() {
         </div>
 
         {/* Info Section */}
-        <section className="mt-12 bg-white border border-gray-400 rounded-lg p-6">
+        <section className="mt-12 bg-slate-900 border border-slate-700 rounded-lg p-6">
           <h2 className="text-2xl font-bold text-white mb-4">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
