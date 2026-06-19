@@ -32,7 +32,7 @@ export default function DashboardPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
         <p className="text-white">Loading...</p>
       </div>
     )
@@ -42,7 +42,7 @@ export default function DashboardPage() {
   const categories = Array.from(new Set(projects.map((p) => p.category)))
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600">
+    <div className="min-h-screen bg-slate-900">
       {/* Header */}
       <header className="bg-gradient-to-r from-slate-900 to-cyan-900 border-b border-cyan-400 sticky top-0 z-50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
