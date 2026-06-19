@@ -16,7 +16,14 @@ export async function POST(request: NextRequest) {
   try {
     const { theme = 'motivational' } = await request.json()
 
+    console.log('API Key Check:', {
+      hasKey: !!process.env.ANTHROPIC_API_KEY,
+      keyLength: process.env.ANTHROPIC_API_KEY?.length,
+      keyPrefix: process.env.ANTHROPIC_API_KEY?.substring(0, 10),
+    })
+
     if (!process.env.ANTHROPIC_API_KEY) {
+      console.error('ANTHROPIC_API_KEY not configured!')
       return NextResponse.json(
         { error: 'Claude API key not configured' },
         { status: 500 }
