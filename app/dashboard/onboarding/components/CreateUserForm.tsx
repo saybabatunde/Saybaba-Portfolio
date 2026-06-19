@@ -131,19 +131,19 @@ export default function CreateUserForm() {
 
       {/* Success Result */}
       {result && (
-        <div className="mt-6 p-4 bg-green-900/30 border border-cyan-400 rounded-lg">
+        <div className="mt-6 p-4 bg-green-900 border border-green-500 rounded-lg">
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-2xl">✓</span>
-            <p className="text-green-300 font-semibold">User Created Successfully!</p>
+            <span className="text-3xl text-green-400">✓</span>
+            <p className="text-white font-bold text-lg">User Created Successfully!</p>
           </div>
-          <div className="space-y-2 text-green-300 text-sm mb-4">
+          <div className="space-y-2 text-white text-sm mb-4">
             <p><span className="font-semibold">Username:</span> {result.username}</p>
             <p><span className="font-semibold">Email:</span> {result.email}</p>
             <p><span className="font-semibold">Group:</span> {result.group}</p>
             <p><span className="font-semibold">Audit ID:</span> {result.auditId}</p>
           </div>
-          <div className="border-t border-cyan-400 pt-4 mt-4 p-3 bg-yellow-900/40 border border-yellow-600 rounded-lg">
-            <p className="text-yellow-300 text-sm font-semibold">
+          <div className="border-t border-green-500 pt-4 mt-4 p-3 bg-yellow-900 border border-yellow-500 rounded-lg">
+            <p className="text-yellow-100 text-sm font-semibold">
               ✉️ Check your email to confirm you received the onboarding notification. This demonstrates the system's notification and audit capabilities working end-to-end.
             </p>
           </div>
