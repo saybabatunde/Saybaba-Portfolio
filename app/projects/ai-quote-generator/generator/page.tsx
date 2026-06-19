@@ -121,7 +121,7 @@ export default function GeneratorPage() {
   const themeColor = THEMES.find((t) => t.id === selectedTheme)?.color || '#3b82f6'
 
   return (
-    <div className="min-h-screen bg-black p-4">
+    <div className="min-h-screen bg-gradient-to-b from-blue-600 via-blue-400 to-cyan-300 p-4">
       {/* Header */}
       <header className="bg-slate-900 border-b border-slate-700 sticky top-0 z-50 mb-8">
         <div className="max-w-4xl mx-auto px-4 py-6">
