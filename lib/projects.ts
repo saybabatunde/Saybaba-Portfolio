@@ -219,6 +219,30 @@ export const projects: Project[] = [
     github: 'https://github.com/saybabatunde/ai-quote-generator',
     deployment: 'https://ai-quote-generator.vercel.app'
   },
+  {
+    id: 12,
+    slug: 'terraform-multi-cloud-infrastructure',
+    title: 'Terraform Multi-Cloud Infrastructure',
+    description: 'Production-ready infrastructure as code for AWS deployments with auto-scaling and monitoring',
+    fullDescription: 'Enterprise-grade infrastructure-as-code project demonstrating complete 3-tier architecture. Deploy VPCs, EC2 instances with auto-scaling, RDS databases with backups, and load balancers. Supports dev, staging, and production environments from the same codebase. Includes comprehensive monitoring, alarms, security groups, and disaster recovery capabilities.',
+    category: 'DevOps',
+    techStack: ['Terraform', 'AWS', 'VPC', 'EC2', 'RDS', 'ALB', 'IAM', 'CloudWatch', 'Auto Scaling'],
+    features: [
+      'Modular Terraform architecture (4 reusable components)',
+      'Multi-environment support (dev, staging, production)',
+      'Auto-scaling EC2 instances based on CPU metrics',
+      'Load balanced traffic distribution with ALB',
+      'RDS PostgreSQL with Multi-AZ failover',
+      'Automated daily backups with 30-day retention',
+      'Security groups with least-privilege access',
+      'IAM roles and policies for EC2 and RDS',
+      'CloudWatch monitoring and automated alarms',
+      'VPC with public and private subnets',
+      'NAT Gateway for private resource access',
+      'Production-ready with encryption and compliance'
+    ],
+    github: 'https://github.com/saybabatunde/Terraform-MultiCloud-Infrastructure',
+  },
 ]
 
 export const getProjectBySlug = (slug: string): Project | undefined => {
