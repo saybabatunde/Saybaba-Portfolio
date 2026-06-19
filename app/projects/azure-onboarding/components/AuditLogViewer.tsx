@@ -13,7 +13,7 @@ export default function AuditLogViewer() {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await fetch(`${API_URL}/audit-logs`, {
+        const response = await fetch(`${API_URL}/audit-logs?platform=azure`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

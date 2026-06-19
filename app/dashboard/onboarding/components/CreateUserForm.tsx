@@ -35,7 +35,7 @@ export default function CreateUserForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, platform: 'aws' }),
       })
 
       const data = await response.json()
