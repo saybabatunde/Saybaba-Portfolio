@@ -282,9 +282,7 @@ export default function AIQuoteGeneratorPage() {
             Experience Claude-powered quote generation. No signup required.
           </p>
           <a
-            href="https://ai-quote-generator.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/projects/ai-quote-generator/generator"
             className="inline-block bg-white text-gray-700 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition"
           >
             Open Generator →

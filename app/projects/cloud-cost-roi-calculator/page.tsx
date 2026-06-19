@@ -244,9 +244,7 @@ export default function CloudCostROICalculatorPage() {
                   Visit the live calculator to analyze your cloud infrastructure ROI.
                 </p>
                 <a
-                  href="https://cloud-roi-calculator.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/projects/cloud-cost-roi-calculator/calculator"
                   className="inline-block bg-green-600 hover:bg-green-700 text-gray-800 font-bold px-6 py-3 rounded-lg transition"
                 >
                   Open Calculator →
@@ -296,9 +294,7 @@ export default function CloudCostROICalculatorPage() {
             Experience the calculator firsthand. No signup required.
           </p>
           <a
-            href="https://cloud-roi-calculator.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/projects/cloud-cost-roi-calculator/calculator"
             className="inline-block bg-white text-gray-700 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition"
           >
             Open Calculator →
