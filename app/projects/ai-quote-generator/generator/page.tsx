@@ -12,6 +12,14 @@ const THEMES = [
   { id: 'life', label: '✨ Life', color: '#06b6d4' },
 ]
 
+const ANIMATION_STYLES = [
+  'animate-fade-in-bounce',
+  'animate-slide-up',
+  'animate-pulse-glow',
+  'animate-bounce-in',
+  'animate-fade-in-scale',
+]
+
 export default function GeneratorPage() {
   const [selectedTheme, setSelectedTheme] = useState('motivational')
   const [quote, setQuote] = useState('')
@@ -20,10 +28,13 @@ export default function GeneratorPage() {
   const [favorites, setFavorites] = useState<Array<{ quote: string; author: string; theme: string }>>([])
   const [showFavorites, setShowFavorites] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [animationStyle, setAnimationStyle] = useState('animate-fade-in-bounce')
   const quoteRef = useRef<HTMLDivElement>(null)
 
   const generateQuote = async () => {
     setLoading(true)
+    const randomAnimation = ANIMATION_STYLES[Math.floor(Math.random() * ANIMATION_STYLES.length)]
+    setAnimationStyle(randomAnimation)
     try {
       const response = await fetch('/api/generate-quote', {
         method: 'POST',
@@ -152,7 +163,7 @@ export default function GeneratorPage() {
               }}
             >
               {quote ? (
-                <div className="space-y-4">
+                <div className={`space-y-4 ${animationStyle}`}>
                   <p className="text-3xl font-bold text-white leading-relaxed">"{quote}"</p>
                   <p className="text-xl text-white">— {author}</p>
                 </div>
