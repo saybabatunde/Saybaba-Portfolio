@@ -183,49 +183,49 @@ export default function GeneratorPage() {
               )}
             </div>
 
-            {/* Generate Button */}
-            <button
-              onClick={generateQuote}
-              disabled={loading}
-              className="w-full bg-gray-500 hover:bg-gray-600 disabled:bg-white600 text-white font-bold py-4 rounded-lg transition text-lg"
-            >
-              {loading ? '🔄 Generating...' : '✨ Generate Quote'}
-            </button>
+            {/* Generate and Clear Buttons */}
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                onClick={generateQuote}
+                disabled={loading}
+                className="bg-gray-500 hover:bg-gray-600 disabled:bg-gray-600 text-white font-bold py-4 rounded-lg transition text-lg"
+              >
+                {loading ? '🔄 Generating...' : '✨ Generate'}
+              </button>
+              <button
+                onClick={clearQuote}
+                className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-4 rounded-lg transition flex items-center justify-center gap-2"
+              >
+                🗑️ Clear
+              </button>
+            </div>
 
             {/* Action Buttons */}
             {quote && (
-              <div className="space-y-3">
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    onClick={copyToClipboard}
-                    className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                  >
-                    {copied ? '✓ Copied!' : '📋 Copy'}
-                  </button>
-                  <button
-                    onClick={exportAsImage}
-                    className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                  >
-                    🖼️ Export
-                  </button>
-                  <button
-                    onClick={shareToTwitter}
-                    className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                  >
-                    𝕏 Share
-                  </button>
-                  <button
-                    onClick={saveFavorite}
-                    className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                  >
-                    ❤️ Save
-                  </button>
-                </div>
+              <div className="grid grid-cols-2 gap-3">
                 <button
-                  onClick={clearQuote}
-                  className="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                  onClick={copyToClipboard}
+                  className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
                 >
-                  🗑️ Clear
+                  {copied ? '✓ Copied!' : '📋 Copy'}
+                </button>
+                <button
+                  onClick={exportAsImage}
+                  className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                >
+                  🖼️ Export
+                </button>
+                <button
+                  onClick={shareToTwitter}
+                  className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                >
+                  𝕏 Share
+                </button>
+                <button
+                  onClick={saveFavorite}
+                  className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                >
+                  ❤️ Save
                 </button>
               </div>
             )}
