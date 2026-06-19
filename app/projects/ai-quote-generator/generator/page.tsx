@@ -178,32 +178,32 @@ export default function GeneratorPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={copyToClipboard}
-                    className="bg-white700 hover:bg-white600 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                    className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
                   >
                     {copied ? '✓ Copied!' : '📋 Copy'}
                   </button>
                   <button
                     onClick={exportAsImage}
-                    className="bg-white700 hover:bg-white600 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                    className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
                   >
                     🖼️ Export
                   </button>
                   <button
                     onClick={shareToTwitter}
-                    className="bg-gray-500 hover:bg-gray-500 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                    className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
                   >
                     𝕏 Share
                   </button>
                   <button
                     onClick={saveFavorite}
-                    className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                    className="bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
                   >
                     ❤️ Save
                   </button>
                 </div>
                 <button
                   onClick={clearQuote}
-                  className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
+                  className="w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
                 >
                   🗑️ Clear
                 </button>
