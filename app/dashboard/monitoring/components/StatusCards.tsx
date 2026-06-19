@@ -41,6 +41,7 @@ export default function StatusCards() {
     { name: 'Resend', status: 'operational', icon: '📧', message: 'Email service active', color: 'green' },
     { name: 'AWS', status: 'operational', icon: '⚙️', message: 'Lambda & API Gateway healthy', color: 'green' },
     { name: 'Azure', status: 'operational', icon: '☁️', message: 'Resources operational', color: 'green' },
+    { name: 'Claude API', status: 'operational', icon: '🤖', message: 'AI service responsive', color: 'green' },
   ]
 
   if (loading) {
