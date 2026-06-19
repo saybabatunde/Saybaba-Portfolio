@@ -131,7 +131,7 @@ export default function GeneratorPage() {
                     className={`px-4 py-2 rounded-lg font-semibold transition ${
                       selectedTheme === theme.id
                         ? `bg-opacity-100 text-white`
-                        : 'bg-white700 text-white hover:bg-white600'
+                        : 'bg-slate-800 text-white hover:bg-slate-700'
                     }`}
                     style={
                       selectedTheme === theme.id ? { backgroundColor: theme.color } : {}
