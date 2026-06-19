@@ -7,21 +7,21 @@ export default function CloudCostROICalculatorPage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'features' | 'calculator'>('overview')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-400 via-gray-300 to-gray-200">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-gray-600/80 border-b border-gray-500 sticky top-0 z-50">
+      <header className="bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-6">
           <button
             onClick={() => window.history.back()}
-            className="text-gray-200 hover:text-gray-800 flex items-center gap-2 mb-4"
+            className="text-gray-400 hover:text-white flex items-center gap-2 mb-4"
           >
             ← Back
           </button>
           <div>
-            <h1 className="text-4xl font-bold text-gray-800 flex items-center gap-3">
+            <h1 className="text-4xl font-bold text-white flex items-center gap-3">
               <span>💰</span> Cloud Cost ROI Calculator
             </h1>
-            <p className="text-gray-100 text-lg mt-2">
+            <p className="text-gray-300 text-lg mt-2">
               Calculate return on investment for your cloud infrastructure • Built with Claude AI
             </p>
           </div>
@@ -60,7 +60,7 @@ export default function CloudCostROICalculatorPage() {
         </div>
 
         {/* Tabs */}
-        <div className="mb-8 border-b border-gray-400">
+        <div className="mb-8 border-b border-slate-700">
           <div className="flex gap-4 overflow-x-auto">
             {(['overview', 'features', 'calculator'] as const).map((tab) => (
               <button
@@ -68,8 +68,8 @@ export default function CloudCostROICalculatorPage() {
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-3 font-semibold border-b-2 transition ${
                   activeTab === tab
-                    ? 'text-gray-700 border-blue-500'
-                    : 'text-gray-800 border-transparent hover:text-gray-800'
+                    ? 'text-white border-blue-500'
+                    : 'text-gray-300 border-transparent hover:text-white'
                 }`}
               >
                 {tab === 'overview' && '📋 Overview'}
