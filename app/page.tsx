@@ -37,7 +37,7 @@ export default function LoginPage() {
         {/* Logo/Header */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-white mb-4">
-            Welcome to Saybaba Portfolio
+            Welcome to baba's Portfolio
           </h1>
           <p className="text-white text-lg">
             Showcasing Cloud & Development Expertise
@@ -46,19 +46,19 @@ export default function LoginPage() {
 
         {/* Login Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 border-2 border-cyan-400">
-          <h2 className="text-2xl font-bold text-white mb-2">Login</h2>
-          <p className="text-white text-sm mb-6">
-            Kindly use <span className="font-semibold text-cyan-700">Admin</span> for username and password to gain access
+          <h2 className="text-2xl font-black text-black mb-2 text-base">Login</h2>
+          <p className="text-black text-sm mb-6 font-bold">
+            Kindly use <span className="font-black text-black">Admin</span> for username and password to gain access
           </p>
 
           <LoginForm onSubmit={handleLogin} isLoading={isLoading} error={error} />
 
           {/* Demo Credentials Hint */}
           <div className="mt-6 p-4 bg-blue-50 rounded-lg border-2 border-cyan-400">
-            <p className="text-xs text-white text-center">
+            <p className="text-sm text-black text-center font-black">
               Demo Access:<br />
-              Username: <span className="text-cyan-700 font-mono font-semibold">admin</span><br />
-              Password: <span className="text-cyan-700 font-mono font-semibold">admin</span>
+              Username: <span className="text-black font-mono font-black">admin</span><br />
+              Password: <span className="text-black font-mono font-black">admin</span>
             </p>
           </div>
         </div>

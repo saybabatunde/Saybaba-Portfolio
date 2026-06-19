@@ -21,7 +21,7 @@ export default function LoginForm({ onSubmit, isLoading, error }: LoginFormProps
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Username Input */}
       <div>
-        <label htmlFor="username" className="block text-sm font-medium text-slate-700 mb-2">
+        <label htmlFor="username" className="block text-sm font-black text-black mb-2">
           Username
         </label>
         <input
@@ -31,14 +31,14 @@ export default function LoginForm({ onSubmit, isLoading, error }: LoginFormProps
           onChange={(e) => setUsername(e.target.value)}
           placeholder="admin"
           disabled={isLoading}
-          className="w-full px-4 py-2 bg-sky-50 border-2 border-sky-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-300 disabled:opacity-50"
+          className="w-full px-4 py-2 bg-sky-50 border-2 border-sky-200 rounded-lg text-black font-black placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-300 disabled:opacity-50"
           required
         />
       </div>
 
       {/* Password Input */}
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-slate-700 mb-2">
+        <label htmlFor="password" className="block text-sm font-black text-black mb-2">
           Password
         </label>
         <input
@@ -48,7 +48,7 @@ export default function LoginForm({ onSubmit, isLoading, error }: LoginFormProps
           onChange={(e) => setPassword(e.target.value)}
           placeholder="••••••••"
           disabled={isLoading}
-          className="w-full px-4 py-2 bg-sky-50 border-2 border-sky-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-300 disabled:opacity-50"
+          className="w-full px-4 py-2 bg-sky-50 border-2 border-sky-200 rounded-lg text-black font-black placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-300 disabled:opacity-50"
           required
         />
       </div>
@@ -64,7 +64,7 @@ export default function LoginForm({ onSubmit, isLoading, error }: LoginFormProps
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-700 hover:to-cyan-700 disabled:bg-slate-400 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 mt-6"
+        className="w-full bg-gradient-to-r from-sky-600 to-cyan-600 hover:from-sky-700 hover:to-cyan-700 disabled:bg-slate-400 text-white font-black py-2 px-4 rounded-lg transition duration-200 mt-6 text-sm"
       >
         {isLoading ? 'Logging in...' : 'Login'}
       </button>
