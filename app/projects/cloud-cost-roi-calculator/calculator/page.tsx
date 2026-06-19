@@ -337,18 +337,18 @@ indicates rapid return on investment.
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-400 via-gray-300 to-gray-200">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-gradient-to-r from-gray-600 to-gray-500 shadow-lg sticky top-0 z-50">
+      <header className="bg-slate-900 shadow-lg sticky top-0 z-50 border-b border-slate-700">
         <div className="max-w-7xl mx-auto px-6 py-8">
           <button
             onClick={() => window.history.back()}
-            className="text-gray-200 hover:text-gray-800 flex items-center gap-2 mb-4 font-semibold text-sm"
+            className="text-gray-400 hover:text-white flex items-center gap-2 mb-4 font-semibold text-sm"
           >
             ← Back
           </button>
-          <h1 className="text-4xl font-bold text-gray-800">💰 Cloud Cost ROI Calculator</h1>
-          <p className="text-gray-100 mt-2">Calculate your cloud infrastructure return on investment with precision</p>
+          <h1 className="text-4xl font-bold text-white">💰 Cloud Cost ROI Calculator</h1>
+          <p className="text-gray-300 mt-2">Calculate your cloud infrastructure return on investment with precision</p>
         </div>
       </header>
 
