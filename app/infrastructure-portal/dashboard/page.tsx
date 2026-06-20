@@ -52,11 +52,20 @@ export default function InfrastructureDashboard() {
       const response = await fetch(`/api/infrastructure/resources?email=${userEmail}`)
       if (!response.ok) throw new Error('Failed to fetch resources')
       const data = await response.json()
-      setResources(data.resources || [])
+
+      // Auto-delete resources older than 1 hour
+      const now = new Date()
+      const filteredResources = (data.resources || []).filter((resource: DeployedResource) => {
+        const createdTime = new Date(resource.created_at)
+        const hoursOld = (now.getTime() - createdTime.getTime()) / (1000 * 60 * 60)
+        return hoursOld < 1 // Keep only resources younger than 1 hour
+      })
+
+      setResources(filteredResources)
       setRequests(data.requests || [])
 
       // Calculate total cost
-      const total = data.resources?.reduce((sum: number, r: DeployedResource) => sum + r.monthly_cost, 0) || 0
+      const total = filteredResources.reduce((sum: number, r: DeployedResource) => sum + r.monthly_cost, 0) || 0
       setTotalCost(total)
     } catch (err) {
       console.error('Error fetching resources:', err)
@@ -97,6 +106,14 @@ export default function InfrastructureDashboard() {
     return Math.max(0, days)
   }
 
+  const calculateTimeUntilAutoDelete = (createdAt: string) => {
+    const now = new Date()
+    const created = new Date(createdAt)
+    const minutesOld = (now.getTime() - created.getTime()) / (1000 * 60)
+    const minutesRemaining = Math.max(0, 60 - Math.floor(minutesOld))
+    return minutesRemaining
+  }
+
   return (
     <div className="min-h-screen bg-slate-950">
       <header className="bg-slate-900 border-b border-cyan-500 sticky top-0 z-50">
@@ -117,6 +134,24 @@ export default function InfrastructureDashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 py-12">
+        {/* Warning Banner */}
+        <div className="mb-8 bg-red-900/30 border-l-4 border-red-600 rounded-lg p-6">
+          <div className="flex items-start gap-4">
+            <span className="text-3xl">⚠️</span>
+            <div>
+              <h3 className="text-xl font-bold text-red-300 mb-2">Important: Delete Resources to Avoid Billing</h3>
+              <p className="text-red-200 mb-3">
+                Kindly delete the resources created to avoid unexpected charges. Each resource incurs real costs to your Azure subscription.
+              </p>
+              <ul className="text-red-200 text-sm space-y-1 list-disc list-inside">
+                <li><strong>⏱️ Auto-delete:</strong> Resources automatically deleted after 1 hour</li>
+                <li><strong>💰 Manual delete:</strong> Click "🗑 Delete Resource" button to delete immediately</li>
+                <li><strong>📧 Notifications:</strong> Email confirmation sent when resource is deleted</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-white mb-2">Infrastructure Dashboard</h1>
           <p className="text-gray-300">Manage your deployed Azure resources and monitor costs</p>
@@ -232,10 +267,13 @@ export default function InfrastructureDashboard() {
                     </div>
                   </div>
 
-                  {/* Expiration Warning */}
-                  <div className={`p-3 rounded mb-4 ${isExpiringSoon ? 'bg-yellow-900/30 border border-yellow-600' : 'bg-slate-800 border border-gray-600'}`}>
-                    <p className={isExpiringSoon ? 'text-yellow-300' : 'text-gray-300'}>
-                      ⏱ Expires in {daysRemaining} days • Auto-cleanup enabled
+                  {/* Auto-Delete Warning */}
+                  <div className="p-3 rounded mb-4 bg-red-900/30 border border-red-600">
+                    <p className="text-red-300 font-semibold">
+                      ⏰ Auto-deletes in {calculateTimeUntilAutoDelete(resource.created_at)} minutes
+                    </p>
+                    <p className="text-red-200 text-sm mt-1">
+                      Delete now to stop charges immediately, or it will auto-delete after 1 hour
                     </p>
                   </div>
 
