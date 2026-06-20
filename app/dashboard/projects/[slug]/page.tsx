@@ -120,8 +120,8 @@ export default function ProjectPage() {
                 key={index}
                 className="bg-white border border-cyan-400 rounded-lg p-4 flex items-start gap-3"
               >
-                <div className="text-blue-400 text-xl mt-1">✓</div>
-                <p className="text-white">{feature}</p>
+                <div className="text-black text-2xl mt-1 font-bold">✓</div>
+                <p className="text-black text-base" style={{ fontSize: '15px' }}>{feature}</p>
               </div>
             ))}
           </div>
