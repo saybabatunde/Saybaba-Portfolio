@@ -78,12 +78,18 @@ export default function InfrastructurePortal() {
   return (
     <div className="min-h-screen bg-slate-950">
       <header className="bg-slate-900 border-b border-cyan-500 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-6">
+        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
           <Link
-            href="/dashboard"
+            href="/infrastructure-portal/dashboard"
             className="text-blue-400 hover:text-blue-300 font-semibold transition duration-200 flex items-center gap-2"
           >
-            ← Back to Dashboard
+            ← View My Resources
+          </Link>
+          <Link
+            href="/dashboard"
+            className="text-gray-400 hover:text-gray-300 font-semibold transition duration-200 flex items-center gap-2 text-sm"
+          >
+            Back to Main Dashboard
           </Link>
         </div>
       </header>

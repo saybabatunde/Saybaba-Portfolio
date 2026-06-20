@@ -47,6 +47,7 @@ export default function ApprovalPage() {
   const [request, setRequest] = useState<Request | null>(null)
   const [loading, setLoading] = useState(true)
   const [deploying, setDeploying] = useState(false)
+  const [deployed, setDeployed] = useState(false)
   const [error, setError] = useState('')
 
   const requestId = params.id as string
@@ -84,7 +85,11 @@ export default function ApprovalPage() {
         throw new Error(data.error || 'Deployment failed')
       }
 
-      router.push(`/infrastructure-portal/dashboard`)
+      setDeployed(true)
+      // Redirect to dashboard after 3 seconds
+      setTimeout(() => {
+        router.push(`/infrastructure-portal/dashboard`)
+      }, 3000)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during deployment')
     } finally {
@@ -104,6 +109,47 @@ export default function ApprovalPage() {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <p className="text-red-400 text-xl">Request not found</p>
+      </div>
+    )
+  }
+
+  if (deployed) {
+    return (
+      <div className="min-h-screen bg-slate-950">
+        <header className="bg-slate-900 border-b border-cyan-500 sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 py-6">
+            <h1 className="text-2xl font-bold text-white">Infrastructure Deployment</h1>
+          </div>
+        </header>
+
+        <main className="max-w-4xl mx-auto px-4 py-12 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center space-y-8">
+            <div className="text-7xl animate-bounce">✅</div>
+            <div>
+              <h2 className="text-4xl font-bold text-green-400 mb-4">Deployment Successful!</h2>
+              <p className="text-white text-xl mb-2">Your infrastructure has been provisioned</p>
+              <p className="text-gray-400 text-lg">Redirecting to dashboard...</p>
+            </div>
+
+            <div className="bg-slate-900 border border-green-500 rounded-lg p-6">
+              <h3 className="text-white font-bold mb-3">✨ What's Next:</h3>
+              <ul className="text-gray-300 space-y-2 text-left">
+                <li>✅ Resource deployed to your Azure subscription</li>
+                <li>✅ Email confirmation sent to {request.user_email}</li>
+                <li>✅ Access resource in Infrastructure Dashboard</li>
+                <li>✅ Monitor costs and usage</li>
+                <li>✅ Delete anytime to stop charges</li>
+              </ul>
+            </div>
+
+            <Link
+              href="/infrastructure-portal/dashboard"
+              className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-lg transition duration-200 text-lg"
+            >
+              → Go to Dashboard Now
+            </Link>
+          </div>
+        </main>
       </div>
     )
   }
