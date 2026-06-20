@@ -117,19 +117,36 @@ export default function InfrastructureDashboard() {
   return (
     <div className="min-h-screen bg-slate-950">
       <header className="bg-slate-900 border-b border-cyan-500 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-          <Link
-            href="/dashboard"
-            className="text-blue-400 hover:text-blue-300 font-semibold transition duration-200 flex items-center gap-2"
-          >
-            ← Back to Dashboard
-          </Link>
-          <Link
-            href="/infrastructure-portal"
-            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
-          >
-            + Request Infrastructure
-          </Link>
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="flex justify-between items-center mb-4">
+            <Link
+              href="/dashboard"
+              className="text-gray-400 hover:text-gray-300 font-semibold transition duration-200 flex items-center gap-2 text-sm"
+            >
+              ← Main Portfolio
+            </Link>
+            <Link
+              href="/infrastructure-portal"
+              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+            >
+              + Request Infrastructure
+            </Link>
+          </div>
+
+          {/* Infrastructure Dashboard Navigation */}
+          <div className="flex items-center gap-3 bg-cyan-900/30 border border-cyan-600 rounded-lg p-3">
+            <span className="text-cyan-400 text-2xl">📊</span>
+            <div className="flex-1">
+              <h2 className="text-white font-bold text-lg">Infrastructure Dashboard</h2>
+              <p className="text-gray-400 text-xs">Manage your deployed Azure resources</p>
+            </div>
+            <button
+              onClick={() => window.location.href = '/infrastructure-portal/dashboard'}
+              className="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 text-sm"
+            >
+              ↻ Refresh
+            </button>
+          </div>
         </div>
       </header>
 
