@@ -33,7 +33,7 @@ async function logError(errorType: string, errorMessage: string, userName: strin
 async function sendAdminNotification(errorType: string, errorMessage: string, userName: string, userEmail: string) {
   try {
     await resend.emails.send({
-      from: 'alerts@babatundeportfolio.com',
+      from: 'Alerts <onboarding@resend.dev>',
       to: process.env.ADMIN_EMAIL || 'olawalebabatunde98@gmail.com',
       subject: `⚠️ ONBOARDING ERROR - ${errorType}`,
       html: `
@@ -137,7 +137,7 @@ export async function POST(request: NextRequest) {
     let emailSent = true
     try {
       await resend.emails.send({
-        from: 'onboarding@babatundeportfolio.com',
+        from: 'Onboarding <onboarding@resend.dev>',
         to: email,
         subject: 'Welcome to Saybaba Portfolio - User Onboarding Confirmation',
         html: `
