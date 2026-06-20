@@ -116,24 +116,24 @@ export default function MetricsDisplay() {
       {/* Current Metrics Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
-          <p className="text-white text-sm mb-2">CPU Usage</p>
-          <p className="text-2xl font-bold text-blue-400">{currentMetrics.cpu.toFixed(1)}%</p>
-        </div>
-        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
-          <p className="text-white text-sm mb-2">RAM Usage</p>
-          <p className="text-2xl font-bold text-purple-400">{currentMetrics.ram.toFixed(1)}%</p>
-        </div>
-        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
-          <p className="text-white text-sm mb-2">Disk Usage</p>
-          <p className="text-2xl font-bold text-orange-400">{currentMetrics.disk.toFixed(1)}%</p>
-        </div>
-        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
           <p className="text-white text-sm mb-2">Response Time</p>
           <p className="text-2xl font-bold text-green-400">{currentMetrics.responseTime.toFixed(0)}ms</p>
         </div>
-        <div className="bg-white/20 rounded-lg border border-emerald-600/30 p-4">
-          <p className="text-white text-sm mb-2">Uptime (30d)</p>
+        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
+          <p className="text-white text-sm mb-2">Uptime</p>
           <p className="text-2xl font-bold text-emerald-400">{currentMetrics.uptime.toFixed(2)}%</p>
+        </div>
+        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
+          <p className="text-white text-sm mb-2">API Requests</p>
+          <p className="text-2xl font-bold text-blue-400">{(currentMetrics as any).apiRequests || 0}</p>
+        </div>
+        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
+          <p className="text-white text-sm mb-2">Lambda Errors</p>
+          <p className="text-2xl font-bold text-red-400">{(currentMetrics as any).lambdaErrors || 0}</p>
+        </div>
+        <div className="bg-white/20 rounded-lg border border-emerald-600/30 p-4">
+          <p className="text-white text-sm mb-2">Monthly Cost</p>
+          <p className="text-2xl font-bold text-emerald-400">${(currentMetrics as any).estimatedMonthlyCost?.toFixed(2) || '0.00'}</p>
         </div>
       </div>
 

@@ -42,9 +42,9 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600">
+    <div className="min-h-screen bg-slate-950">
       {/* Header */}
-      <header className="bg-white border-b border-cyan-400 sticky top-0 z-50">
+      <header className="bg-slate-900 border-b border-cyan-500 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <Link
             href="/dashboard"
