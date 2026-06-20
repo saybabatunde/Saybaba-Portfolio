@@ -103,7 +103,7 @@ export default function ProjectPage() {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="bg-white border border-cyan-400 text-blue-400 px-4 py-2 rounded-lg text-sm font-semibold"
+                className="bg-white border border-cyan-400 text-black px-4 py-2 rounded-lg text-sm font-semibold"
               >
                 {tech}
               </span>
