@@ -27,7 +27,13 @@ export default function TestPage() {
       }
 
       const data = await response.json()
-      setMessage(`✅ Test resource created! Name: ${data.resourceName}`)
+      // Store email so dashboard can fetch resources
+      localStorage.setItem('user_email', email)
+      setMessage(`✅ Test resource created! Name: ${data.resourceName}. Redirecting to dashboard...`)
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        window.location.href = '/infrastructure-portal/dashboard'
+      }, 2000)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
     } finally {

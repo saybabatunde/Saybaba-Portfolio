@@ -40,7 +40,11 @@ export default function InfrastructureDashboard() {
     // For demo, show sample data or allow email input
     const userEmail = localStorage.getItem('user_email') || ''
     setEmail(userEmail)
-    fetchResources(userEmail)
+    if (userEmail) {
+      fetchResources(userEmail)
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const fetchResources = async (userEmail: string) => {
@@ -145,7 +149,33 @@ export default function InfrastructureDashboard() {
           </div>
         )}
 
-        {loading ? (
+        {!email ? (
+          <div className="bg-slate-900 rounded-lg border border-gray-600 p-12">
+            <h2 className="text-2xl font-bold text-white mb-6">Enter Your Email</h2>
+            <p className="text-gray-300 mb-6">Enter the email you used to request infrastructure to view your resources:</p>
+
+            <div className="flex gap-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                className="flex-1 px-4 py-3 bg-slate-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400"
+              />
+              <button
+                onClick={() => {
+                  if (email) {
+                    localStorage.setItem('user_email', email)
+                    fetchResources(email)
+                  }
+                }}
+                className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition"
+              >
+                Load Resources
+              </button>
+            </div>
+          </div>
+        ) : loading ? (
           <div className="text-center py-12">
             <p className="text-gray-400 text-lg">Loading resources...</p>
           </div>
