@@ -64,7 +64,7 @@ export default function LoginPage() {
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-8 text-slate-500 text-sm">
+        <div className="text-center mt-8 text-slate-500 text-base">
           <p>&copy; 2024 Saybaba. All rights reserved.</p>
         </div>
       </div>
