@@ -21,7 +21,7 @@ export default function LoginForm({ onSubmit, isLoading, error }: LoginFormProps
     <form onSubmit={handleSubmit} className="space-y-4">
       {/* Username Input */}
       <div>
-        <label htmlFor="username" className="block text-sm font-black text-gray-400 mb-2">
+        <label htmlFor="username" className="block text-sm font-black text-gray-700 mb-2">
           Username
         </label>
         <input
@@ -38,7 +38,7 @@ export default function LoginForm({ onSubmit, isLoading, error }: LoginFormProps
 
       {/* Password Input */}
       <div>
-        <label htmlFor="password" className="block text-sm font-black text-gray-400 mb-2">
+        <label htmlFor="password" className="block text-sm font-black text-gray-700 mb-2">
           Password
         </label>
         <input

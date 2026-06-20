@@ -46,19 +46,19 @@ export default function LoginPage() {
 
         {/* Login Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 border-2 border-cyan-400">
-          <h2 className="text-2xl font-black text-gray-400 mb-2 text-base">Login</h2>
-          <p className="text-gray-400 text-sm mb-6 font-bold">
-            Kindly use <span className="font-black text-gray-400">Admin</span> for username and password to gain access
+          <h2 className="text-2xl font-black text-gray-700 mb-2 text-base">Login</h2>
+          <p className="text-gray-700 text-sm mb-6 font-bold">
+            Kindly use <span className="font-black text-gray-700">Admin</span> for username and password to gain access
           </p>
 
           <LoginForm onSubmit={handleLogin} isLoading={isLoading} error={error} />
 
           {/* Demo Credentials Hint */}
           <div className="mt-6 p-4 bg-blue-50 rounded-lg border-2 border-cyan-400">
-            <p className="text-sm text-gray-400 text-center font-black">
+            <p className="text-sm text-gray-700 text-center font-black">
               Demo Access:<br />
-              Username: <span className="text-gray-400 font-mono font-black">admin</span><br />
-              Password: <span className="text-gray-400 font-mono font-black">admin</span>
+              Username: <span className="text-gray-700 font-mono font-black">admin</span><br />
+              Password: <span className="text-gray-700 font-mono font-black">admin</span>
             </p>
           </div>
         </div>
