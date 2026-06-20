@@ -150,6 +150,25 @@ export default function DashboardPage() {
                 </div>
               </div>
             </Link>
+
+            {/* Infrastructure Request Portal */}
+            <Link href="/infrastructure-portal">
+              <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-lg border-2 border-indigo-400 hover:border-indigo-300 hover:shadow-lg hover:shadow-indigo-600/40 transition duration-300 p-6 cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🏗️</span>
+                  <div>
+                    <h4 className="text-xl font-bold text-white group-hover:text-indigo-100">Infrastructure Request Portal</h4>
+                    <p className="text-sm text-white font-semibold">Azure Provisioning Tool</p>
+                  </div>
+                </div>
+                <p className="text-white mb-4 font-medium">
+                  Request and provision Azure infrastructure on-demand. Select VM size, region, and compliance level. Automated deployment via Terraform with cost controls and budget alerts.
+                </p>
+                <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
+                  Request Infrastructure <span>→</span>
+                </div>
+              </div>
+            </Link>
           </div>
           <p className="text-sm text-white mt-4">
             💡 <span className="text-yellow-400">Live Projects:</span> All demos are fully functional with real integrations. Explore interactive dashboards and production DevOps pipeline.
