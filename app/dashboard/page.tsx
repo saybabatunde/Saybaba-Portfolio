@@ -153,7 +153,7 @@ export default function DashboardPage() {
 
             {/* Infrastructure Request Portal */}
             <Link href="/infrastructure-portal">
-              <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-lg border-2 border-indigo-400 hover:border-indigo-300 hover:shadow-lg hover:shadow-indigo-600/40 transition duration-300 p-6 cursor-pointer group">
+              <div className="bg-gradient-to-br from-slate-500 to-slate-600 rounded-lg border-2 border-slate-400 hover:border-slate-300 hover:shadow-lg hover:shadow-slate-500/40 transition duration-300 p-6 cursor-pointer group">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🏗️</span>
                   <div>
