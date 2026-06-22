@@ -132,6 +132,13 @@ export default function NewOnboardingRequest() {
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-12">
+        {/* Demo Notice */}
+        <div className="bg-blue-900/30 border border-blue-500 rounded-lg p-6 mb-8">
+          <p className="text-blue-200">
+            💡 <strong>This is a demo.</strong> Use your own email to test the approval workflow. You'll receive an approval request email, and can approve or deny the request to see the complete workflow in action.
+          </p>
+        </div>
+
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Employee Information */}
           <div className="bg-slate-900 rounded-lg border border-blue-500 p-8">
