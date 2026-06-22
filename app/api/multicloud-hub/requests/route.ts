@@ -108,8 +108,9 @@ export async function POST(request: NextRequest) {
       const approvalUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'https://babatundeportfolio.com'}/multicloud-hub/approve?requestId=${data.id}`
 
       try {
-        await resend.emails.send({
-          from: 'Onboarding <onboarding@resend.dev>',
+        console.log('📧 Sending approval request email to:', manager_email)
+        const emailResult = await resend.emails.send({
+          from: 'onboarding@resend.dev',
           to: manager_email,
           subject: `Approval Requested: ${employee_name} - ${job_title}`,
           html: `
@@ -144,8 +145,9 @@ export async function POST(request: NextRequest) {
             </div>
           `,
         })
+        console.log('✅ Email sent successfully:', emailResult)
       } catch (emailError) {
-        console.warn('⚠️ Email send failed:', emailError)
+        console.error('❌ Email send failed:', emailError)
         // Don't fail the request if email fails, just log it
       }
     }

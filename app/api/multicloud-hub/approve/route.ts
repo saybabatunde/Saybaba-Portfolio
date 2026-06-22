@@ -74,8 +74,9 @@ export async function POST(request: NextRequest) {
     // Send confirmation email to manager
     if (resend && managerEmail) {
       try {
-        await resend.emails.send({
-          from: 'Onboarding <onboarding@resend.dev>',
+        console.log('📧 Sending manager confirmation email to:', managerEmail)
+        const managerEmailResult = await resend.emails.send({
+          from: 'onboarding@resend.dev',
           to: managerEmail,
           subject:
             action === 'approve'
@@ -102,16 +103,18 @@ export async function POST(request: NextRequest) {
             </div>
           `,
         })
+        console.log('✅ Manager email sent:', managerEmailResult)
       } catch (emailError) {
-        console.warn('⚠️ Manager confirmation email failed:', emailError)
+        console.error('❌ Manager confirmation email failed:', emailError)
       }
     }
 
     // Send notification email to employee
     if (resend && currentRequest.employee_email) {
       try {
-        await resend.emails.send({
-          from: 'Onboarding <onboarding@resend.dev>',
+        console.log('📧 Sending employee notification email to:', currentRequest.employee_email)
+        const employeeEmailResult = await resend.emails.send({
+          from: 'onboarding@resend.dev',
           to: currentRequest.employee_email,
           subject:
             action === 'approve'
@@ -145,8 +148,9 @@ export async function POST(request: NextRequest) {
             </div>
           `,
         })
+        console.log('✅ Employee email sent:', employeeEmailResult)
       } catch (emailError) {
-        console.warn('⚠️ Employee notification email failed:', emailError)
+        console.error('❌ Employee notification email failed:', emailError)
       }
     }
 
