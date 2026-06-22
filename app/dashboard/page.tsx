@@ -113,6 +113,25 @@ export default function DashboardPage() {
               </div>
             </Link>
 
+            {/* Multi-Cloud Identity & Infrastructure Automation Hub */}
+            <Link href="/multicloud-hub">
+              <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-lg border-2 border-gray-500 hover:border-gray-400 hover:shadow-lg hover:shadow-gray-600/40 transition duration-300 p-6 cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🌐</span>
+                  <div>
+                    <h4 className="text-xl font-bold text-white group-hover:text-gray-100">Multi-Cloud IAM Hub</h4>
+                    <p className="text-sm text-gray-200 font-semibold">Identity & Infrastructure Automation</p>
+                  </div>
+                </div>
+                <p className="text-white mb-4 font-medium">
+                  Enterprise IAM automation dashboard with onboarding workflows, role mapping matrix, provisioning simulation, and multi-cloud compliance tracking. Azure + AWS + Vercel.
+                </p>
+                <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
+                  Open Dashboard <span>→</span>
+                </div>
+              </div>
+            </Link>
+
             {/* Infrastructure Health Dashboard */}
             <Link href="/dashboard/monitoring">
               <div className="bg-gradient-to-br from-purple-600 to-violet-700 rounded-lg border-2 border-purple-400 hover:border-purple-300 hover:shadow-lg hover:shadow-purple-600/40 transition duration-300 p-6 cursor-pointer group">
@@ -132,6 +151,25 @@ export default function DashboardPage() {
               </div>
             </Link>
 
+            {/* Infrastructure Request Portal */}
+            <Link href="/infrastructure-portal">
+              <div className="bg-gradient-to-br from-slate-500 to-slate-600 rounded-lg border-2 border-slate-400 hover:border-slate-300 hover:shadow-lg hover:shadow-slate-500/40 transition duration-300 p-6 cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🏗️</span>
+                  <div>
+                    <h4 className="text-xl font-bold text-white group-hover:text-slate-100">Infrastructure Request Portal</h4>
+                    <p className="text-sm text-white font-semibold">Azure Provisioning Tool</p>
+                  </div>
+                </div>
+                <p className="text-white mb-4 font-medium">
+                  Request and provision Azure infrastructure on-demand. Select VM size, region, and compliance level. Automated deployment via Terraform with cost controls and budget alerts.
+                </p>
+                <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
+                  Request Infrastructure <span>→</span>
+                </div>
+              </div>
+            </Link>
+
             {/* CI/CD Pipeline Project */}
             <Link href="/projects/cicd-pipeline">
               <div className="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-lg border-2 border-emerald-400 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-600/40 transition duration-300 p-6 cursor-pointer group">
@@ -147,44 +185,6 @@ export default function DashboardPage() {
                 </p>
                 <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
                   View Project <span>→</span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Infrastructure Request Portal */}
-            <Link href="/infrastructure-portal">
-              <div className="bg-gradient-to-br from-slate-500 to-slate-600 rounded-lg border-2 border-slate-400 hover:border-slate-300 hover:shadow-lg hover:shadow-slate-500/40 transition duration-300 p-6 cursor-pointer group">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">🏗️</span>
-                  <div>
-                    <h4 className="text-xl font-bold text-white group-hover:text-indigo-100">Infrastructure Request Portal</h4>
-                    <p className="text-sm text-white font-semibold">Azure Provisioning Tool</p>
-                  </div>
-                </div>
-                <p className="text-white mb-4 font-medium">
-                  Request and provision Azure infrastructure on-demand. Select VM size, region, and compliance level. Automated deployment via Terraform with cost controls and budget alerts.
-                </p>
-                <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
-                  Request Infrastructure <span>→</span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Multi-Cloud Identity & Infrastructure Automation Hub */}
-            <Link href="/multicloud-hub">
-              <div className="bg-gradient-to-br from-purple-700 to-indigo-800 rounded-lg border-2 border-purple-400 hover:border-purple-300 hover:shadow-lg hover:shadow-purple-600/40 transition duration-300 p-6 cursor-pointer group">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-3xl">🌐</span>
-                  <div>
-                    <h4 className="text-xl font-bold text-white group-hover:text-purple-100">Multi-Cloud IAM Hub</h4>
-                    <p className="text-sm text-white font-semibold">Identity & Infrastructure Automation</p>
-                  </div>
-                </div>
-                <p className="text-white mb-4 font-medium">
-                  Enterprise IAM automation dashboard with onboarding workflows, role mapping matrix, provisioning simulation, and multi-cloud compliance tracking. Azure + AWS + Vercel.
-                </p>
-                <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
-                  Open Dashboard <span>→</span>
                 </div>
               </div>
             </Link>
