@@ -33,6 +33,13 @@ export default function RequestDetail() {
   const [request, setRequest] = useState<OnboardingRequest | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [processing, setProcessing] = useState(false)
+  const [showRejectForm, setShowRejectForm] = useState(false)
+  const [rejectionReason, setRejectionReason] = useState('')
+  const [approvalResult, setApprovalResult] = useState<{ status: 'approved' | 'rejected' | null; message: string }>({
+    status: null,
+    message: '',
+  })
 
   useEffect(() => {
     const logged_in = localStorage.getItem('logged_in')
@@ -66,6 +73,71 @@ export default function RequestDetail() {
 
     fetchRequest()
   }, [requestId, isAuthenticated])
+
+  const handleApprove = async () => {
+    if (!request) return
+
+    setProcessing(true)
+    try {
+      const response = await fetch('/api/multicloud-hub/approve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          requestId: request.id,
+          action: 'approve',
+          managerEmail: request.manager_email,
+          managerName: request.manager_name,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to approve request')
+      }
+
+      setApprovalResult({
+        status: 'approved',
+        message: `✅ Request approved successfully! ${request.employee_name} will be notified.`,
+      })
+      setRequest({ ...request, status: 'approved' })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error approving request')
+    } finally {
+      setProcessing(false)
+    }
+  }
+
+  const handleReject = async () => {
+    if (!request) return
+
+    setProcessing(true)
+    try {
+      const response = await fetch('/api/multicloud-hub/approve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          requestId: request.id,
+          action: 'reject',
+          rejectionReason,
+          managerEmail: request.manager_email,
+          managerName: request.manager_name,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to reject request')
+      }
+
+      setApprovalResult({
+        status: 'rejected',
+        message: `❌ Request rejected. ${request.employee_name} will be notified.`,
+      })
+      setRequest({ ...request, status: 'rejected' })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error rejecting request')
+    } finally {
+      setProcessing(false)
+    }
+  }
 
   if (!isAuthenticated) {
     return (
@@ -259,6 +331,55 @@ export default function RequestDetail() {
               </div>
             </div>
 
+            {/* Approval Result */}
+            {approvalResult.status && (
+              <div
+                className={`rounded-lg border-2 p-8 text-center mb-8 ${
+                  approvalResult.status === 'approved'
+                    ? 'bg-green-900/30 border-green-600'
+                    : 'bg-red-900/30 border-red-600'
+                }`}
+              >
+                <p
+                  className={`text-lg font-semibold ${
+                    approvalResult.status === 'approved' ? 'text-green-300' : 'text-red-300'
+                  }`}
+                >
+                  {approvalResult.message}
+                </p>
+              </div>
+            )}
+
+            {/* Rejection Form */}
+            {showRejectForm && request.status === 'pending' && (
+              <div className="bg-red-900/20 border border-red-600 rounded-lg p-6 mb-8">
+                <h3 className="text-lg font-bold text-white mb-4">Reason for Rejection</h3>
+                <textarea
+                  value={rejectionReason}
+                  onChange={(e) => setRejectionReason(e.target.value)}
+                  placeholder="Explain why you're rejecting this request..."
+                  className="w-full px-4 py-2 bg-slate-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-red-400 mb-4"
+                  rows={4}
+                />
+                <div className="flex gap-4">
+                  <button
+                    onClick={handleReject}
+                    disabled={processing}
+                    className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
+                  >
+                    {processing ? 'Processing...' : 'Confirm Rejection'}
+                  </button>
+                  <button
+                    onClick={() => setShowRejectForm(false)}
+                    disabled={processing}
+                    className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-lg transition"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
+
             {/* Actions */}
             <div className="flex gap-4">
               <Link
@@ -267,12 +388,20 @@ export default function RequestDetail() {
               >
                 ← Back to Requests
               </Link>
-              {request.status === 'pending' && (
+              {request.status === 'pending' && !approvalResult.status && (
                 <>
-                  <button className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition">
-                    ✅ Approve
+                  <button
+                    onClick={handleApprove}
+                    disabled={processing}
+                    className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
+                  >
+                    {processing ? 'Processing...' : '✅ Approve'}
                   </button>
-                  <button className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition">
+                  <button
+                    onClick={() => setShowRejectForm(true)}
+                    disabled={processing}
+                    className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
+                  >
                     ❌ Reject
                   </button>
                 </>
