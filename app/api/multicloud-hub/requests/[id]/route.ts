@@ -47,3 +47,37 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     )
   }
 }
+
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+  try {
+    const { id } = params
+
+    if (!supabase) {
+      return NextResponse.json(
+        { error: 'Supabase not configured' },
+        { status: 500 }
+      )
+    }
+
+    const { error } = await supabase
+      .from('onboarding_requests')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      console.error('❌ Delete error:', error)
+      return NextResponse.json(
+        { error: `Failed to delete request: ${error.message}` },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ success: true, message: 'Request deleted successfully' })
+  } catch (error) {
+    console.error('❌ Delete API Error:', error)
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Internal server error' },
+      { status: 500 }
+    )
+  }
+}

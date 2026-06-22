@@ -22,6 +22,7 @@ export default function OnboardingRequests() {
   const [requests, setRequests] = useState<OnboardingRequest[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [deleting, setDeleting] = useState<string | null>(null)
 
   useEffect(() => {
     const logged_in = localStorage.getItem('logged_in')
@@ -48,6 +49,30 @@ export default function OnboardingRequests() {
       setError(err instanceof Error ? err.message : 'Error fetching requests')
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!confirm(`Are you sure you want to delete the request for ${name}? This cannot be undone.`)) {
+      return
+    }
+
+    setDeleting(id)
+    try {
+      const response = await fetch(`/api/multicloud-hub/requests/${id}`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to delete request')
+      }
+
+      setRequests(requests.filter((r) => r.id !== id))
+      setError('')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error deleting request')
+    } finally {
+      setDeleting(null)
     }
   }
 
@@ -196,13 +221,20 @@ export default function OnboardingRequests() {
                       </span>
                     </div>
 
-                    <div>
+                    <div className="flex gap-3">
                       <Link
                         href={`/multicloud-hub/requests/${req.id}`}
                         className="text-blue-400 hover:text-blue-300 font-semibold text-sm"
                       >
                         View →
                       </Link>
+                      <button
+                        onClick={() => handleDelete(req.id, req.employee_name)}
+                        disabled={deleting === req.id}
+                        className="text-red-400 hover:text-red-300 font-semibold text-sm disabled:text-gray-500"
+                      >
+                        {deleting === req.id ? '...' : '🗑️'}
+                      </button>
                     </div>
                   </div>
                 </div>
