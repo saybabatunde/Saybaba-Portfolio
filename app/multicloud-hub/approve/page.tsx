@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
@@ -23,7 +23,7 @@ interface OnboardingRequest {
   created_at: string
 }
 
-export default function ApprovalPage() {
+function ApprovalContent() {
   const searchParams = useSearchParams()
   const requestId = searchParams.get('requestId')
 
@@ -312,5 +312,19 @@ export default function ApprovalPage() {
         )}
       </main>
     </div>
+  )
+}
+
+export default function ApprovalPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+          <p className="text-white">Loading approval page...</p>
+        </div>
+      }
+    >
+      <ApprovalContent />
+    </Suspense>
   )
 }
