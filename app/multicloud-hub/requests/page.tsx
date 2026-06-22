@@ -221,7 +221,7 @@ export default function OnboardingRequests() {
                       </span>
                     </div>
 
-                    <div className="flex gap-3">
+                    <div className="flex gap-4">
                       <Link
                         href={`/multicloud-hub/requests/${req.id}`}
                         className="text-blue-400 hover:text-blue-300 font-semibold text-sm"
@@ -231,9 +231,9 @@ export default function OnboardingRequests() {
                       <button
                         onClick={() => handleDelete(req.id, req.employee_name)}
                         disabled={deleting === req.id}
-                        className="text-red-400 hover:text-red-300 font-semibold text-sm disabled:text-gray-500"
+                        className="text-red-400 hover:text-red-300 font-semibold text-sm disabled:text-gray-500 disabled:cursor-not-allowed"
                       >
-                        {deleting === req.id ? '...' : '🗑️'}
+                        {deleting === req.id ? 'Deleting...' : 'Delete'}
                       </button>
                     </div>
                   </div>
