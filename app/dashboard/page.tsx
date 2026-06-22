@@ -115,12 +115,12 @@ export default function DashboardPage() {
 
             {/* Multi-Cloud Identity & Infrastructure Automation Hub */}
             <Link href="/multicloud-hub">
-              <div className="bg-gradient-to-br from-gray-600 to-gray-700 rounded-lg border-2 border-gray-500 hover:border-gray-400 hover:shadow-lg hover:shadow-gray-600/40 transition duration-300 p-6 cursor-pointer group">
+              <div className="bg-gradient-to-br from-amber-700 to-amber-800 rounded-lg border-2 border-amber-600 hover:border-amber-500 hover:shadow-lg hover:shadow-amber-700/40 transition duration-300 p-6 cursor-pointer group">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🌐</span>
                   <div>
-                    <h4 className="text-xl font-bold text-white group-hover:text-gray-100">Multi-Cloud IAM Hub</h4>
-                    <p className="text-sm text-gray-200 font-semibold">Identity & Infrastructure Automation</p>
+                    <h4 className="text-xl font-bold text-white group-hover:text-amber-100">Multi-Cloud IAM Hub</h4>
+                    <p className="text-sm text-amber-100 font-semibold">Identity & Infrastructure Automation</p>
                   </div>
                 </div>
                 <p className="text-white mb-4 font-medium">
