@@ -1,10 +1,15 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
-const supabase = createClient(supabaseUrl, supabaseServiceKey)
+// Check if Supabase credentials are configured
+if (!supabaseUrl || !supabaseServiceKey) {
+  console.warn('⚠️ Supabase credentials not configured. API will return mock responses.')
+}
+
+const supabase = supabaseUrl && supabaseServiceKey ? createClient(supabaseUrl, supabaseServiceKey) : null
 
 export async function POST(request: NextRequest) {
   try {
@@ -35,7 +40,22 @@ export async function POST(request: NextRequest) {
     ]
     const suggested_m365_license = department === 'Finance' ? 'Microsoft 365 E3' : 'Microsoft 365 E5'
 
-    // Create onboarding request
+    // If Supabase is not configured, return mock response for now
+    if (!supabase) {
+      console.warn('⚠️ Supabase not configured. Returning mock response with generated ID.')
+      const mockId = `req_${Date.now()}`
+      return NextResponse.json(
+        {
+          id: mockId,
+          message: 'Request created successfully (mock - configure Supabase to persist)',
+          status: 'pending',
+          note: 'Set SUPABASE_SERVICE_ROLE_KEY in environment variables to save to database',
+        },
+        { status: 201 }
+      )
+    }
+
+    // Create onboarding request in Supabase
     const { data, error } = await supabase
       .from('onboarding_requests')
       .insert({
@@ -57,8 +77,14 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (error) {
-      console.error('Supabase error:', error)
-      return NextResponse.json({ error: 'Failed to create request' }, { status: 500 })
+      console.error('❌ Supabase insert error:', error)
+      return NextResponse.json(
+        {
+          error: `Failed to create request: ${error.message}`,
+          details: error,
+        },
+        { status: 500 }
+      )
     }
 
     // Log audit trail
@@ -82,25 +108,42 @@ export async function POST(request: NextRequest) {
       { status: 201 }
     )
   } catch (error) {
-    console.error('Error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error('❌ API Error:', error)
+    return NextResponse.json(
+      {
+        error: error instanceof Error ? error.message : 'Internal server error',
+      },
+      { status: 500 }
+    )
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
+    if (!supabase) {
+      console.warn('⚠️ Supabase not configured. Returning empty mock response.')
+      return NextResponse.json({ requests: [] })
+    }
+
     const { data, error } = await supabase
       .from('onboarding_requests')
       .select('*')
       .order('created_at', { ascending: false })
 
     if (error) {
-      return NextResponse.json({ error: 'Failed to fetch requests' }, { status: 500 })
+      console.error('❌ Supabase fetch error:', error)
+      return NextResponse.json(
+        { error: `Failed to fetch requests: ${error.message}` },
+        { status: 500 }
+      )
     }
 
-    return NextResponse.json({ requests: data })
+    return NextResponse.json({ requests: data as any[] || [] })
   } catch (error) {
-    console.error('Error:', error)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    console.error('❌ API Error:', error)
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Internal server error' },
+      { status: 500 }
+    )
   }
 }
