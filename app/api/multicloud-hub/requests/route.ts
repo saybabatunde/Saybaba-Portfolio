@@ -1,8 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+const resendApiKey = process.env.RESEND_API_KEY
+
+const resend = resendApiKey ? new Resend(resendApiKey) : null
 
 // Check if Supabase credentials are configured
 if (!supabaseUrl || !supabaseServiceKey) {
@@ -99,11 +103,59 @@ export async function POST(request: NextRequest) {
       details: `New onboarding request for ${employee_name} in ${department}`,
     })
 
+    // Send approval request email to manager
+    if (manager_email && resend) {
+      const approvalUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'https://babatundeportfolio.com'}/multicloud-hub/approve?requestId=${data.id}`
+
+      try {
+        await resend.emails.send({
+          from: 'Onboarding <onboarding@resend.dev>',
+          to: manager_email,
+          subject: `Approval Requested: ${employee_name} - ${job_title}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #333;">Approval Requested</h2>
+              <p>Hi ${manager_name},</p>
+              <p>A new onboarding request requires your approval:</p>
+
+              <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>Employee:</strong> ${employee_name}</p>
+                <p><strong>Position:</strong> ${job_title}</p>
+                <p><strong>Department:</strong> ${department}</p>
+                <p><strong>Location:</strong> ${location}</p>
+                <p><strong>Start Date:</strong> ${start_date || 'Not specified'}</p>
+              </div>
+
+              <p>Please review and approve or deny this request:</p>
+
+              <div style="margin: 30px 0;">
+                <a href="${approvalUrl}" style="background: #22c55e; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; display: inline-block; margin-right: 10px;">
+                  Review Request
+                </a>
+              </div>
+
+              <p style="color: #666; font-size: 12px;">
+                If the button doesn't work, copy and paste this link:<br/>
+                <code>${approvalUrl}</code>
+              </p>
+
+              <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+              <p style="color: #999; font-size: 12px;">Multi-Cloud IAM Hub • Automated Onboarding System</p>
+            </div>
+          `,
+        })
+      } catch (emailError) {
+        console.warn('⚠️ Email send failed:', emailError)
+        // Don't fail the request if email fails, just log it
+      }
+    }
+
     return NextResponse.json(
       {
         id: data.id,
         message: 'Request created successfully',
         status: 'pending',
+        emailSent: manager_email ? true : false,
       },
       { status: 201 }
     )
