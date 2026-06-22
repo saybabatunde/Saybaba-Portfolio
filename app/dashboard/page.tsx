@@ -169,6 +169,25 @@ export default function DashboardPage() {
                 </div>
               </div>
             </Link>
+
+            {/* Multi-Cloud Identity & Infrastructure Automation Hub */}
+            <Link href="/multicloud-hub">
+              <div className="bg-gradient-to-br from-purple-700 to-indigo-800 rounded-lg border-2 border-purple-400 hover:border-purple-300 hover:shadow-lg hover:shadow-purple-600/40 transition duration-300 p-6 cursor-pointer group">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🌐</span>
+                  <div>
+                    <h4 className="text-xl font-bold text-white group-hover:text-purple-100">Multi-Cloud IAM Hub</h4>
+                    <p className="text-sm text-white font-semibold">Identity & Infrastructure Automation</p>
+                  </div>
+                </div>
+                <p className="text-white mb-4 font-medium">
+                  Enterprise IAM automation dashboard with onboarding workflows, role mapping matrix, provisioning simulation, and multi-cloud compliance tracking. Azure + AWS + Vercel.
+                </p>
+                <div className="flex items-center gap-2 text-white font-bold group-hover:gap-3">
+                  Open Dashboard <span>→</span>
+                </div>
+              </div>
+            </Link>
           </div>
           <p className="text-sm text-white mt-4">
             💡 <span className="text-yellow-400">Live Projects:</span> All demos are fully functional with real integrations. Explore interactive dashboards and production DevOps pipeline.
