@@ -48,6 +48,8 @@ export default function RequestDetail() {
   })
   const [provisioning, setProvisioning] = useState(false)
   const [provisioningSteps, setProvisioningSteps] = useState<ProvisioningStep[]>([])
+  const [deleting, setDeleting] = useState(false)
+  const [deletionSteps, setDeletionSteps] = useState<ProvisioningStep[]>([])
 
   useEffect(() => {
     const logged_in = localStorage.getItem('logged_in')
@@ -172,6 +174,40 @@ export default function RequestDetail() {
       setError(err instanceof Error ? err.message : 'Error provisioning account')
     } finally {
       setProvisioning(false)
+    }
+  }
+
+  const handleDelete = async () => {
+    if (!request) return
+
+    if (!confirm(`Are you sure you want to delete ${request.employee_name}'s request and cloud accounts? This cannot be undone.`)) {
+      return
+    }
+
+    setDeleting(true)
+    setDeletionSteps([])
+
+    try {
+      const response = await fetch('/api/multicloud-hub/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ requestId: request.id }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to delete request')
+      }
+
+      const data = await response.json()
+      setDeletionSteps(data.steps)
+      // Redirect after a brief delay
+      setTimeout(() => {
+        router.push('/multicloud-hub/requests')
+      }, 2000)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error deleting request')
+    } finally {
+      setDeleting(false)
     }
   }
 
@@ -411,6 +447,31 @@ export default function RequestDetail() {
               </div>
             )}
 
+            {/* Deletion Steps */}
+            {(deletionSteps.length > 0 || deleting) && (
+              <div className="bg-red-900/20 border border-red-500 rounded-lg p-8">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                  🗑️ Deletion Status
+                </h2>
+                <div className="space-y-4">
+                  {deletionSteps.map((step, idx) => (
+                    <div key={idx} className="flex items-start gap-4">
+                      <div className="flex-shrink-0 pt-1">
+                        {step.status === 'completed' && <span className="text-2xl">✅</span>}
+                        {step.status === 'in-progress' && <span className="text-2xl">⏳</span>}
+                        {step.status === 'failed' && <span className="text-2xl">❌</span>}
+                        {step.status === 'pending' && <span className="text-2xl">⭕</span>}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-white font-semibold">{step.name}</p>
+                        <p className="text-gray-400 text-sm">{step.message}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Rejection Form */}
             {showRejectForm && request.status === 'pending' && (
               <div className="bg-red-900/20 border border-red-600 rounded-lg p-6 mb-8">
@@ -474,6 +535,15 @@ export default function RequestDetail() {
                   className="flex-1 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
                 >
                   {provisioning ? 'Provisioning...' : '🚀 Provision Now'}
+                </button>
+              )}
+              {request.status === 'completed' && (
+                <button
+                  onClick={handleDelete}
+                  disabled={deleting}
+                  className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
+                >
+                  {deleting ? 'Deleting...' : '🗑️ Delete & Clean Up'}
                 </button>
               )}
             </div>
