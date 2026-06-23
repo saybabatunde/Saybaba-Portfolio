@@ -24,6 +24,12 @@ interface OnboardingRequest {
   approved_at?: string
 }
 
+interface ProvisioningStep {
+  name: string
+  status: 'pending' | 'in-progress' | 'completed' | 'failed'
+  message: string
+}
+
 export default function RequestDetail() {
   const router = useRouter()
   const params = useParams()
@@ -40,6 +46,8 @@ export default function RequestDetail() {
     status: null,
     message: '',
   })
+  const [provisioning, setProvisioning] = useState(false)
+  const [provisioningSteps, setProvisioningSteps] = useState<ProvisioningStep[]>([])
 
   useEffect(() => {
     const logged_in = localStorage.getItem('logged_in')
@@ -136,6 +144,34 @@ export default function RequestDetail() {
       setError(err instanceof Error ? err.message : 'Error rejecting request')
     } finally {
       setProcessing(false)
+    }
+  }
+
+  const handleProvision = async () => {
+    if (!request) return
+
+    setProvisioning(true)
+    setProvisioningSteps([])
+
+    try {
+      const response = await fetch('/api/multicloud-hub/provision', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ requestId: request.id }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to provision account')
+      }
+
+      const data = await response.json()
+      setProvisioningSteps(data.steps)
+      setRequest({ ...request, status: 'completed' })
+      setError('')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error provisioning account')
+    } finally {
+      setProvisioning(false)
     }
   }
 
@@ -350,6 +386,31 @@ export default function RequestDetail() {
               </div>
             )}
 
+            {/* Provisioning Steps */}
+            {(provisioningSteps.length > 0 || provisioning) && (
+              <div className="bg-purple-900/20 border border-purple-500 rounded-lg p-8">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                  🚀 Provisioning Status
+                </h2>
+                <div className="space-y-4">
+                  {provisioningSteps.map((step, idx) => (
+                    <div key={idx} className="flex items-start gap-4">
+                      <div className="flex-shrink-0 pt-1">
+                        {step.status === 'completed' && <span className="text-2xl">✅</span>}
+                        {step.status === 'in-progress' && <span className="text-2xl">⏳</span>}
+                        {step.status === 'failed' && <span className="text-2xl">❌</span>}
+                        {step.status === 'pending' && <span className="text-2xl">⭕</span>}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-white font-semibold">{step.name}</p>
+                        <p className="text-gray-400 text-sm">{step.message}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Rejection Form */}
             {showRejectForm && request.status === 'pending' && (
               <div className="bg-red-900/20 border border-red-600 rounded-lg p-6 mb-8">
@@ -405,6 +466,15 @@ export default function RequestDetail() {
                     ❌ Reject
                   </button>
                 </>
+              )}
+              {request.status === 'approved' && (
+                <button
+                  onClick={handleProvision}
+                  disabled={provisioning}
+                  className="flex-1 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
+                >
+                  {provisioning ? 'Provisioning...' : '🚀 Provision Now'}
+                </button>
               )}
             </div>
           </div>
