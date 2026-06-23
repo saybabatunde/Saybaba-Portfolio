@@ -126,7 +126,8 @@ export async function POST(request: NextRequest) {
     try {
       console.log('AWS Config:', {
         accessKeyId: !!awsAccessKeyId ? awsAccessKeyId.substring(0, 10) + '...' : 'MISSING',
-        secretAccessKey: !!awsSecretAccessKey ? '***' : 'MISSING',
+        secretAccessKey: !!awsSecretAccessKey ? awsSecretAccessKey.substring(0, 10) + '...' : 'MISSING',
+        secretLength: awsSecretAccessKey?.length || 0,
         region: process.env.AWS_REGION,
       })
 
