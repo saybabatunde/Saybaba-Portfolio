@@ -22,12 +22,17 @@ interface DeletionStep {
   message: string
 }
 
+import { Resend } from 'resend'
+
+const resendApiKey = process.env.RESEND_API_KEY
+const resend = resendApiKey ? new Resend(resendApiKey) : null
+
 export async function POST(request: NextRequest) {
   try {
     console.log('🗑️ Delete API started')
 
     const body = await request.json()
-    const { requestId } = body
+    const { requestId, notificationEmail } = body
 
     if (!requestId) {
       return NextResponse.json({ error: 'Missing requestId' }, { status: 400 })
@@ -153,12 +158,49 @@ export async function POST(request: NextRequest) {
       details: `Deleted user from Azure and AWS, removed request record`,
     })
 
+    // Send confirmation email
+    if (notificationEmail && resend) {
+      try {
+        console.log('📧 Sending deletion confirmation email to:', notificationEmail)
+        await resend.emails.send({
+          from: 'noreply@babatundeportfolio.com',
+          to: notificationEmail,
+          subject: `Account Deletion Confirmed: ${onboardingRequest.employee_name}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #333;">🗑️ Account Deleted</h2>
+              <p>The following user account has been successfully deleted:</p>
+              <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p><strong>${onboardingRequest.employee_name}</strong></p>
+                <p>${onboardingRequest.job_title} in ${onboardingRequest.department}</p>
+                <p>Email: ${onboardingRequest.employee_email}</p>
+              </div>
+              <p><strong>Deleted from:</strong></p>
+              <ul>
+                <li>✅ Azure Active Directory</li>
+                <li>✅ AWS IAM</li>
+                <li>✅ Onboarding System</li>
+              </ul>
+              <p style="color: #666; margin-top: 30px;">
+                If you have any questions, please contact your administrator.
+              </p>
+              <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+              <p style="color: #999; font-size: 12px;">Multi-Cloud IAM Hub • Automated Onboarding System</p>
+            </div>
+          `,
+        })
+        console.log('✅ Deletion confirmation email sent')
+      } catch (emailError) {
+        console.error('❌ Failed to send deletion email:', emailError)
+      }
+    }
+
     const allSuccess = steps.every((s) => s.status !== 'failed')
 
     return NextResponse.json({
       success: allSuccess,
       steps,
-      message: allSuccess ? 'Deletion completed successfully' : 'Deletion completed with some errors',
+      message: allSuccess ? 'Deletion completed successfully and confirmation email sent' : 'Deletion completed with some errors',
     })
   } catch (error) {
     console.error('❌ Delete API Error:', error)

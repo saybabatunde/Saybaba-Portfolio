@@ -50,6 +50,8 @@ export default function RequestDetail() {
   const [provisioningSteps, setProvisioningSteps] = useState<ProvisioningStep[]>([])
   const [deleting, setDeleting] = useState(false)
   const [deletionSteps, setDeletionSteps] = useState<ProvisioningStep[]>([])
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [deleteEmail, setDeleteEmail] = useState('')
 
   useEffect(() => {
     const logged_in = localStorage.getItem('logged_in')
@@ -178,20 +180,21 @@ export default function RequestDetail() {
   }
 
   const handleDelete = async () => {
-    if (!request) return
+    if (!request || !deleteEmail) return
 
-    if (!confirm(`Are you sure you want to delete ${request.employee_name}'s request and cloud accounts? This cannot be undone.`)) {
+    if (!confirm(`Delete ${request.employee_name}'s account from Azure, AWS, and the system? A confirmation will be sent to ${deleteEmail}`)) {
       return
     }
 
     setDeleting(true)
     setDeletionSteps([])
+    setShowDeleteModal(false)
 
     try {
       const response = await fetch('/api/multicloud-hub/delete', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ requestId: request.id }),
+        body: JSON.stringify({ requestId: request.id, notificationEmail: deleteEmail }),
       })
 
       if (!response.ok) {
@@ -502,6 +505,41 @@ export default function RequestDetail() {
               </div>
             )}
 
+            {/* Delete Email Modal */}
+            {showDeleteModal && (
+              <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="bg-slate-900 rounded-lg border border-red-500 p-8 max-w-md w-full mx-4">
+                  <h3 className="text-2xl font-bold text-white mb-4">Delete & Clean Up</h3>
+                  <p className="text-gray-300 mb-6">
+                    Enter the email address where the deletion confirmation should be sent.
+                  </p>
+                  <input
+                    type="email"
+                    value={deleteEmail}
+                    onChange={(e) => setDeleteEmail(e.target.value)}
+                    placeholder="Email address for confirmation"
+                    className="w-full px-4 py-2 bg-slate-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-red-400 mb-6"
+                  />
+                  <div className="flex gap-4">
+                    <button
+                      onClick={handleDelete}
+                      disabled={!deleteEmail || deleting}
+                      className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition"
+                    >
+                      {deleting ? 'Deleting...' : 'Delete'}
+                    </button>
+                    <button
+                      onClick={() => setShowDeleteModal(false)}
+                      disabled={deleting}
+                      className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 px-4 rounded-lg transition"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Actions */}
             <div className="flex gap-4">
               <Link
@@ -537,9 +575,9 @@ export default function RequestDetail() {
                   {provisioning ? 'Provisioning...' : '🚀 Provision Now'}
                 </button>
               )}
-              {(request.status === 'completed' || request.status === 'COMPLETED') && (
+              {String(request.status).toLowerCase() === 'completed' && (
                 <button
-                  onClick={handleDelete}
+                  onClick={() => setShowDeleteModal(true)}
                   disabled={deleting}
                   className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
                 >
