@@ -25,6 +25,18 @@ interface ProvisioningStep {
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('🚀 Provision API started')
+    console.log('Azure creds:', {
+      subscriptionId: !!azureSubscriptionId,
+      tenantId: !!azureTenantId,
+      clientId: !!azureClientId,
+      clientSecret: !!azureClientSecret,
+    })
+    console.log('AWS creds:', {
+      accessKeyId: !!awsAccessKeyId,
+      secretAccessKey: !!awsSecretAccessKey,
+    })
+
     const body = await request.json()
     const { requestId } = body
 
