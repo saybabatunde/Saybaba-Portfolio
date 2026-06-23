@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import { ChevronRight } from 'lucide-react'
 
 export default function AboutMePage() {
   const router = useRouter()
@@ -124,7 +123,7 @@ export default function AboutMePage() {
                 onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 4px 15px rgba(15, 42, 74, 0.2)')}
               >
                 View My Portfolio
-                <ChevronRight size={20} />
+                <span>→</span>
               </button>
             </div>
           </div>
