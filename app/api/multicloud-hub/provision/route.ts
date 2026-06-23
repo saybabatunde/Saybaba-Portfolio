@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
       })
 
       const username = onboardingRequest.employee_name.toLowerCase().replace(/\s+/g, '.')
-      const userPrincipalName = `${username}@saybaba11outlook.onmicrosoft.com`
+      const userPrincipalName = `${username}@babatundeportfolio.com`
 
       await graphClient.api('/users').post({
         accountEnabled: true,
