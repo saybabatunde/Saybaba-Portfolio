@@ -179,7 +179,6 @@ export async function POST(request: NextRequest) {
       .from('onboarding_requests')
       .update({
         status: allSuccess ? 'completed' : 'provisioning',
-        provisioned_at: new Date().toISOString(),
       })
       .eq('id', requestId)
 
