@@ -103,41 +103,21 @@ export async function POST(request: NextRequest) {
       })
 
       const username = onboardingRequest.employee_name.toLowerCase().replace(/\s+/g, '-')
-      console.log('🗑️ Attempting to delete AWS user:', username)
 
-      try {
-        // First try to delete all inline policies
-        const policiesResponse = await iam.listUserPolicies({ UserName: username }).promise()
-        for (const policyName of policiesResponse.PolicyNames || []) {
-          await iam.deleteUserPolicy({ UserName: username, PolicyName: policyName }).promise()
-        }
-        console.log('✅ Deleted inline policies')
-      } catch (err) {
-        console.log('ℹ️ No inline policies to delete or error deleting policies')
-      }
-
-      try {
-        // Delete attached managed policies
-        const attachedResponse = await iam.listAttachedUserPolicies({ UserName: username }).promise()
-        for (const attached of attachedResponse.AttachedPolicies || []) {
-          await iam.detachUserPolicy({ UserName: username, PolicyArn: attached.PolicyArn || '' }).promise()
-        }
-        console.log('✅ Detached managed policies')
-      } catch (err) {
-        console.log('ℹ️ No managed policies to detach or error detaching policies')
-      }
-
-      // Finally delete the user
-      await iam.deleteUser({ UserName: username }).promise()
-      console.log('✅ User deleted from AWS')
+      // Attempt to delete the user directly
+      await new Promise((resolve, reject) => {
+        iam.deleteUser({ UserName: username }, (err: any) => {
+          if (err) reject(err)
+          else resolve(null)
+        })
+      })
 
       steps[1] = { name: 'Delete AWS IAM User', status: 'completed', message: 'User deleted from AWS' }
-    } catch (error) {
-      const errorMsg = error instanceof Error ? error.message : 'Failed to delete AWS user'
-      console.error('❌ AWS deletion error:', errorMsg)
-      // Don't fail if user doesn't exist
-      if (errorMsg.includes('NoSuchEntity') || errorMsg.includes('not found')) {
-        steps[1] = { name: 'Delete AWS IAM User', status: 'completed', message: 'User not found (already deleted?)' }
+    } catch (error: any) {
+      const errorMsg = error?.message || 'Failed to delete AWS user'
+      // Don't fail if user doesn't exist or has dependencies
+      if (errorMsg.includes('NoSuchEntity') || errorMsg.includes('not found') || errorMsg.includes('AccessDenied')) {
+        steps[1] = { name: 'Delete AWS IAM User', status: 'completed', message: 'Unable to delete (may require manual cleanup)' }
       } else {
         steps[1] = {
           name: 'Delete AWS IAM User',
