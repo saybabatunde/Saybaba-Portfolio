@@ -104,17 +104,7 @@ export async function POST(request: NextRequest) {
 
       const username = onboardingRequest.employee_name.toLowerCase().replace(/\s+/g, '-')
 
-      // List and delete access keys
-      const accessKeysResponse = await iam.listAccessKeys({ UserName: username }).promise()
-      if (accessKeysResponse.AccessKeyMetadata) {
-        for (const accessKey of accessKeysResponse.AccessKeyMetadata) {
-          if (accessKey.AccessKeyId) {
-            await iam.deleteAccessKey({ UserName: username, AccessKeyId: accessKey.AccessKeyId }).promise()
-          }
-        }
-      }
-
-      // Delete user
+      // Delete user (access keys will be deleted with the user)
       await iam.deleteUser({ UserName: username }).promise()
 
       steps[1] = { name: 'Delete AWS IAM User', status: 'completed', message: 'User deleted from AWS' }
