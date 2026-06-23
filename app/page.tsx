@@ -19,7 +19,7 @@ export default function LoginPage() {
         // Store session
         localStorage.setItem('logged_in', 'true')
         localStorage.setItem('username', username)
-        router.push('/dashboard')
+        router.push('/about-me')
       } else {
         setError('Invalid username or password')
       }
