@@ -107,7 +107,9 @@ export async function POST(request: NextRequest) {
       // List and delete access keys
       const accessKeysResponse = await iam.listAccessKeys({ UserName: username }).promise()
       for (const accessKey of accessKeysResponse.AccessKeyMetadata || []) {
-        await iam.deleteAccessKey({ UserName: username, AccessKeyId: accessKey.AccessKeyId }).promise()
+        if (accessKey.AccessKeyId) {
+          await iam.deleteAccessKey({ UserName: username, AccessKeyId: accessKey.AccessKeyId }).promise()
+        }
       }
 
       // Delete user
