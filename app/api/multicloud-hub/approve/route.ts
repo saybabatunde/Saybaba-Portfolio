@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
       try {
         console.log('📧 Sending manager confirmation email to:', managerEmail)
         const managerEmailResult = await resend.emails.send({
-          from: 'onboarding@resend.dev',
+          from: 'noreply@babatundeportfolio.com',
           to: managerEmail,
           subject:
             action === 'approve'
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
       try {
         console.log('📧 Sending employee notification email to:', currentRequest.employee_email)
         const employeeEmailResult = await resend.emails.send({
-          from: 'onboarding@resend.dev',
+          from: 'noreply@babatundeportfolio.com',
           to: currentRequest.employee_email,
           subject:
             action === 'approve'

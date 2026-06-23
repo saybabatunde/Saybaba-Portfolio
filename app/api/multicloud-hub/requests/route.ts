@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
       try {
         console.log('📧 Sending approval request email to:', manager_email)
         const emailResult = await resend.emails.send({
-          from: 'onboarding@resend.dev',
+          from: 'noreply@babatundeportfolio.com',
           to: manager_email,
           subject: `Approval Requested: ${employee_name} - ${job_title}`,
           html: `
