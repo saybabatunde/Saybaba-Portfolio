@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { ChevronRight } from 'lucide-react'
 
 export default function AboutMePage() {
   const router = useRouter()
@@ -22,28 +23,37 @@ export default function AboutMePage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-blue-950 flex items-center justify-center">
-        <p className="text-white">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFF4D8' }}>
+        <p style={{ color: '#0F2A4A' }}>Loading...</p>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#FFE4B5' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#FFF4D8' }}>
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-8 shadow-lg">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold">Welcome</h1>
-          <p className="text-blue-100 mt-2">Get to know me and my work</p>
+      <header className="border-b" style={{ backgroundColor: '#0F2A4A', borderColor: '#D4A017' }}>
+        <div className="max-w-6xl mx-auto px-6 py-12">
+          <h1 className="text-4xl md:text-5xl font-bold" style={{ color: '#FFFDF7' }}>
+            About Me
+          </h1>
+          <div className="w-12 h-1 mt-4" style={{ backgroundColor: '#D4A017' }}></div>
         </div>
-      </div>
+      </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+      <main className="max-w-6xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 items-start">
           {/* Picture Section */}
-          <div className="md:col-span-1 flex justify-center">
-            <div className="relative w-64 h-64 md:w-80 md:h-96 rounded-lg overflow-hidden shadow-2xl border-4 border-white">
+          <div className="md:col-span-2 flex justify-center md:justify-start">
+            <div
+              className="relative w-72 h-80 rounded-2xl overflow-hidden"
+              style={{
+                backgroundColor: '#FFFDF7',
+                border: `3px solid #D4A017`,
+                boxShadow: '0 10px 40px rgba(15, 42, 74, 0.15)',
+              }}
+            >
               <Image
                 src="/images/me.png"
                 alt="Babatunde Olawale"
@@ -55,44 +65,74 @@ export default function AboutMePage() {
           </div>
 
           {/* Bio Section */}
-          <div className="md:col-span-2">
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-3xl font-bold text-blue-900 mb-6">Babatunde Olawale</h2>
-              <p className="text-gray-700 text-sm leading-relaxed mb-6">
-                Hybrid Cloud Infrastructure Engineer who turns messy, manual, on-prem environments into secure, automated, cloud-ready systems. Over the past seven-plus years I've worked across the full arc of enterprise IT — from racking servers and running production support to architecting multi-cloud infrastructure that mostly runs itself.
-              </p>
+          <div className="md:col-span-3">
+            <div
+              className="rounded-2xl p-10 space-y-6"
+              style={{
+                backgroundColor: '#FFFDF7',
+                boxShadow: '0 4px 20px rgba(15, 42, 74, 0.08)',
+              }}
+            >
+              {/* Name & Title */}
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-2" style={{ color: '#0F2A4A' }}>
+                  Babatunde Olawale
+                </h2>
+                <p className="text-lg font-medium" style={{ color: '#D4A017' }}>
+                  Hybrid Cloud Infrastructure Engineer
+                </p>
+              </div>
 
-              <p className="text-gray-700 text-sm leading-relaxed mb-6">
-                My foundation is traditional infrastructure done right: Windows Server, virtualization, networking, and Active Directory, with the kind of production-support instincts you only build by being the person who gets the 2 a.m. page. That foundation grew into cloud — Azure and AWS — and into the disciplines that make modern infrastructure dependable: Infrastructure-as-Code, CI/CD, automation, monitoring, identity, and security built on Zero Trust principles.
-              </p>
+              {/* Bio Paragraphs */}
+              <div className="space-y-5 border-t pt-6" style={{ borderColor: '#D4A017' }}>
+                <p style={{ color: '#1F2937', lineHeight: '1.8', fontSize: '0.95rem' }}>
+                  I turn messy, manual, on-prem environments into secure, automated, cloud-ready systems. Over seven-plus years, I've worked across the full arc of enterprise IT — from racking servers and running production support to architecting multi-cloud infrastructure that mostly runs itself.
+                </p>
 
-              <p className="text-gray-700 text-sm leading-relaxed mb-6">
-                Day to day, I work across Azure, AWS, Terraform, ARM/Bicep, Ansible, PowerShell, Python, Azure DevOps, GitHub Actions, Intune, and Microsoft Defender. But the tools are just the means. What I actually care about is the outcome: infrastructure that's secure by default, automated end to end, and scalable without the chaos — the kind that lets a team modernize from on-prem to cloud without breaking what already works.
-              </p>
+                <p style={{ color: '#1F2937', lineHeight: '1.8', fontSize: '0.95rem' }}>
+                  My foundation is traditional infrastructure done right: Windows Server, virtualization, networking, and Active Directory — the kind of production-support instincts you only build by being the person who gets the 2 a.m. page. That foundation grew into cloud, Azure and AWS, and into the disciplines that make modern infrastructure dependable: Infrastructure-as-Code, CI/CD, automation, monitoring, identity, and security built on Zero Trust principles.
+                </p>
 
-              <p className="text-gray-700 text-sm leading-relaxed">
-                I'm drawn to real infrastructure problems, not theoretical ones. Cutting manual toil. Tightening access control. Making monitoring tell you something before it's an incident. Building deployment patterns repeatable enough that the right way becomes the easy way.
-              </p>
+                <p style={{ color: '#1F2937', lineHeight: '1.8', fontSize: '0.95rem' }}>
+                  Day to day, I work across Azure, AWS, Terraform, ARM/Bicep, Ansible, PowerShell, Python, Azure DevOps, GitHub Actions, Intune, and Microsoft Defender. But the tools are just the means. What I actually care about is the outcome: infrastructure that's secure by default, automated end to end, and scalable without the chaos.
+                </p>
 
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <p className="text-gray-600 text-sm font-semibold">
-                  This portfolio is the proof. Each project here is built around a genuine infrastructure challenge — multi-cloud automation, IAM, CI/CD, Kubernetes, Terraform, cloud monitoring, cost visibility, and onboarding workflows — and every one is designed to do the same four things: reduce manual work, improve reliability, strengthen security, and make cloud operations easier to manage at scale.
+                <p style={{ color: '#1F2937', lineHeight: '1.8', fontSize: '0.95rem' }}>
+                  I'm drawn to real infrastructure problems. Cutting manual toil. Tightening access control. Making monitoring tell you something before it's an incident. Building deployment patterns repeatable enough that the right way becomes the easy way.
+                </p>
+              </div>
+
+              {/* Closing Statement */}
+              <div className="mt-8 pt-6 border-t" style={{ borderColor: '#D4A017' }}>
+                <p style={{ color: '#0F2A4A', lineHeight: '1.7', fontSize: '0.9rem', fontWeight: '500' }}>
+                  This portfolio is the proof. Each project here is built around a genuine infrastructure challenge — and every one is designed to do the same: reduce manual work, improve reliability, strengthen security, and make cloud operations easier to manage at scale.
                 </p>
               </div>
             </div>
 
             {/* Next Button */}
-            <div className="mt-8 flex justify-center md:justify-start">
+            <div className="mt-10 flex justify-center md:justify-start">
               <button
                 onClick={() => router.push('/dashboard')}
-                className="bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 text-white font-bold py-4 px-12 rounded-lg transition shadow-lg text-lg"
+                className="font-semibold py-4 px-8 rounded-xl transition duration-300 flex items-center gap-2 hover:gap-3"
+                style={{
+                  backgroundColor: '#0F2A4A',
+                  color: '#FFFDF7',
+                  boxShadow: '0 4px 15px rgba(15, 42, 74, 0.2)',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = '0 6px 25px rgba(15, 42, 74, 0.3)')}
+                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = '0 4px 15px rgba(15, 42, 74, 0.2)')}
               >
-                Next → View My Portfolio
+                View My Portfolio
+                <ChevronRight size={20} />
               </button>
             </div>
           </div>
         </div>
       </main>
+
+      {/* Footer Accent */}
+      <div className="mt-20 border-t" style={{ borderColor: '#D4A017' }}></div>
     </div>
   )
 }
