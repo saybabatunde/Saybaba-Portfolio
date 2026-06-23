@@ -575,15 +575,13 @@ export default function RequestDetail() {
                   {provisioning ? 'Provisioning...' : '🚀 Provision Now'}
                 </button>
               )}
-              {String(request.status).toLowerCase() === 'completed' && (
-                <button
-                  onClick={() => setShowDeleteModal(true)}
-                  disabled={deleting}
-                  className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
-                >
-                  {deleting ? 'Deleting...' : '🗑️ Delete & Clean Up'}
-                </button>
-              )}
+              <button
+                onClick={() => setShowDeleteModal(true)}
+                disabled={deleting}
+                className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
+              >
+                {deleting ? 'Deleting...' : '🗑️ Delete & Clean Up'}
+              </button>
             </div>
           </div>
         ) : !loading ? (
