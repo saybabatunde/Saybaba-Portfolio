@@ -124,6 +124,16 @@ export async function POST(request: NextRequest) {
     // Step 4: Create AWS IAM user
     steps.push({ name: 'Create AWS IAM User', status: 'in-progress', message: 'Creating user in AWS...' })
     try {
+      console.log('AWS Config:', {
+        accessKeyId: !!awsAccessKeyId ? awsAccessKeyId.substring(0, 10) + '...' : 'MISSING',
+        secretAccessKey: !!awsSecretAccessKey ? '***' : 'MISSING',
+        region: process.env.AWS_REGION,
+      })
+
+      if (!awsAccessKeyId || !awsSecretAccessKey) {
+        throw new Error(`AWS credentials missing: accessKeyId=${!!awsAccessKeyId}, secretAccessKey=${!!awsSecretAccessKey}`)
+      }
+
       const iam = new IAM({
         accessKeyId: awsAccessKeyId,
         secretAccessKey: awsSecretAccessKey,
@@ -131,14 +141,17 @@ export async function POST(request: NextRequest) {
       })
 
       const username = onboardingRequest.employee_name.toLowerCase().replace(/\s+/g, '-')
+      console.log('Creating AWS user:', username)
 
       await iam.createUser({ UserName: username }).promise()
+      console.log('AWS user created:', username)
 
       // Create access keys
-      const accessKeyResponse = await iam.createAccessKey({ UserName: username }).promise()
+      await iam.createAccessKey({ UserName: username }).promise()
 
       steps[3] = { name: 'Create AWS IAM User', status: 'completed', message: 'User created in AWS' }
     } catch (error) {
+      console.error('AWS create user error:', error)
       steps[3] = {
         name: 'Create AWS IAM User',
         status: 'failed',
