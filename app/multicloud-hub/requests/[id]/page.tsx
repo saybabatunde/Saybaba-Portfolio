@@ -537,7 +537,7 @@ export default function RequestDetail() {
                   {provisioning ? 'Provisioning...' : '🚀 Provision Now'}
                 </button>
               )}
-              {request.status === 'completed' && (
+              {(request.status === 'completed' || request.status === 'COMPLETED') && (
                 <button
                   onClick={handleDelete}
                   disabled={deleting}
