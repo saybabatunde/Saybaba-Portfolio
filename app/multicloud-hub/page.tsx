@@ -87,15 +87,15 @@ export default function MultiCloudHub() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen" style={{ backgroundColor: '#FFF0F5' }}>
       {/* Header */}
-      <header className="bg-gradient-to-r from-purple-900 to-blue-900 border-b border-purple-500 sticky top-0 z-50 shadow-lg">
+      <header className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: '#B19CD9', borderBottom: '2px solid #9370DB' }}>
         <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-white flex items-center gap-2">
               🌐 Multi-Cloud IAM Hub
             </h1>
-            <p className="text-purple-200 text-sm mt-1">Identity & Infrastructure Automation Dashboard</p>
+            <p className="text-white text-sm mt-1 opacity-90">Identity & Infrastructure Automation Dashboard</p>
           </div>
           <button
             onClick={() => {
@@ -114,87 +114,87 @@ export default function MultiCloudHub() {
       <main className="max-w-7xl mx-auto px-4 py-12">
         {/* Page Title */}
         <div className="mb-8">
-          <h2 className="text-4xl font-bold text-white mb-2">Dashboard</h2>
-          <p className="text-gray-400">Monitor onboarding, provisioning, cloud resources, and compliance</p>
+          <h2 className="text-4xl font-bold mb-2" style={{ color: '#B19CD9' }}>Dashboard</h2>
+          <p style={{ color: '#6B5B7C' }}>Monitor onboarding, provisioning, cloud resources, and compliance</p>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {/* Pending Requests */}
-          <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg border border-blue-500 p-6">
+          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">📋</span>
-              <span className="text-blue-400 text-sm font-semibold">PENDING</span>
+              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>PENDING</span>
             </div>
-            <p className="text-gray-300 text-sm mb-2">Onboarding Requests</p>
-            <p className="text-4xl font-bold text-white">{stats.pendingRequests}</p>
-            <p className="text-blue-300 text-xs mt-3">Awaiting approval</p>
+            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Onboarding Requests</p>
+            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.pendingRequests}</p>
+            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Awaiting approval</p>
           </div>
 
           {/* Approved Requests */}
-          <div className="bg-gradient-to-br from-green-900 to-green-800 rounded-lg border border-green-500 p-6">
+          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">✅</span>
-              <span className="text-green-400 text-sm font-semibold">APPROVED</span>
+              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>APPROVED</span>
             </div>
-            <p className="text-gray-300 text-sm mb-2">Approved Requests</p>
-            <p className="text-4xl font-bold text-white">{stats.approvedRequests}</p>
-            <p className="text-green-300 text-xs mt-3">Ready to provision</p>
+            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Approved Requests</p>
+            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.approvedRequests}</p>
+            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Ready to provision</p>
           </div>
 
           {/* Completed Provisioning */}
-          <div className="bg-gradient-to-br from-purple-900 to-purple-800 rounded-lg border border-purple-500 p-6">
+          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">🚀</span>
-              <span className="text-purple-400 text-sm font-semibold">COMPLETED</span>
+              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>COMPLETED</span>
             </div>
-            <p className="text-gray-300 text-sm mb-2">Provisioning Runs</p>
-            <p className="text-4xl font-bold text-white">{stats.completedProvisioning}</p>
-            <p className="text-purple-300 text-xs mt-3">Successfully deployed</p>
+            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Provisioning Runs</p>
+            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.completedProvisioning}</p>
+            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Successfully deployed</p>
           </div>
 
           {/* High Risk Findings */}
-          <div className="bg-gradient-to-br from-red-900 to-red-800 rounded-lg border border-red-500 p-6">
+          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">⚠️</span>
-              <span className="text-red-400 text-sm font-semibold">RISK</span>
+              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>RISK</span>
             </div>
-            <p className="text-gray-300 text-sm mb-2">High-Risk Findings</p>
-            <p className="text-4xl font-bold text-white">{stats.highRiskFindings}</p>
-            <p className="text-red-300 text-xs mt-3">Require attention</p>
+            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>High-Risk Findings</p>
+            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.highRiskFindings}</p>
+            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Require attention</p>
           </div>
 
           {/* Total Resources */}
-          <div className="bg-gradient-to-br from-cyan-900 to-cyan-800 rounded-lg border border-cyan-500 p-6">
+          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">☁️</span>
-              <span className="text-cyan-400 text-sm font-semibold">TOTAL</span>
+              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>TOTAL</span>
             </div>
-            <p className="text-gray-300 text-sm mb-2">Cloud Resources</p>
-            <p className="text-4xl font-bold text-white">{stats.totalResources}</p>
-            <p className="text-cyan-300 text-xs mt-3">Multi-cloud inventory</p>
+            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Cloud Resources</p>
+            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.totalResources}</p>
+            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Multi-cloud inventory</p>
           </div>
 
           {/* Estimated Cost */}
-          <div className="bg-gradient-to-br from-amber-900 to-amber-800 rounded-lg border border-amber-500 p-6">
+          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">💰</span>
-              <span className="text-amber-400 text-sm font-semibold">MONTHLY</span>
+              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>MONTHLY</span>
             </div>
-            <p className="text-gray-300 text-sm mb-2">Estimated Cost</p>
-            <p className="text-4xl font-bold text-white">${stats.estimatedMonthlyCost.toFixed(2)}</p>
-            <p className="text-amber-300 text-xs mt-3">Azure + AWS + Vercel</p>
+            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Estimated Cost</p>
+            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>${stats.estimatedMonthlyCost.toFixed(2)}</p>
+            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Azure + AWS + Vercel</p>
           </div>
 
           {/* Untagged Resources */}
-          <div className="bg-gradient-to-br from-orange-900 to-orange-800 rounded-lg border border-orange-500 p-6">
+          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">🏷️</span>
-              <span className="text-orange-400 text-sm font-semibold">COMPLIANCE</span>
+              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>COMPLIANCE</span>
             </div>
-            <p className="text-gray-300 text-sm mb-2">Untagged Resources</p>
-            <p className="text-4xl font-bold text-white">{stats.untaggedResources}</p>
-            <p className="text-orange-300 text-xs mt-3">Need tagging</p>
+            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Untagged Resources</p>
+            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.untaggedResources}</p>
+            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Need tagging</p>
           </div>
         </div>
 
@@ -202,44 +202,62 @@ export default function MultiCloudHub() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           {/* Quick Actions */}
           <div className="lg:col-span-1">
-            <div className="bg-slate-900 rounded-lg border border-purple-500 p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ color: '#B19CD9' }}>
                 <span>⚡</span> Quick Actions
               </h3>
               <div className="space-y-3">
                 <Link
                   href="/multicloud-hub/requests/new"
-                  className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  className="block w-full text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  style={{ backgroundColor: '#B19CD9' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#9370DB')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#B19CD9')}
                 >
                   + New Onboarding Request
                 </Link>
                 <Link
                   href="/multicloud-hub/requests"
-                  className="block w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  className="block w-full text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  style={{ backgroundColor: '#B19CD9' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#9370DB')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#B19CD9')}
                 >
                   View All Requests
                 </Link>
                 <Link
                   href="/multicloud-hub/role-mapping"
-                  className="block w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  className="block w-full text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  style={{ backgroundColor: '#B19CD9' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#9370DB')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#B19CD9')}
                 >
                   Manage Role Mapping
                 </Link>
                 <Link
                   href="/multicloud-hub/provisioning"
-                  className="block w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  className="block w-full text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  style={{ backgroundColor: '#B19CD9' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#9370DB')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#B19CD9')}
                 >
                   View Provisioning Runs
                 </Link>
                 <Link
                   href="/multicloud-hub/cloud-inventory"
-                  className="block w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  className="block w-full text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  style={{ backgroundColor: '#B19CD9' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#9370DB')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#9370DB')}
                 >
                   Cloud Inventory
                 </Link>
                 <Link
                   href="/multicloud-hub/audit-logs"
-                  className="block w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  className="block w-full text-white font-semibold py-3 px-4 rounded-lg transition text-center"
+                  style={{ backgroundColor: '#B19CD9' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#9370DB')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#B19CD9')}
                 >
                   Audit Logs
                 </Link>
@@ -249,17 +267,17 @@ export default function MultiCloudHub() {
 
           {/* Recent Activity */}
           <div className="lg:col-span-2">
-            <div className="bg-slate-900 rounded-lg border border-cyan-500 p-6">
-              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+            <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-2" style={{ color: '#B19CD9' }}>
                 <span>📊</span> Recent Activity
               </h3>
               <div className="space-y-4">
                 {recentActivity.map((activity) => (
-                  <div key={activity.id} className="border-l-4 border-purple-500 pl-4 py-2">
+                  <div key={activity.id} className="border-l-4 pl-4 py-2" style={{ borderColor: '#B19CD9' }}>
                     <div className="flex justify-between items-start">
                       <div>
-                        <p className="text-white font-semibold">{activity.action}</p>
-                        <p className="text-gray-400 text-sm">{activity.resource}</p>
+                        <p className="font-semibold" style={{ color: '#3B3B4D' }}>{activity.action}</p>
+                        <p className="text-sm" style={{ color: '#6B5B7C' }}>{activity.resource}</p>
                       </div>
                       <span
                         className={`text-xs font-semibold px-2 py-1 rounded ${
@@ -273,7 +291,7 @@ export default function MultiCloudHub() {
                         {activity.status.toUpperCase()}
                       </span>
                     </div>
-                    <p className="text-gray-500 text-xs mt-2">{activity.timestamp}</p>
+                    <p className="text-xs mt-2" style={{ color: '#9370DB' }}>{activity.timestamp}</p>
                   </div>
                 ))}
               </div>
@@ -284,9 +302,9 @@ export default function MultiCloudHub() {
         {/* Info Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* What This Hub Does */}
-          <div className="bg-blue-900/20 border border-blue-500 rounded-lg p-6">
-            <h3 className="text-lg font-bold text-white mb-3">🎯 What This Hub Does</h3>
-            <ul className="space-y-2 text-gray-300 text-sm">
+          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+            <h3 className="text-lg font-bold mb-3" style={{ color: '#B19CD9' }}>🎯 What This Hub Does</h3>
+            <ul className="space-y-2 text-sm" style={{ color: '#3B3B4D' }}>
               <li>✅ Automate user onboarding across Entra ID, AD, and M365</li>
               <li>✅ Map roles to groups, licenses, and cloud access</li>
               <li>✅ Simulate provisioning workflows with approval gates</li>
@@ -297,23 +315,23 @@ export default function MultiCloudHub() {
           </div>
 
           {/* Tech Stack */}
-          <div className="bg-purple-900/20 border border-purple-500 rounded-lg p-6">
-            <h3 className="text-lg font-bold text-white mb-3">🛠️ Tech Stack</h3>
-            <div className="space-y-2 text-gray-300 text-sm">
-              <p><span className="text-purple-400 font-semibold">Frontend:</span> Next.js + Vercel</p>
-              <p><span className="text-purple-400 font-semibold">Database:</span> Supabase PostgreSQL</p>
-              <p><span className="text-purple-400 font-semibold">Auth:</span> Supabase Auth</p>
-              <p><span className="text-purple-400 font-semibold">Serverless:</span> Azure Functions + AWS Lambda</p>
-              <p><span className="text-purple-400 font-semibold">IaC:</span> Terraform</p>
-              <p><span className="text-purple-400 font-semibold">CI/CD:</span> GitHub Actions</p>
+          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+            <h3 className="text-lg font-bold mb-3" style={{ color: '#B19CD9' }}>🛠️ Tech Stack</h3>
+            <div className="space-y-2 text-sm" style={{ color: '#3B3B4D' }}>
+              <p><span className="font-semibold" style={{ color: '#B19CD9' }}>Frontend:</span> Next.js + Vercel</p>
+              <p><span className="font-semibold" style={{ color: '#B19CD9' }}>Database:</span> Supabase PostgreSQL</p>
+              <p><span className="font-semibold" style={{ color: '#B19CD9' }}>Auth:</span> Supabase Auth</p>
+              <p><span className="font-semibold" style={{ color: '#B19CD9' }}>Serverless:</span> Azure Functions + AWS Lambda</p>
+              <p><span className="font-semibold" style={{ color: '#B19CD9' }}>IaC:</span> Terraform</p>
+              <p><span className="font-semibold" style={{ color: '#B19CD9' }}>CI/CD:</span> GitHub Actions</p>
             </div>
           </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 border-t border-slate-700 mt-20 py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm">
+      <footer className="mt-20 py-8" style={{ backgroundColor: '#B19CD9', borderTop: '2px solid #9370DB' }}>
+        <div className="max-w-7xl mx-auto px-4 text-center text-sm" style={{ color: '#FFFFFF' }}>
           <p>© 2026 Multi-Cloud Identity & Infrastructure Automation Hub</p>
         </div>
       </footer>
