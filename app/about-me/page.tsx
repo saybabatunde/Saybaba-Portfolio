@@ -85,11 +85,11 @@ export default function AboutMePage() {
               {/* Bio Paragraphs */}
               <div className="space-y-5 border-t pt-6" style={{ borderColor: '#D4A017' }}>
                 <p className="font-semibold" style={{ color: '#1F2937', lineHeight: '1.8', fontSize: '0.97rem' }}>
-                  I turn messy, manual, on-prem environments into secure, automated, cloud-ready systems. Over seven-plus years, I've worked across the full arc of enterprise IT — from racking servers and running production support to architecting multi-cloud infrastructure that mostly runs itself.
+                  I turn messy, manual, on-prem environments into secure, automated, cloud-ready systems. Over seven-plus years, I've worked across the full arc of enterprise IT from racking servers and running production support to architecting multi-cloud infrastructure that mostly runs itself.
                 </p>
 
                 <p className="font-semibold" style={{ color: '#1F2937', lineHeight: '1.8', fontSize: '0.97rem' }}>
-                  My foundation is traditional infrastructure done right: Windows Server, virtualization, networking, and Active Directory — the kind of production-support instincts you only build by being the person who gets the 2 a.m. page. That foundation grew into cloud, Azure and AWS, and into the disciplines that make modern infrastructure dependable: Infrastructure-as-Code, CI/CD, automation, monitoring, identity, and security built on Zero Trust principles.
+                  My foundation is traditional infrastructure done right: Windows Server, virtualization, networking, and Active Directory  the kind of production-support instincts you only build by being the person who gets the 2 a.m page. That foundation grew into cloud, Azure and AWS, and into the disciplines that make modern infrastructure dependable: Infrastructure-as-Code, CI/CD, automation, monitoring, identity, and security built on Zero Trust principles.
                 </p>
 
                 <p className="font-semibold" style={{ color: '#1F2937', lineHeight: '1.8', fontSize: '0.97rem' }}>
@@ -98,6 +98,10 @@ export default function AboutMePage() {
 
                 <p className="font-semibold" style={{ color: '#1F2937', lineHeight: '1.8', fontSize: '0.97rem' }}>
                   I'm drawn to real infrastructure problems. Cutting manual toil. Tightening access control. Making monitoring tell you something before it's an incident. Building deployment patterns repeatable enough that the right way becomes the easy way.
+                </p>
+
+                <p className="font-semibold" style={{ color: '#1F2937', lineHeight: '1.8', fontSize: '0.97rem' }}>
+                  This portfolio is the proof. Each project here is built around a genuine infrastructure challenge, and each one is designed to do the same: reduce manual work, improve reliability, strengthen security, and make cloud operations easier to manage at scale.
                 </p>
               </div>
 
