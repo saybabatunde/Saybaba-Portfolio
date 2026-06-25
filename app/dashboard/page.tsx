@@ -42,17 +42,17 @@ export default function DashboardPage() {
   const categories = Array.from(new Set(projects.map((p) => p.category)))
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#3A3A3A' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       {/* Header */}
-      <header className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: '#2A2A2A', borderBottom: '2px solid #4A4A4A' }}>
-        <div className="max-w-7xl mx-auto px-4 py-8 flex justify-between items-center">
+      <header className="sticky top-0 z-50" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }}>
+        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
           <div>
-            <h1 className="text-4xl font-bold text-white">Saybaba Portfolio</h1>
-            <p className="text-white text-sm opacity-90">Welcome, {username}!</p>
+            <h1 className="text-3xl font-bold" style={{ color: '#2563EB' }}>Saybaba Portfolio</h1>
+            <p className="text-sm" style={{ color: '#6B7280' }}>Welcome, {username}!</p>
           </div>
           <button
             onClick={handleLogout}
-            className="text-white font-semibold py-2 px-6 rounded-lg transition duration-200 border-2 border-white hover:bg-white hover:text-gray-700"
+            className="font-semibold py-2 px-6 rounded-lg transition duration-200 border-2" style={{ color: '#2563EB', borderColor: '#2563EB' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#2563EB'; e.currentTarget.style.color = '#FFFFFF' }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#2563EB' }}
           >
             Logout
           </button>
@@ -63,15 +63,15 @@ export default function DashboardPage() {
       <main className="max-w-7xl mx-auto px-4 py-12">
         {/* Intro Section */}
         <div className="mb-16 animate-fade-in">
-          <h2 className="text-4xl font-bold text-white mb-4">My Portfolio</h2>
-          <p className="text-white text-lg max-w-2xl opacity-95">
+          <h2 className="text-4xl font-bold mb-4" style={{ color: '#111827' }}>My Portfolio</h2>
+          <p className="text-lg max-w-2xl" style={{ color: '#6B7280' }}>
             Explore my projects across cloud platforms (AWS, Azure), Python development, and full-stack applications. Each project showcases my expertise in infrastructure, automation, and software development.
           </p>
         </div>
 
         {/* Live Projects / Interactive Demos */}
         <section className="mb-16 animate-fade-in">
-          <h3 className="text-2xl font-bold text-white mb-8 pb-4" style={{ borderBottom: '2px solid #D4A17A' }}>
+          <h3 className="text-2xl font-bold mb-8 pb-4" style={{ color: '#111827', borderBottom: '2px solid #2563EB' }}>
             🔴 Live Projects (Interactive Demos)
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -196,7 +196,7 @@ export default function DashboardPage() {
 
         {/* AI-Assisted Development Projects */}
         <section className="mb-16 animate-fade-in">
-          <h3 className="text-2xl font-bold text-white mb-8 pb-4" style={{ borderBottom: '2px solid #D4A17A' }}>
+          <h3 className="text-2xl font-bold mb-8 pb-4" style={{ color: '#111827', borderBottom: '2px solid #2563EB' }}>
             🤖 AI-Assisted Development Projects (Claude Build)
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -249,7 +249,7 @@ export default function DashboardPage() {
             const categoryProjects = projects.filter((p) => p.category === category)
             return (
               <section key={category} className="animate-fade-in">
-                <h3 className="text-2xl font-bold text-white mb-8 pb-4" style={{ borderBottom: '2px solid #D4A17A' }}>
+                <h3 className="text-2xl font-bold mb-8 pb-4" style={{ color: '#111827', borderBottom: '2px solid #2563EB' }}>
                   {category} Projects
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
@@ -263,11 +263,11 @@ export default function DashboardPage() {
         </div>
 
         {/* Call to Action */}
-        <section className="mt-20 text-center py-12 rounded-lg border-2" style={{ backgroundColor: '#8A7E73', borderColor: '#D4A17A' }}>
-          <h3 className="text-2xl font-bold text-white mb-4">
+        <section className="mt-20 text-center py-12 rounded-lg border" style={{ backgroundColor: '#F0F9FF', borderColor: '#BFDBFE' }}>
+          <h3 className="text-2xl font-bold mb-4" style={{ color: '#2563EB' }}>
             Want to learn more?
           </h3>
-          <p className="text-white mb-6 opacity-95">
+          <p className="mb-6" style={{ color: '#6B7280' }}>
             Check out my GitHub, LinkedIn, or contact me directly for collaboration opportunities.
           </p>
           <div className="flex justify-center gap-4">
@@ -275,7 +275,7 @@ export default function DashboardPage() {
               href="https://github.com/saybabatunde"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white font-semibold py-2 px-6 rounded-lg transition duration-200 border-2 border-white hover:bg-white hover:text-gray-700"
+              className="font-semibold py-2 px-6 rounded-lg transition duration-200 border-2" style={{ color: '#2563EB', borderColor: '#2563EB' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#2563EB'; e.currentTarget.style.color = '#FFFFFF' }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#2563EB' }}
             >
               GitHub
             </a>
@@ -283,7 +283,7 @@ export default function DashboardPage() {
               href="https://www.linkedin.com/in/babatundeolawale"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white font-semibold py-2 px-6 rounded-lg transition duration-200 border-2 border-white hover:bg-white hover:text-gray-700"
+              className="font-semibold py-2 px-6 rounded-lg transition duration-200 border-2" style={{ color: '#2563EB', borderColor: '#2563EB' }} onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#2563EB'; e.currentTarget.style.color = '#FFFFFF' }} onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#2563EB' }}
             >
               LinkedIn
             </a>
@@ -292,8 +292,8 @@ export default function DashboardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-20" style={{ backgroundColor: '#2A2A2A', borderTop: '2px solid #4A4A4A' }}>
-        <div className="max-w-7xl mx-auto px-4 py-8 text-center text-white text-sm opacity-90">
+      <footer className="mt-20" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB' }}>
+        <div className="max-w-7xl mx-auto px-4 py-8 text-center text-sm" style={{ color: '#9CA3AF' }}>
           <p>&copy; 2024 Saybaba. Built with Next.js and Tailwind CSS.</p>
         </div>
       </footer>
