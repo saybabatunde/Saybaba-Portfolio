@@ -97,16 +97,34 @@ export default function MultiCloudHub() {
             </h1>
             <p className="text-base mt-2" style={{ color: '#4B5563' }}>Identity & Infrastructure Automation Dashboard</p>
           </div>
-          <button
-            onClick={() => {
-              localStorage.removeItem('logged_in')
-              localStorage.removeItem('username')
-              router.push('/')
-            }}
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition"
-          >
-            Logout
-          </button>
+          <div className="flex gap-3">
+            <Link
+              href="/dashboard"
+              className="font-semibold py-2 px-4 rounded-lg transition text-white"
+              style={{
+                backgroundColor: '#6366F1',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#4F46E5')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#6366F1')}
+            >
+              ← Back to Dashboard
+            </Link>
+            <button
+              onClick={() => {
+                localStorage.removeItem('logged_in')
+                localStorage.removeItem('username')
+                router.push('/')
+              }}
+              className="font-semibold py-2 px-4 rounded-lg transition text-white hover:bg-red-700"
+              style={{
+                backgroundColor: '#EF4444',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#DC2626')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#EF4444')}
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </header>
 
