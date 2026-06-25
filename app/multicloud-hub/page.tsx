@@ -87,15 +87,15 @@ export default function MultiCloudHub() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#FBF8F3' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       {/* Header */}
-      <header className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: '#B19CD9', borderBottom: '2px solid #9370DB' }}>
+      <header className="sticky top-0 z-50" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }}>
         <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-2">
+            <h1 className="text-3xl font-bold flex items-center gap-2" style={{ color: '#2563EB' }}>
               🌐 Multi-Cloud IAM Hub
             </h1>
-            <p className="text-white text-sm mt-1 opacity-90">Identity & Infrastructure Automation Dashboard</p>
+            <p className="text-sm mt-1" style={{ color: '#6B7280' }}>Identity & Infrastructure Automation Dashboard</p>
           </div>
           <button
             onClick={() => {
@@ -330,8 +330,8 @@ export default function MultiCloudHub() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-20 py-8" style={{ backgroundColor: '#B19CD9', borderTop: '2px solid #9370DB' }}>
-        <div className="max-w-7xl mx-auto px-4 text-center text-sm" style={{ color: '#FFFFFF' }}>
+      <footer className="mt-20 py-8" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB' }}>
+        <div className="max-w-7xl mx-auto px-4 text-center text-sm" style={{ color: '#9CA3AF' }}>
           <p>© 2026 Multi-Cloud Identity & Infrastructure Automation Hub</p>
         </div>
       </footer>

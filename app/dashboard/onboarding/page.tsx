@@ -27,21 +27,22 @@ export default function AWSOboardingPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F5F5F0' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       {/* Header */}
-      <header className="sticky top-0 z-50" style={{ backgroundColor: '#8B4513', borderBottom: '2px solid #A0522D' }}>
+      <header className="sticky top-0 z-50" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }}>
         <div className="max-w-7xl mx-auto px-4 py-6">
           <button
             onClick={() => router.push('/dashboard')}
-            className="mb-4 text-white hover:text-orange-100 flex items-center gap-2"
+            className="mb-4 flex items-center gap-2 hover:opacity-70 transition"
+            style={{ color: '#2563EB' }}
           >
             ← Back to Dashboard
           </button>
           <div>
-            <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+            <h1 className="text-3xl font-bold flex items-center gap-3" style={{ color: '#2563EB' }}>
               <span>⚙️</span> AWS User Onboarding Portal
             </h1>
-            <p className="text-white text-base mt-2">
+            <p className="text-base mt-2" style={{ color: '#6B7280' }}>
               Create users and manage onboarding with real AWS integration
             </p>
           </div>
@@ -114,8 +115,8 @@ export default function AWSOboardingPage() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-20" style={{ backgroundColor: '#8B4513', borderTop: '2px solid #A0522D' }}>
-        <div className="max-w-7xl mx-auto px-4 py-8 text-center text-white text-sm">
+      <footer className="mt-20" style={{ backgroundColor: '#FFFFFF', borderTop: '1px solid #E5E7EB' }}>
+        <div className="max-w-7xl mx-auto px-4 py-8 text-center text-sm" style={{ color: '#9CA3AF' }}>
           <p>&copy; 2024 Saybaba AWS Onboarding. Built with Next.js and AWS.</p>
         </div>
       </footer>
