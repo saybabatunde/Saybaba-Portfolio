@@ -206,11 +206,11 @@ export default function DashboardPage() {
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">💰</span>
                   <div>
-                    <h4 className="text-xl font-bold group-hover:text-gray-700" style={{ color: '#6B6256' }}>Cloud Cost ROI Calculator</h4>
-                    <p className="text-sm font-semibold" style={{ color: '#8A7E73' }}>AI-Assisted Development</p>
+                    <h4 className="text-xl font-bold group-hover:text-gray-900" style={{ color: '#000000' }}>Cloud Cost ROI Calculator</h4>
+                    <p className="text-sm font-semibold" style={{ color: '#000000' }}>AI-Assisted Development</p>
                   </div>
                 </div>
-                <p className="mb-4" style={{ color: '#6B6256' }}>
+                <p className="mb-4" style={{ color: '#000000' }}>
                   Calculate return on investment for cloud infrastructure deployments. Input costs and metrics, get instant ROI analysis with visual charts and exportable reports.
                 </p>
                 <div className="flex items-center gap-2 font-semibold group-hover:gap-3" style={{ color: '#D4A17A' }}>
@@ -225,11 +225,11 @@ export default function DashboardPage() {
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">✨</span>
                   <div>
-                    <h4 className="text-xl font-bold group-hover:text-gray-700" style={{ color: '#6B6256' }}>AI-Powered Quote Generator</h4>
-                    <p className="text-sm font-semibold" style={{ color: '#8A7E73' }}>AI-Assisted Development</p>
+                    <h4 className="text-xl font-bold group-hover:text-gray-900" style={{ color: '#000000' }}>AI-Powered Quote Generator</h4>
+                    <p className="text-sm font-semibold" style={{ color: '#000000' }}>AI-Assisted Development</p>
                   </div>
                 </div>
-                <p className="mb-4" style={{ color: '#6B6256' }}>
+                <p className="mb-4" style={{ color: '#000000' }}>
                   Generate unique quotes powered by Claude AI. Select themes, save favorites, export as images, and share on social media. Built with Next.js and Claude API.
                 </p>
                 <div className="flex items-center gap-2 font-semibold group-hover:gap-3" style={{ color: '#D4A17A' }}>
