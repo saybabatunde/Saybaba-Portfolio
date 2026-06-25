@@ -148,25 +148,35 @@ async function checkServiceHealth() {
 
   // Check Claude API
   try {
-    const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY || '',
-      },
-      body: JSON.stringify({
-        model: 'claude-opus-4-1',
-        max_tokens: 10,
-        messages: [{ role: 'user', content: 'hi' }],
-      }),
-    })
-    services.push({
-      name: 'Claude API',
-      status: claudeRes.ok || claudeRes.status === 400 ? 'operational' : 'degraded',
-      icon: '🤖',
-      message: claudeRes.ok ? 'AI service responsive' : 'Service responding',
-    })
-  } catch {
+    if (!process.env.ANTHROPIC_API_KEY) {
+      services.push({
+        name: 'Claude API',
+        status: 'degraded',
+        icon: '🤖',
+        message: 'API key not configured',
+      })
+    } else {
+      const claudeRes = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': process.env.ANTHROPIC_API_KEY,
+        },
+        body: JSON.stringify({
+          model: 'claude-opus-4-8',
+          max_tokens: 10,
+          messages: [{ role: 'user', content: 'health' }],
+        }),
+      })
+      services.push({
+        name: 'Claude API',
+        status: claudeRes.ok || claudeRes.status === 400 || claudeRes.status === 401 ? 'operational' : 'degraded',
+        icon: '🤖',
+        message: claudeRes.ok ? 'AI service responsive' : 'Service responding',
+      })
+    }
+  } catch (error) {
+    console.error('Claude API health check error:', error)
     services.push({
       name: 'Claude API',
       status: 'degraded',
