@@ -9,12 +9,12 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="bg-gray-800 rounded-lg border border-gray-700 hover:border-blue-600 transition duration-300 p-6 hover:shadow-xl hover:shadow-blue-600/20">
-      <h4 className="text-xl font-bold text-white mb-2">{project.title}</h4>
-      <p className="text-gray-400 mb-4">{project.description}</p>
+    <div className="rounded-lg border-2 transition duration-300 p-6 hover:shadow-xl" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+      <h4 className="text-xl font-bold mb-2" style={{ color: '#000000' }}>{project.title}</h4>
+      <p className="mb-4 font-bold" style={{ color: '#000000' }}>{project.description}</p>
       <Link
         href={`/dashboard/projects/${project.slug}`}
-        className="inline-block text-blue-400 hover:text-blue-300 font-semibold transition duration-200"
+        className="inline-block font-semibold transition duration-200" style={{ color: '#D4A17A' }}
       >
         View Project →
       </Link>
