@@ -78,26 +78,26 @@ export default function OnboardingRequests() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <p className="text-white">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFFFFF' }}>
+        <p style={{ color: '#6B7280' }}>Loading...</p>
       </div>
     )
   }
 
-  const getStatusColor = (status: string) => {
+  const getStatusBg = (status: string) => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-900/30 border-yellow-600 text-yellow-300'
+        return { bg: '#FEF3C7', border: '#F59E0B', text: '#92400E' }
       case 'approved':
-        return 'bg-blue-900/30 border-blue-600 text-blue-300'
+        return { bg: '#DCFCE7', border: '#10B981', text: '#166534' }
       case 'provisioning':
-        return 'bg-purple-900/30 border-purple-600 text-purple-300'
+        return { bg: '#F3E8FF', border: '#A855F7', text: '#6D28D9' }
       case 'completed':
-        return 'bg-green-900/30 border-green-600 text-green-300'
+        return { bg: '#CFFAFE', border: '#06B6D4', text: '#164E63' }
       case 'rejected':
-        return 'bg-red-900/30 border-red-600 text-red-300'
+        return { bg: '#FEE2E2', border: '#EF4444', text: '#991B1B' }
       default:
-        return 'bg-gray-900/30 border-gray-600 text-gray-300'
+        return { bg: '#F3F4F6', border: '#9CA3AF', text: '#374151' }
     }
   }
 
@@ -119,28 +119,34 @@ export default function OnboardingRequests() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-900 to-purple-900 border-b border-blue-500 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-6">
+      <header style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }} className="sticky top-0 z-50 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 py-8">
           <Link
             href="/multicloud-hub"
-            className="text-blue-300 hover:text-blue-200 font-semibold transition flex items-center gap-2 mb-4"
+            className="inline-flex items-center gap-2 mb-6 font-medium transition"
+            style={{ color: '#6366F1' }}
           >
             ← Back to Dashboard
           </Link>
-          <h1 className="text-3xl font-bold text-white">All Onboarding Requests</h1>
-          <p className="text-blue-200 text-sm mt-2">View all submitted onboarding requests and their status</p>
+          <h1 className="text-4xl font-bold mb-2" style={{ color: '#111827' }}>All Onboarding Requests</h1>
+          <p style={{ color: '#6B7280' }}>View all submitted onboarding requests and their status</p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-12">
+      <main className="max-w-7xl mx-auto px-6 py-12">
         {/* New Request Button */}
         <div className="mb-8">
           <Link
             href="/multicloud-hub/requests/new"
-            className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition"
+            className="inline-block font-semibold py-3 px-6 rounded-lg transition text-white"
+            style={{
+              backgroundColor: '#10B981',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#059669')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#10B981')}
           >
             + Create New Request
           </Link>
@@ -148,7 +154,7 @@ export default function OnboardingRequests() {
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-900/50 border border-red-500 text-red-300 px-6 py-4 rounded-lg mb-8">
+          <div className="rounded-lg border-l-4 p-6 mb-8" style={{ backgroundColor: '#FEF2F2', borderColor: '#EF4444', color: '#7F1D1D' }}>
             {error}
           </div>
         )}
@@ -156,133 +162,147 @@ export default function OnboardingRequests() {
         {/* Loading */}
         {loading && (
           <div className="text-center py-12">
-            <p className="text-gray-400">Loading requests...</p>
+            <p style={{ color: '#6B7280' }}>Loading requests...</p>
           </div>
         )}
 
-        {/* Requests Table */}
+        {/* Requests Grid */}
         {!loading && requests.length > 0 ? (
-          <div className="bg-slate-900 rounded-lg border border-gray-600 overflow-hidden">
-            {/* Table Header */}
-            <div className="hidden md:grid grid-cols-6 gap-4 bg-slate-800 border-b border-gray-600 p-4 font-bold text-gray-300 text-sm">
-              <div>Employee</div>
-              <div>Department</div>
-              <div>Job Title</div>
-              <div>Location</div>
-              <div>Status</div>
-              <div>Action</div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {requests.map((req) => {
+              const statusStyle = getStatusBg(req.status)
+              return (
+                <div
+                  key={req.id}
+                  className="rounded-lg border-2 p-6 transition hover:shadow-lg"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    borderColor: '#E5E7EB',
+                  }}
+                >
+                  {/* Status Badge */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span
+                      className="text-sm font-bold px-3 py-1 rounded-full flex items-center gap-1"
+                      style={{
+                        backgroundColor: statusStyle.bg,
+                        color: statusStyle.text,
+                        borderColor: statusStyle.border,
+                      }}
+                    >
+                      {getStatusIcon(req.status)} {req.status.toUpperCase()}
+                    </span>
+                  </div>
 
-            {/* Table Rows */}
-            <div className="divide-y divide-gray-600">
-              {requests.map((req) => (
-                <div key={req.id} className="p-4 hover:bg-slate-800/50 transition">
-                  {/* Mobile Layout */}
-                  <div className="md:hidden space-y-3 mb-4">
+                  {/* Employee Info */}
+                  <div className="mb-4">
+                    <h3 className="text-lg font-bold mb-1" style={{ color: '#111827' }}>
+                      {req.employee_name}
+                    </h3>
+                    <p className="text-sm" style={{ color: '#6B7280' }}>
+                      {req.employee_email}
+                    </p>
+                  </div>
+
+                  {/* Details */}
+                  <div className="space-y-3 mb-6" style={{ borderTop: '1px solid #E5E7EB', paddingTop: '1rem' }}>
                     <div>
-                      <p className="text-white font-semibold">{req.employee_name}</p>
-                      <p className="text-gray-400 text-sm">{req.employee_email}</p>
+                      <p className="text-xs font-semibold mb-1" style={{ color: '#6B7280' }}>Department</p>
+                      <p style={{ color: '#111827' }}>{req.department}</p>
                     </div>
-                    <div className="flex justify-between">
-                      <div>
-                        <p className="text-gray-400 text-sm">{req.department} • {req.job_title}</p>
-                        <p className="text-gray-500 text-xs">{req.location}</p>
-                      </div>
-                      <span
-                        className={`text-xs font-bold px-2 py-1 rounded border ${getStatusColor(
-                          req.status
-                        )}`}
-                      >
-                        {getStatusIcon(req.status)} {req.status.toUpperCase()}
-                      </span>
+                    <div>
+                      <p className="text-xs font-semibold mb-1" style={{ color: '#6B7280' }}>Job Title</p>
+                      <p style={{ color: '#111827' }}>{req.job_title}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold mb-1" style={{ color: '#6B7280' }}>Location</p>
+                      <p style={{ color: '#111827' }}>{req.location}</p>
                     </div>
                   </div>
 
-                  {/* Desktop Layout */}
-                  <div className="hidden md:grid grid-cols-6 gap-4 items-center">
-                    <div>
-                      <p className="text-white font-semibold text-sm">{req.employee_name}</p>
-                      <p className="text-gray-400 text-xs">{req.employee_email}</p>
-                    </div>
-
-                    <div className="text-gray-300 text-sm">{req.department}</div>
-
-                    <div className="text-gray-300 text-sm">{req.job_title}</div>
-
-                    <div className="text-gray-300 text-sm">{req.location}</div>
-
-                    <div>
-                      <span
-                        className={`text-xs font-bold px-3 py-1 rounded border inline-block ${getStatusColor(
-                          req.status
-                        )}`}
-                      >
-                        {getStatusIcon(req.status)} {req.status.toUpperCase()}
-                      </span>
-                    </div>
-
-                    <div className="flex gap-4">
-                      <Link
-                        href={`/multicloud-hub/requests/${req.id}`}
-                        className="text-blue-400 hover:text-blue-300 font-semibold text-sm"
-                      >
-                        View →
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(req.id, req.employee_name)}
-                        disabled={deleting === req.id}
-                        className="text-red-400 hover:text-red-300 font-semibold text-sm disabled:text-gray-500 disabled:cursor-not-allowed"
-                      >
-                        {deleting === req.id ? 'Deleting...' : 'Delete'}
-                      </button>
-                    </div>
+                  {/* Action Buttons */}
+                  <div className="flex gap-2">
+                    <Link
+                      href={`/multicloud-hub/requests/${req.id}`}
+                      className="flex-1 font-semibold py-2 px-4 rounded-lg transition text-center text-white"
+                      style={{ backgroundColor: '#6366F1' }}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#4F46E5')}
+                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#6366F1')}
+                    >
+                      View →
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(req.id, req.employee_name)}
+                      disabled={deleting === req.id}
+                      className="font-semibold py-2 px-4 rounded-lg transition text-white"
+                      style={{
+                        backgroundColor: deleting === req.id ? '#D1D5DB' : '#EF4444',
+                        cursor: deleting === req.id ? 'not-allowed' : 'pointer',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (deleting !== req.id) e.currentTarget.style.backgroundColor = '#DC2626'
+                      }}
+                      onMouseLeave={(e) => {
+                        if (deleting !== req.id) e.currentTarget.style.backgroundColor = '#EF4444'
+                      }}
+                    >
+                      {deleting === req.id ? 'Deleting...' : 'Delete'}
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              )
+            })}
           </div>
         ) : !loading ? (
-          <div className="bg-slate-900 rounded-lg border border-gray-600 p-12 text-center">
-            <p className="text-gray-400 text-lg mb-6">No onboarding requests yet</p>
+          <div className="rounded-lg border p-12 text-center" style={{ backgroundColor: '#F9FAFB', borderColor: '#E5E7EB' }}>
+            <p className="text-lg mb-6" style={{ color: '#6B7280' }}>No onboarding requests yet</p>
             <Link
               href="/multicloud-hub/requests/new"
-              className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition"
+              className="inline-block font-semibold py-3 px-6 rounded-lg transition text-white"
+              style={{
+                backgroundColor: '#10B981',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#059669')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#10B981')}
             >
               + Create First Request
             </Link>
           </div>
         ) : null}
 
-        {/* Summary */}
+        {/* Summary Stats */}
         {!loading && requests.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mt-8">
-            <div className="bg-slate-900 rounded-lg border border-gray-600 p-4">
-              <p className="text-gray-400 text-sm">Total Requests</p>
-              <p className="text-3xl font-bold text-white">{requests.length}</p>
-            </div>
-            <div className="bg-yellow-900/20 rounded-lg border border-yellow-600 p-4">
-              <p className="text-yellow-300 text-sm">Pending</p>
-              <p className="text-3xl font-bold text-yellow-300">
-                {requests.filter((r) => r.status === 'pending').length}
-              </p>
-            </div>
-            <div className="bg-blue-900/20 rounded-lg border border-blue-600 p-4">
-              <p className="text-blue-300 text-sm">Approved</p>
-              <p className="text-3xl font-bold text-blue-300">
-                {requests.filter((r) => r.status === 'approved').length}
-              </p>
-            </div>
-            <div className="bg-green-900/20 rounded-lg border border-green-600 p-4">
-              <p className="text-green-300 text-sm">Completed</p>
-              <p className="text-3xl font-bold text-green-300">
-                {requests.filter((r) => r.status === 'completed').length}
-              </p>
-            </div>
-            <div className="bg-red-900/20 rounded-lg border border-red-600 p-4">
-              <p className="text-red-300 text-sm">Rejected</p>
-              <p className="text-3xl font-bold text-red-300">
-                {requests.filter((r) => r.status === 'rejected').length}
-              </p>
+          <div className="pt-8" style={{ borderTop: '2px solid #E5E7EB' }}>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#111827' }}>Summary</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E7EB' }}>
+                <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Total Requests</p>
+                <p className="text-4xl font-bold" style={{ color: '#111827' }}>{requests.length}</p>
+              </div>
+              <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FEF3C7', borderColor: '#F59E0B' }}>
+                <p className="text-sm font-semibold mb-2" style={{ color: '#92400E' }}>⏳ Pending</p>
+                <p className="text-4xl font-bold" style={{ color: '#92400E' }}>
+                  {requests.filter((r) => r.status === 'pending').length}
+                </p>
+              </div>
+              <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#DCFCE7', borderColor: '#10B981' }}>
+                <p className="text-sm font-semibold mb-2" style={{ color: '#166534' }}>✅ Approved</p>
+                <p className="text-4xl font-bold" style={{ color: '#166534' }}>
+                  {requests.filter((r) => r.status === 'approved').length}
+                </p>
+              </div>
+              <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#CFFAFE', borderColor: '#06B6D4' }}>
+                <p className="text-sm font-semibold mb-2" style={{ color: '#164E63' }}>🎉 Completed</p>
+                <p className="text-4xl font-bold" style={{ color: '#164E63' }}>
+                  {requests.filter((r) => r.status === 'completed').length}
+                </p>
+              </div>
+              <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FEE2E2', borderColor: '#EF4444' }}>
+                <p className="text-sm font-semibold mb-2" style={{ color: '#991B1B' }}>❌ Rejected</p>
+                <p className="text-4xl font-bold" style={{ color: '#991B1B' }}>
+                  {requests.filter((r) => r.status === 'rejected').length}
+                </p>
+              </div>
             </div>
           </div>
         )}
