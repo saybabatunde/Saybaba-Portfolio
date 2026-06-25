@@ -32,39 +32,39 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#4DA6FF' }}>
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="w-full max-w-md animate-fade-in">
         {/* Logo/Header */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4">
+          <h1 className="text-5xl font-bold mb-4" style={{ color: '#2563EB' }}>
             Welcome to baba's Portfolio
           </h1>
-          <p className="text-white text-lg">
+          <p className="text-lg" style={{ color: '#6B7280' }}>
             Showcasing Cloud & Development Expertise
           </p>
         </div>
 
         {/* Login Card */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 border-2 border-cyan-400">
-          <h2 className="text-2xl font-black text-gray-700 mb-2 text-base">Login</h2>
-          <p className="text-gray-700 text-sm mb-6 font-bold">
-            Kindly use <span className="font-black text-gray-700">Admin</span> for username and password to gain access
+        <div className="rounded-2xl shadow-lg p-8" style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E7EB' }}>
+          <h2 className="text-2xl font-bold mb-2" style={{ color: '#111827' }}>Login</h2>
+          <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
+            Kindly use <span className="font-bold" style={{ color: '#2563EB' }}>Admin</span> for username and password to gain access
           </p>
 
           <LoginForm onSubmit={handleLogin} isLoading={isLoading} error={error} />
 
           {/* Demo Credentials Hint */}
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg border-2 border-cyan-400">
-            <p className="text-sm text-gray-700 text-center font-black">
+          <div className="mt-6 p-4 rounded-lg" style={{ backgroundColor: '#F0F9FF', border: '1px solid #BFDBFE' }}>
+            <p className="text-sm text-center font-semibold" style={{ color: '#111827' }}>
               Demo Access:<br />
-              Username: <span className="text-gray-700 font-mono font-black">admin</span><br />
-              Password: <span className="text-gray-700 font-mono font-black">admin</span>
+              Username: <span className="font-mono" style={{ color: '#2563EB' }}>admin</span><br />
+              Password: <span className="font-mono" style={{ color: '#2563EB' }}>admin</span>
             </p>
           </div>
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-8 text-slate-500 text-base">
+        <div className="text-center mt-8 text-sm" style={{ color: '#9CA3AF' }}>
           <p>&copy; 2024 Saybaba. All rights reserved.</p>
         </div>
       </div>
