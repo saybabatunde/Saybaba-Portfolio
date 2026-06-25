@@ -77,7 +77,7 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* AWS User Onboarding Portal */}
             <Link href="/dashboard/onboarding">
-              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#E8DCC8', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">⚙️</span>
                   <div>
@@ -96,7 +96,7 @@ export default function DashboardPage() {
 
             {/* Azure User Onboarding Portal */}
             <Link href="/projects/azure-onboarding">
-              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#E8DCC8', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">☁️</span>
                   <div>
@@ -115,7 +115,7 @@ export default function DashboardPage() {
 
             {/* Multi-Cloud Identity & Infrastructure Automation Hub */}
             <Link href="/multicloud-hub">
-              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#E8DCC8', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🌐</span>
                   <div>
@@ -134,7 +134,7 @@ export default function DashboardPage() {
 
             {/* Infrastructure Health Dashboard */}
             <Link href="/dashboard/monitoring">
-              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#E8DCC8', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">📊</span>
                   <div>
@@ -153,7 +153,7 @@ export default function DashboardPage() {
 
             {/* Infrastructure Request Portal */}
             <Link href="/infrastructure-portal">
-              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#E8DCC8', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🏗️</span>
                   <div>
@@ -172,7 +172,7 @@ export default function DashboardPage() {
 
             {/* CI/CD Pipeline Project */}
             <Link href="/projects/cicd-pipeline">
-              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#E8DCC8', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">🔄</span>
                   <div>
@@ -202,7 +202,7 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Cloud Cost ROI Calculator */}
             <Link href="/projects/cloud-cost-roi-calculator">
-              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#E8DCC8', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">💰</span>
                   <div>
@@ -221,7 +221,7 @@ export default function DashboardPage() {
 
             {/* AI-Powered Quote Generator */}
             <Link href="/projects/ai-quote-generator">
-              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#E8DCC8', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-3xl">✨</span>
                   <div>
