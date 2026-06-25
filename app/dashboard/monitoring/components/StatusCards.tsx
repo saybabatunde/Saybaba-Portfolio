@@ -99,18 +99,6 @@ export default function StatusCards() {
               borderColor: colors.border,
             }}
           >
-            {/* Countdown Timer */}
-            <div
-              className="absolute top-3 right-3 text-xs font-mono px-2 py-1 rounded"
-              style={{
-                backgroundColor: colors.border,
-                color: '#FFFFFF',
-                opacity: 0.8,
-              }}
-            >
-              {countdown}s
-            </div>
-
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
                 <span className="text-3xl">{service.icon}</span>
@@ -122,16 +110,30 @@ export default function StatusCards() {
               />
             </div>
             <p className="text-sm mb-3" style={{ color: colors.text }}>{service.message}</p>
-            <div
-              className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full"
-              style={{
-                backgroundColor: colors.badge,
-                color: '#FFFFFF',
-              }}
-            >
-              {service.status === 'operational' && '✓ Operational'}
-              {service.status === 'degraded' && '⚠ Degraded'}
-              {service.status === 'down' && '✗ Down'}
+            <div className="flex items-end justify-between">
+              <div
+                className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full"
+                style={{
+                  backgroundColor: colors.badge,
+                  color: '#FFFFFF',
+                }}
+              >
+                {service.status === 'operational' && '✓ Operational'}
+                {service.status === 'degraded' && '⚠ Degraded'}
+                {service.status === 'down' && '✗ Down'}
+              </div>
+
+              {/* Countdown Timer - Bottom Right */}
+              <div
+                className="text-xs font-mono px-2 py-1 rounded"
+                style={{
+                  backgroundColor: colors.border,
+                  color: '#FFFFFF',
+                  opacity: 0.8,
+                }}
+              >
+                {countdown}s
+              </div>
             </div>
           </div>
         )
