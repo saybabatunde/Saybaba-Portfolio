@@ -89,13 +89,13 @@ export default function MultiCloudHub() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       {/* Header */}
-      <header className="sticky top-0 z-50" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }}>
-        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+      <header className="sticky top-0 z-50 shadow-sm" style={{ backgroundColor: '#FFFFFF', borderBottom: '3px solid #6366F1' }}>
+        <div className="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold flex items-center gap-2" style={{ color: '#2563EB' }}>
+            <h1 className="text-4xl font-bold flex items-center gap-3" style={{ color: '#6366F1' }}>
               🌐 Multi-Cloud IAM Hub
             </h1>
-            <p className="text-sm mt-1" style={{ color: '#6B7280' }}>Identity & Infrastructure Automation Dashboard</p>
+            <p className="text-base mt-2" style={{ color: '#4B5563' }}>Identity & Infrastructure Automation Dashboard</p>
           </div>
           <button
             onClick={() => {
@@ -121,43 +121,43 @@ export default function MultiCloudHub() {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {/* Pending Requests */}
-          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+          <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#F59E0B', boxShadow: '0 2px 8px rgba(245, 158, 11, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">📋</span>
-              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>PENDING</span>
+              <span className="text-sm font-bold px-3 py-1 rounded" style={{ color: '#FFFFFF', backgroundColor: '#F59E0B' }}>PENDING</span>
             </div>
-            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Onboarding Requests</p>
-            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.pendingRequests}</p>
-            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Awaiting approval</p>
+            <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Onboarding Requests</p>
+            <p className="text-4xl font-bold" style={{ color: '#F59E0B' }}>{stats.pendingRequests}</p>
+            <p className="text-xs mt-3" style={{ color: '#92400E' }}>Awaiting approval</p>
           </div>
 
           {/* Approved Requests */}
-          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+          <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#10B981', boxShadow: '0 2px 8px rgba(16, 185, 129, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">✅</span>
-              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>APPROVED</span>
+              <span className="text-sm font-bold px-3 py-1 rounded" style={{ color: '#FFFFFF', backgroundColor: '#10B981' }}>APPROVED</span>
             </div>
-            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Approved Requests</p>
-            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.approvedRequests}</p>
-            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Ready to provision</p>
+            <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Approved Requests</p>
+            <p className="text-4xl font-bold" style={{ color: '#10B981' }}>{stats.approvedRequests}</p>
+            <p className="text-xs mt-3" style={{ color: '#047857' }}>Ready to provision</p>
           </div>
 
           {/* Completed Provisioning */}
-          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+          <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#3B82F6', boxShadow: '0 2px 8px rgba(59, 130, 246, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">🚀</span>
-              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>COMPLETED</span>
+              <span className="text-sm font-bold px-3 py-1 rounded" style={{ color: '#FFFFFF', backgroundColor: '#3B82F6' }}>COMPLETED</span>
             </div>
-            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Provisioning Runs</p>
-            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.completedProvisioning}</p>
-            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Successfully deployed</p>
+            <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Provisioning Runs</p>
+            <p className="text-4xl font-bold" style={{ color: '#3B82F6' }}>{stats.completedProvisioning}</p>
+            <p className="text-xs mt-3" style={{ color: '#1E40AF' }}>Successfully deployed</p>
           </div>
 
           {/* High Risk Findings */}
-          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+          <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#EF4444', boxShadow: '0 2px 8px rgba(239, 68, 68, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">⚠️</span>
-              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>RISK</span>
+              <span className="text-sm font-bold px-3 py-1 rounded" style={{ color: '#FFFFFF', backgroundColor: '#EF4444' }}>RISK</span>
             </div>
             <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>High-Risk Findings</p>
             <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.highRiskFindings}</p>
@@ -165,36 +165,36 @@ export default function MultiCloudHub() {
           </div>
 
           {/* Total Resources */}
-          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+          <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#6366F1', boxShadow: '0 2px 8px rgba(99, 102, 241, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">☁️</span>
-              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>TOTAL</span>
+              <span className="text-sm font-bold px-3 py-1 rounded" style={{ color: '#FFFFFF', backgroundColor: '#6366F1' }}>TOTAL</span>
             </div>
-            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Cloud Resources</p>
-            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.totalResources}</p>
-            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Multi-cloud inventory</p>
+            <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Cloud Resources</p>
+            <p className="text-4xl font-bold" style={{ color: '#6366F1' }}>{stats.totalResources}</p>
+            <p className="text-xs mt-3" style={{ color: '#4338CA' }}>Multi-cloud inventory</p>
           </div>
 
           {/* Estimated Cost */}
-          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+          <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#A855F7', boxShadow: '0 2px 8px rgba(168, 85, 247, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">💰</span>
-              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>MONTHLY</span>
+              <span className="text-sm font-bold px-3 py-1 rounded" style={{ color: '#FFFFFF', backgroundColor: '#A855F7' }}>MONTHLY</span>
             </div>
-            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Estimated Cost</p>
-            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>${stats.estimatedMonthlyCost.toFixed(2)}</p>
-            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Azure + AWS + Vercel</p>
+            <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Estimated Cost</p>
+            <p className="text-4xl font-bold" style={{ color: '#A855F7' }}>${stats.estimatedMonthlyCost.toFixed(2)}</p>
+            <p className="text-xs mt-3" style={{ color: '#6D28D9' }}>Azure + AWS + Vercel</p>
           </div>
 
           {/* Untagged Resources */}
-          <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#B19CD9', boxShadow: '0 2px 8px rgba(177, 156, 217, 0.1)' }}>
+          <div className="rounded-lg border-2 p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#64748B', boxShadow: '0 2px 8px rgba(100, 116, 139, 0.1)' }}>
             <div className="flex justify-between items-start mb-4">
               <span className="text-3xl">🏷️</span>
-              <span className="text-sm font-semibold" style={{ color: '#B19CD9' }}>COMPLIANCE</span>
+              <span className="text-sm font-bold px-3 py-1 rounded" style={{ color: '#FFFFFF', backgroundColor: '#64748B' }}>COMPLIANCE</span>
             </div>
-            <p className="text-sm mb-2" style={{ color: '#6B5B7C' }}>Untagged Resources</p>
-            <p className="text-4xl font-bold" style={{ color: '#B19CD9' }}>{stats.untaggedResources}</p>
-            <p className="text-xs mt-3" style={{ color: '#9370DB' }}>Need tagging</p>
+            <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Untagged Resources</p>
+            <p className="text-4xl font-bold" style={{ color: '#64748B' }}>{stats.untaggedResources}</p>
+            <p className="text-xs mt-3" style={{ color: '#334155' }}>Need tagging</p>
           </div>
         </div>
 
