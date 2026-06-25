@@ -161,33 +161,92 @@ function ApprovalContent() {
 
         {/* Success Result */}
         {result.status && (
-          <div
-            className="rounded-lg border-2 p-8 text-center mb-8"
-            style={{
-              backgroundColor: result.status === 'approved' ? '#DCFCE7' : '#FEE2E2',
-              borderColor: result.status === 'approved' ? '#10B981' : '#EF4444',
-            }}
-          >
-            <p className="text-5xl mb-4">{result.status === 'approved' ? '✅' : '❌'}</p>
-            <p
-              className="text-lg font-semibold"
+          <div className="flex items-center justify-center py-20">
+            <div
+              className="rounded-2xl border-2 p-12 text-center max-w-md w-full"
               style={{
-                color: result.status === 'approved' ? '#166534' : '#991B1B'
+                backgroundColor: result.status === 'approved' ? '#DCFCE7' : '#FEE2E2',
+                borderColor: result.status === 'approved' ? '#10B981' : '#EF4444',
               }}
             >
-              {result.message}
-            </p>
-            <Link
-              href="/multicloud-hub"
-              className="inline-block mt-6 font-semibold py-3 px-6 rounded-lg transition text-white"
-              style={{
-                backgroundColor: '#6366F1',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#4F46E5')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#6366F1')}
-            >
-              Back to Dashboard
-            </Link>
+              {/* Large Success Icon */}
+              <div className="mb-6 flex justify-center">
+                <div
+                  className="w-24 h-24 rounded-full flex items-center justify-center text-6xl"
+                  style={{
+                    backgroundColor: result.status === 'approved' ? '#ECFDF5' : '#FEF2F2',
+                    border: `4px solid ${result.status === 'approved' ? '#10B981' : '#EF4444'}`,
+                  }}
+                >
+                  {result.status === 'approved' ? '✅' : '❌'}
+                </div>
+              </div>
+
+              {/* Status Title */}
+              <h2
+                className="text-3xl font-bold mb-3"
+                style={{
+                  color: result.status === 'approved' ? '#166534' : '#991B1B'
+                }}
+              >
+                {result.status === 'approved' ? 'Request Approved' : 'Request Denied'}
+              </h2>
+
+              {/* Message */}
+              <p
+                className="text-base mb-8 leading-relaxed"
+                style={{
+                  color: result.status === 'approved' ? '#166534' : '#991B1B'
+                }}
+              >
+                {result.message}
+              </p>
+
+              {/* What Happens Next */}
+              <div
+                className="rounded-lg p-4 mb-8 text-sm text-left"
+                style={{
+                  backgroundColor: result.status === 'approved' ? '#F0FDF4' : '#FEF2F2',
+                  borderLeft: `4px solid ${result.status === 'approved' ? '#10B981' : '#EF4444'}`,
+                }}
+              >
+                <p className="font-semibold mb-2" style={{ color: result.status === 'approved' ? '#166534' : '#991B1B' }}>
+                  {result.status === 'approved' ? '📧 What Happens Next:' : '📧 Notification Sent:'}
+                </p>
+                <ul className="space-y-1" style={{ color: result.status === 'approved' ? '#166534' : '#991B1B' }}>
+                  {result.status === 'approved' ? (
+                    <>
+                      <li>• Employee will receive approval notification</li>
+                      <li>• Provisioning will begin automatically</li>
+                      <li>• Account setup takes 2-4 hours</li>
+                    </>
+                  ) : (
+                    <>
+                      <li>• Employee has been notified of denial</li>
+                      <li>• Request marked as rejected</li>
+                      <li>• New request can be submitted if needed</li>
+                    </>
+                  )}
+                </ul>
+              </div>
+
+              {/* Back Button */}
+              <Link
+                href="/multicloud-hub"
+                className="inline-block font-semibold py-3 px-8 rounded-lg transition text-white w-full text-center"
+                style={{
+                  backgroundColor: result.status === 'approved' ? '#10B981' : '#EF4444',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = result.status === 'approved' ? '#059669' : '#DC2626'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = result.status === 'approved' ? '#10B981' : '#EF4444'
+                }}
+              >
+                Back to Dashboard
+              </Link>
+            </div>
           </div>
         )}
 
