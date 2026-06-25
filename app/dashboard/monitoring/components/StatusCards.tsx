@@ -48,7 +48,7 @@ export default function StatusCards() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="bg-white rounded-lg border border-gray-600 p-4 animate-pulse h-24" />
+          <div key={i} className="rounded-lg border p-4 animate-pulse h-24" style={{ backgroundColor: '#F9FAFB', borderColor: '#E5E7EB' }} />
         ))}
       </div>
     )
@@ -58,30 +58,61 @@ export default function StatusCards() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {services.map((service) => {
         const statusColors = {
-          operational: { bg: 'bg-white/20', border: 'border-gray-600', text: 'text-green-400', dot: 'bg-green-500' },
-          degraded: { bg: 'bg-white/20', border: 'border-yellow-600', text: 'text-yellow-400', dot: 'bg-yellow-500' },
-          down: { bg: 'bg-white/20', border: 'border-red-600', text: 'text-red-400', dot: 'bg-red-500' },
+          operational: {
+            bg: '#DCFCE7',
+            border: '#10B981',
+            text: '#166534',
+            dot: '#10B981',
+            badge: '#10B981'
+          },
+          degraded: {
+            bg: '#FEF3C7',
+            border: '#F59E0B',
+            text: '#92400E',
+            dot: '#F59E0B',
+            badge: '#F59E0B'
+          },
+          down: {
+            bg: '#FEE2E2',
+            border: '#EF4444',
+            text: '#991B1B',
+            dot: '#EF4444',
+            badge: '#EF4444'
+          },
         }
         const colors = statusColors[service.status]
 
         return (
           <div
             key={service.name}
-            className={`${colors.bg} rounded-lg border ${colors.border} p-6 hover:shadow-lg transition`}
+            className="rounded-lg border-2 p-6 hover:shadow-lg transition"
+            style={{
+              backgroundColor: colors.bg,
+              borderColor: colors.border,
+            }}
           >
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">{service.icon}</span>
-                <h3 className="text-lg font-semibold text-white">{service.name}</h3>
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">{service.icon}</span>
+                <h3 className="text-lg font-bold" style={{ color: colors.text }}>{service.name}</h3>
               </div>
-              <div className={`w-3 h-3 rounded-full ${colors.dot} animate-pulse`} />
+              <div
+                className="w-3 h-3 rounded-full animate-pulse"
+                style={{ backgroundColor: colors.dot }}
+              />
             </div>
-            <p className={`text-sm ${colors.text}`}>{service.message}</p>
-            <p className="text-xs text-white mt-2">
+            <p className="text-sm mb-3" style={{ color: colors.text }}>{service.message}</p>
+            <div
+              className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full"
+              style={{
+                backgroundColor: colors.badge,
+                color: '#FFFFFF',
+              }}
+            >
               {service.status === 'operational' && '✓ Operational'}
               {service.status === 'degraded' && '⚠ Degraded'}
               {service.status === 'down' && '✗ Down'}
-            </p>
+            </div>
           </div>
         )
       })}

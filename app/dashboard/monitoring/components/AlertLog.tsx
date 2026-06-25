@@ -46,16 +46,16 @@ export default function AlertLog() {
     },
   ]
 
-  const getSeverityColor = (severity: string) => {
+  const getSeverityStyles = (severity: string) => {
     switch (severity) {
       case 'critical':
-        return 'bg-white/20 border-red-600 text-red-300'
+        return { bg: '#FEE2E2', border: '#EF4444', text: '#991B1B' }
       case 'warning':
-        return 'bg-white/20 border-yellow-600 text-yellow-300'
+        return { bg: '#FEF3C7', border: '#F59E0B', text: '#92400E' }
       case 'info':
-        return 'bg-white/20 border-gray-600 text-blue-300'
+        return { bg: '#F0F9FF', border: '#3B82F6', text: '#1E40AF' }
       default:
-        return 'bg-white/20 border-gray-600 text-white'
+        return { bg: '#F9FAFB', border: '#E5E7EB', text: '#111827' }
     }
   }
 
@@ -76,7 +76,7 @@ export default function AlertLog() {
     return (
       <div className="space-y-3">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="bg-white/20 rounded-lg border border-gray-600 p-4 animate-pulse h-20" />
+          <div key={i} className="rounded-lg border p-4 animate-pulse h-20" style={{ backgroundColor: '#F9FAFB', borderColor: '#E5E7EB' }} />
         ))}
       </div>
     )
@@ -85,34 +85,49 @@ export default function AlertLog() {
   return (
     <div className="space-y-3">
       {alerts.length === 0 ? (
-        <div className="bg-white/20 border border-gray-600 rounded-lg p-4 text-green-300">
+        <div className="rounded-lg border p-4" style={{ backgroundColor: '#DCFCE7', borderColor: '#10B981', color: '#166534' }}>
           <p className="font-semibold">✓ No active alerts</p>
           <p className="text-sm mt-1">All systems operating normally</p>
         </div>
       ) : (
-        alerts.map((alert) => (
-          <div key={alert.id} className={`border rounded-lg p-4 ${getSeverityColor(alert.severity)}`}>
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <span className="text-xl">{getSeverityIcon(alert.severity)}</span>
-                <div className="flex-1">
-                  <p className="font-semibold">{alert.type}</p>
-                  <p className="text-sm mt-1">{alert.message}</p>
-                  <p className="text-xs opacity-70 mt-2">
-                    {new Date(alert.timestamp).toLocaleString()}
-                  </p>
+        alerts.map((alert) => {
+          const styles = getSeverityStyles(alert.severity)
+          const statusBg = alert.status === 'resolved' ? '#DCFCE7' : '#FEE2E2'
+          const statusColor = alert.status === 'resolved' ? '#166534' : '#991B1B'
+
+          return (
+            <div
+              key={alert.id}
+              className="border-2 rounded-lg p-4"
+              style={{
+                backgroundColor: styles.bg,
+                borderColor: styles.border,
+              }}
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex items-start gap-3 flex-1">
+                  <span className="text-2xl">{getSeverityIcon(alert.severity)}</span>
+                  <div className="flex-1">
+                    <p className="font-bold" style={{ color: styles.text }}>{alert.type}</p>
+                    <p className="text-sm mt-1" style={{ color: styles.text }}>{alert.message}</p>
+                    <p className="text-xs mt-2" style={{ color: styles.text, opacity: 0.7 }}>
+                      {new Date(alert.timestamp).toLocaleString()}
+                    </p>
+                  </div>
                 </div>
+                <span
+                  className="text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap ml-4"
+                  style={{
+                    backgroundColor: statusBg,
+                    color: statusColor,
+                  }}
+                >
+                  {alert.status === 'resolved' ? '✓ Resolved' : '⚠ Active'}
+                </span>
               </div>
-              <span
-                className={`text-xs px-2 py-1 rounded whitespace-nowrap ml-4 ${
-                  alert.status === 'resolved' ? 'bg-green-600/30 text-green-300' : 'bg-red-600/30 text-red-300'
-                }`}
-              >
-                {alert.status === 'resolved' ? '✓ Resolved' : '⚠ Active'}
-              </span>
             </div>
-          </div>
-        ))
+          )
+        })
       )}
     </div>
   )

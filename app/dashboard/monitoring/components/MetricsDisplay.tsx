@@ -94,19 +94,19 @@ export default function MetricsDisplay() {
     return (
       <div className="space-y-6">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="bg-blue-900/20 rounded-lg border border-gray-600 p-6 animate-pulse h-64" />
+          <div key={i} className="rounded-lg border p-6 animate-pulse h-64" style={{ backgroundColor: '#F9FAFB', borderColor: '#E5E7EB' }} />
         ))}
       </div>
     )
   }
 
   if (!currentMetrics) {
-    return <div className="text-white">Unable to load metrics</div>
+    return <div style={{ color: '#6B7280' }}>Unable to load metrics</div>
   }
 
   const ChartCard = ({ title, children }: { title: string; children: React.ReactNode }) => (
-    <div className="bg-blue-900/20 rounded-lg border border-gray-600 p-6">
-      <h3 className="text-white font-semibold mb-4">{title}</h3>
+    <div className="rounded-lg border p-6" style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E7EB' }}>
+      <h3 className="font-semibold mb-4" style={{ color: '#111827' }}>{title}</h3>
       {children}
     </div>
   )
@@ -115,25 +115,25 @@ export default function MetricsDisplay() {
     <div className="space-y-6">
       {/* Current Metrics Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
-          <p className="text-white text-sm mb-2">Response Time</p>
-          <p className="text-2xl font-bold text-green-400">{currentMetrics.responseTime.toFixed(0)}ms</p>
+        <div className="rounded-lg border p-4" style={{ backgroundColor: '#F0F9FF', borderColor: '#BFDBFE' }}>
+          <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Response Time</p>
+          <p className="text-3xl font-bold" style={{ color: '#3B82F6' }}>{currentMetrics.responseTime.toFixed(0)}ms</p>
         </div>
-        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
-          <p className="text-white text-sm mb-2">Uptime</p>
-          <p className="text-2xl font-bold text-emerald-400">{currentMetrics.uptime.toFixed(2)}%</p>
+        <div className="rounded-lg border p-4" style={{ backgroundColor: '#DCFCE7', borderColor: '#10B981' }}>
+          <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Uptime</p>
+          <p className="text-3xl font-bold" style={{ color: '#10B981' }}>{currentMetrics.uptime.toFixed(2)}%</p>
         </div>
-        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
-          <p className="text-white text-sm mb-2">API Requests</p>
-          <p className="text-2xl font-bold text-blue-400">{(currentMetrics as any).apiRequests || 0}</p>
+        <div className="rounded-lg border p-4" style={{ backgroundColor: '#F3E8FF', borderColor: '#A855F7' }}>
+          <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>API Requests</p>
+          <p className="text-3xl font-bold" style={{ color: '#A855F7' }}>{(currentMetrics as any).apiRequests || 0}</p>
         </div>
-        <div className="bg-white/20 rounded-lg border border-gray-600/30 p-4">
-          <p className="text-white text-sm mb-2">Lambda Errors</p>
-          <p className="text-2xl font-bold text-red-400">{(currentMetrics as any).lambdaErrors || 0}</p>
+        <div className="rounded-lg border p-4" style={{ backgroundColor: '#FEE2E2', borderColor: '#EF4444' }}>
+          <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Lambda Errors</p>
+          <p className="text-3xl font-bold" style={{ color: '#EF4444' }}>{(currentMetrics as any).lambdaErrors || 0}</p>
         </div>
-        <div className="bg-white/20 rounded-lg border border-emerald-600/30 p-4">
-          <p className="text-white text-sm mb-2">Monthly Cost</p>
-          <p className="text-2xl font-bold text-emerald-400">${(currentMetrics as any).estimatedMonthlyCost?.toFixed(2) || '0.00'}</p>
+        <div className="rounded-lg border p-4" style={{ backgroundColor: '#CFFAFE', borderColor: '#06B6D4' }}>
+          <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Monthly Cost</p>
+          <p className="text-3xl font-bold" style={{ color: '#06B6D4' }}>${(currentMetrics as any).estimatedMonthlyCost?.toFixed(2) || '0.00'}</p>
         </div>
       </div>
 
@@ -141,13 +141,13 @@ export default function MetricsDisplay() {
       <ChartCard title="CPU & RAM Usage (Last 24h)">
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={historicalData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-            <XAxis dataKey="time" stroke="#888" />
-            <YAxis domain={[0, 100]} stroke="#888" />
-            <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444' }} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+            <XAxis dataKey="time" stroke="#6B7280" />
+            <YAxis domain={[0, 100]} stroke="#6B7280" />
+            <Tooltip contentStyle={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }} />
             <Legend />
-            <Line type="linear" dataKey="cpu" stroke="#60a5fa" strokeWidth={2} name="CPU %" isAnimationActive={false} />
-            <Line type="linear" dataKey="ram" stroke="#a78bfa" strokeWidth={2} name="RAM %" isAnimationActive={false} />
+            <Line type="linear" dataKey="cpu" stroke="#3B82F6" strokeWidth={2} name="CPU %" isAnimationActive={false} />
+            <Line type="linear" dataKey="ram" stroke="#A855F7" strokeWidth={2} name="RAM %" isAnimationActive={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -155,12 +155,12 @@ export default function MetricsDisplay() {
       <ChartCard title="Disk Usage (Last 24h)">
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={historicalData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-            <XAxis dataKey="time" stroke="#888" />
-            <YAxis domain={[0, 100]} stroke="#888" />
-            <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444' }} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+            <XAxis dataKey="time" stroke="#6B7280" />
+            <YAxis domain={[0, 100]} stroke="#6B7280" />
+            <Tooltip contentStyle={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }} />
             <Legend />
-            <Line type="linear" dataKey="disk" stroke="#fb923c" strokeWidth={2} name="Disk %" isAnimationActive={false} />
+            <Line type="linear" dataKey="disk" stroke="#F59E0B" strokeWidth={2} name="Disk %" isAnimationActive={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartCard>
@@ -168,14 +168,14 @@ export default function MetricsDisplay() {
       <ChartCard title="Response Time & Uptime (Last 24h)">
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={historicalData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-            <XAxis dataKey="time" stroke="#888" />
-            <YAxis yAxisId="left" domain={[0, 300]} stroke="#888" />
-            <YAxis yAxisId="right" orientation="right" domain={[98, 100]} stroke="#888" />
-            <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #444' }} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
+            <XAxis dataKey="time" stroke="#6B7280" />
+            <YAxis yAxisId="left" domain={[0, 300]} stroke="#6B7280" />
+            <YAxis yAxisId="right" orientation="right" domain={[98, 100]} stroke="#6B7280" />
+            <Tooltip contentStyle={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '8px', color: '#111827' }} />
             <Legend />
-            <Line yAxisId="left" type="linear" dataKey="responseTime" stroke="#34d399" strokeWidth={2} name="Response Time (ms)" isAnimationActive={false} />
-            <Line yAxisId="right" type="linear" dataKey="uptime" stroke="#10b981" strokeWidth={2} name="Uptime %" isAnimationActive={false} />
+            <Line yAxisId="left" type="linear" dataKey="responseTime" stroke="#3B82F6" strokeWidth={2} name="Response Time (ms)" isAnimationActive={false} />
+            <Line yAxisId="right" type="linear" dataKey="uptime" stroke="#10B981" strokeWidth={2} name="Uptime %" isAnimationActive={false} />
           </LineChart>
         </ResponsiveContainer>
       </ChartCard>
