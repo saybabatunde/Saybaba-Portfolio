@@ -158,14 +158,18 @@ export default function StatusCards() {
 
               {/* Countdown Timer - Bottom Right */}
               <div
-                className="text-xs font-mono px-2 py-1 rounded"
+                className="font-bold font-mono px-4 py-2 rounded-lg text-sm"
                 style={{
                   backgroundColor: borderColor,
                   color: '#FFFFFF',
-                  opacity: 0.8,
+                  opacity: 1,
+                  fontSize: '14px',
+                  fontWeight: 'bold',
+                  minWidth: '60px',
+                  textAlign: 'center',
                 }}
               >
-                {countdown}s
+                00:{countdown.toString().padStart(2, '0')}s
               </div>
             </div>
           </div>
