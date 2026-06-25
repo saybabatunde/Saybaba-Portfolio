@@ -65,25 +65,58 @@ export default function StatusCards() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {services.map((service) => {
+        // Service-specific background colors
+        const serviceBackgrounds: { [key: string]: string } = {
+          'GitHub': '#A6DAF8',
+          'Supabase': '#D0F0C0',
+          'Vercel': '#1a1a1a',
+          'Resend': '#2a2a2a',
+          'AWS': '#FFA500',
+          'Azure': '#74BFEA',
+          'Claude API': '#E8D5FF',
+        }
+
+        const serviceTextColors: { [key: string]: string } = {
+          'GitHub': '#0C4A6E',
+          'Supabase': '#166534',
+          'Vercel': '#E5E7EB',
+          'Resend': '#E5E7EB',
+          'AWS': '#7C2D12',
+          'Azure': '#0C4A6E',
+          'Claude API': '#5B21B6',
+        }
+
+        const serviceBorderColors: { [key: string]: string } = {
+          'GitHub': '#0284C7',
+          'Supabase': '#10B981',
+          'Vercel': '#4B5563',
+          'Resend': '#6B7280',
+          'AWS': '#EA580C',
+          'Azure': '#0891B2',
+          'Claude API': '#A855F7',
+        }
+
+        const bgColor = serviceBackgrounds[service.name] || '#F9FAFB'
+        const textColor = serviceTextColors[service.name] || '#111827'
+        const borderColor = serviceBorderColors[service.name] || '#E5E7EB'
+
+        // Status colors (for status badge)
         const statusColors = {
           operational: {
-            bg: '#DCFCE7',
-            border: '#10B981',
-            text: '#166534',
-            dot: '#10B981',
-            badge: '#10B981'
+            border: borderColor,
+            text: textColor,
+            dot: borderColor,
+            badge: borderColor
           },
           degraded: {
-            bg: '#FEF3C7',
-            border: '#F59E0B',
-            text: '#92400E',
+            border: borderColor,
+            text: textColor,
             dot: '#F59E0B',
             badge: '#F59E0B'
           },
           down: {
-            bg: '#FEE2E2',
-            border: '#EF4444',
-            text: '#991B1B',
+            border: borderColor,
+            text: textColor,
             dot: '#EF4444',
             badge: '#EF4444'
           },
@@ -95,21 +128,21 @@ export default function StatusCards() {
             key={service.name}
             className="rounded-lg border-2 p-6 hover:shadow-lg transition relative"
             style={{
-              backgroundColor: colors.bg,
-              borderColor: colors.border,
+              backgroundColor: bgColor,
+              borderColor: borderColor,
             }}
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
                 <span className="text-3xl">{service.icon}</span>
-                <h3 className="text-lg font-bold" style={{ color: colors.text }}>{service.name}</h3>
+                <h3 className="text-lg font-bold" style={{ color: textColor }}>{service.name}</h3>
               </div>
               <div
                 className="w-3 h-3 rounded-full animate-pulse"
-                style={{ backgroundColor: colors.dot }}
+                style={{ backgroundColor: borderColor }}
               />
             </div>
-            <p className="text-sm mb-3" style={{ color: colors.text }}>{service.message}</p>
+            <p className="text-sm mb-3" style={{ color: textColor }}>{service.message}</p>
             <div className="flex items-end justify-between">
               <div
                 className="inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full"
@@ -127,7 +160,7 @@ export default function StatusCards() {
               <div
                 className="text-xs font-mono px-2 py-1 rounded"
                 style={{
-                  backgroundColor: colors.border,
+                  backgroundColor: borderColor,
                   color: '#FFFFFF',
                   opacity: 0.8,
                 }}
