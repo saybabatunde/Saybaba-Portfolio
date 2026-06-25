@@ -127,20 +127,20 @@ function ApprovalContent() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       {/* Header */}
-      <header className="bg-gradient-to-r from-blue-900 to-purple-900 border-b border-blue-500 sticky top-0 z-50">
-        <div className="max-w-4xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-white">Onboarding Approval</h1>
-          <p className="text-blue-200 text-sm mt-2">Review and approve or deny the onboarding request</p>
+      <header style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }} className="sticky top-0 z-50 shadow-sm">
+        <div className="max-w-4xl mx-auto px-6 py-8">
+          <h1 className="text-4xl font-bold mb-2" style={{ color: '#111827' }}>Onboarding Approval</h1>
+          <p style={{ color: '#6B7280' }}>Review and approve or deny the onboarding request</p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-12">
+      <main className="max-w-4xl mx-auto px-6 py-12">
         {/* No Request ID */}
         {!requestId && (
-          <div className="bg-red-900/50 border border-red-500 text-red-300 px-6 py-4 rounded-lg">
+          <div className="rounded-lg border-l-4 p-6" style={{ backgroundColor: '#FEF2F2', borderColor: '#EF4444', color: '#7F1D1D' }}>
             No request ID provided. Please use the link from the email.
           </div>
         )}
@@ -148,33 +148,43 @@ function ApprovalContent() {
         {/* Loading */}
         {loading && (
           <div className="text-center py-12">
-            <p className="text-gray-400">Loading request...</p>
+            <p style={{ color: '#6B7280' }}>Loading request...</p>
           </div>
         )}
 
         {/* Error */}
         {error && !result.status && (
-          <div className="bg-red-900/50 border border-red-500 text-red-300 px-6 py-4 rounded-lg mb-8">
+          <div className="rounded-lg border-l-4 p-6 mb-8" style={{ backgroundColor: '#FEF2F2', borderColor: '#EF4444', color: '#7F1D1D' }}>
             {error}
           </div>
         )}
 
         {/* Success Result */}
         {result.status && (
-          <div className={`rounded-lg border-2 p-8 text-center mb-8 ${
-            result.status === 'approved'
-              ? 'bg-green-900/30 border-green-600'
-              : 'bg-red-900/30 border-red-600'
-          }`}>
-            <p className="text-3xl mb-4">{result.status === 'approved' ? '✅' : '❌'}</p>
-            <p className={`text-lg font-semibold ${
-              result.status === 'approved' ? 'text-green-300' : 'text-red-300'
-            }`}>
+          <div
+            className="rounded-lg border-2 p-8 text-center mb-8"
+            style={{
+              backgroundColor: result.status === 'approved' ? '#DCFCE7' : '#FEE2E2',
+              borderColor: result.status === 'approved' ? '#10B981' : '#EF4444',
+            }}
+          >
+            <p className="text-5xl mb-4">{result.status === 'approved' ? '✅' : '❌'}</p>
+            <p
+              className="text-lg font-semibold"
+              style={{
+                color: result.status === 'approved' ? '#166534' : '#991B1B'
+              }}
+            >
               {result.message}
             </p>
             <Link
               href="/multicloud-hub"
-              className="inline-block mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition"
+              className="inline-block mt-6 font-semibold py-3 px-6 rounded-lg transition text-white"
+              style={{
+                backgroundColor: '#6366F1',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#4F46E5')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#6366F1')}
             >
               Back to Dashboard
             </Link>
@@ -185,32 +195,34 @@ function ApprovalContent() {
         {!loading && request && !result.status && (
           <div className="space-y-8">
             {/* Employee Info */}
-            <div className="bg-slate-900 rounded-lg border border-blue-500 p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">👤 Employee Information</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-lg border p-8" style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E7EB' }}>
+              <h2 className="text-2xl font-bold mb-8 pb-6 flex items-center gap-2" style={{ color: '#111827', borderBottom: '1px solid #E5E7EB' }}>
+                👤 Employee Information
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <p className="text-gray-400 text-sm mb-1">Name</p>
-                  <p className="text-white font-semibold text-lg">{request.employee_name}</p>
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Name</p>
+                  <p className="text-lg font-semibold" style={{ color: '#111827' }}>{request.employee_name}</p>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm mb-1">Email</p>
-                  <p className="text-white font-semibold">{request.employee_email}</p>
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Email</p>
+                  <p className="font-semibold" style={{ color: '#111827' }}>{request.employee_email}</p>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm mb-1">Position</p>
-                  <p className="text-white font-semibold">{request.job_title}</p>
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Position</p>
+                  <p className="font-semibold" style={{ color: '#111827' }}>{request.job_title}</p>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm mb-1">Department</p>
-                  <p className="text-white font-semibold">{request.department}</p>
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Department</p>
+                  <p className="font-semibold" style={{ color: '#111827' }}>{request.department}</p>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm mb-1">Location</p>
-                  <p className="text-white font-semibold">{request.location}</p>
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Location</p>
+                  <p className="font-semibold" style={{ color: '#111827' }}>{request.location}</p>
                 </div>
                 <div>
-                  <p className="text-gray-400 text-sm mb-1">Start Date</p>
-                  <p className="text-white font-semibold">
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Start Date</p>
+                  <p className="font-semibold" style={{ color: '#111827' }}>
                     {request.start_date ? new Date(request.start_date).toLocaleDateString() : 'Not specified'}
                   </p>
                 </div>
@@ -218,21 +230,24 @@ function ApprovalContent() {
             </div>
 
             {/* Suggested Provisioning */}
-            <div className="bg-cyan-900/20 border border-cyan-500 rounded-lg p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">🎯 Suggested Provisioning</h2>
-              <div className="space-y-6">
+            <div className="rounded-lg border p-8" style={{ backgroundColor: '#F0F9FF', borderColor: '#BFDBFE' }}>
+              <h2 className="text-2xl font-bold mb-8 pb-6 flex items-center gap-2" style={{ color: '#111827', borderBottom: '1px solid #E5E7EB' }}>
+                🎯 Suggested Provisioning
+              </h2>
+              <div className="space-y-8">
                 <div>
-                  <p className="text-gray-400 text-sm mb-2">M365 License</p>
-                  <p className="text-white font-semibold text-lg">{request.suggested_m365_license}</p>
+                  <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>M365 License</p>
+                  <p className="text-lg font-semibold" style={{ color: '#1F2937' }}>{request.suggested_m365_license}</p>
                 </div>
 
                 <div>
-                  <p className="text-gray-400 text-sm mb-3">Entra Groups</p>
+                  <p className="text-sm font-semibold mb-3" style={{ color: '#6B7280' }}>Entra Groups</p>
                   <div className="flex flex-wrap gap-2">
                     {request.suggested_entra_groups.map((group, idx) => (
                       <span
                         key={idx}
-                        className="bg-green-600/30 border border-green-500 text-green-200 px-3 py-1 rounded-full text-sm"
+                        className="px-3 py-2 rounded-full text-sm font-medium"
+                        style={{ backgroundColor: '#DCFCE7', color: '#166534' }}
                       >
                         {group}
                       </span>
@@ -241,12 +256,13 @@ function ApprovalContent() {
                 </div>
 
                 <div>
-                  <p className="text-gray-400 text-sm mb-3">Applications</p>
+                  <p className="text-sm font-semibold mb-3" style={{ color: '#6B7280' }}>Applications</p>
                   <div className="flex flex-wrap gap-2">
                     {request.suggested_apps.map((app, idx) => (
                       <span
                         key={idx}
-                        className="bg-blue-600/30 border border-blue-500 text-blue-200 px-3 py-1 rounded text-sm"
+                        className="px-3 py-2 rounded text-sm font-medium"
+                        style={{ backgroundColor: '#DDD6FE', color: '#4F46E5' }}
                       >
                         {app}
                       </span>
@@ -257,35 +273,63 @@ function ApprovalContent() {
             </div>
 
             {/* Approval Actions */}
-            <div className="bg-slate-900 rounded-lg border border-gray-600 p-8">
-              <h2 className="text-2xl font-bold text-white mb-6">📋 Your Decision</h2>
+            <div className="rounded-lg border p-8" style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E7EB' }}>
+              <h2 className="text-2xl font-bold mb-8 pb-6 flex items-center gap-2" style={{ color: '#111827', borderBottom: '1px solid #E5E7EB' }}>
+                📋 Your Decision
+              </h2>
 
               {!showRejectForm ? (
                 <div className="flex gap-4">
                   <button
                     onClick={handleApprove}
                     disabled={processing}
-                    className="flex-1 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white font-bold py-4 px-6 rounded-lg transition text-lg"
+                    className="flex-1 font-bold py-4 px-6 rounded-lg transition text-lg text-white"
+                    style={{
+                      backgroundColor: processing ? '#D1D5DB' : '#10B981',
+                      cursor: processing ? 'not-allowed' : 'pointer',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!processing) e.currentTarget.style.backgroundColor = '#059669'
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!processing) e.currentTarget.style.backgroundColor = '#10B981'
+                    }}
                   >
                     {processing ? 'Processing...' : '✅ Approve Request'}
                   </button>
                   <button
                     onClick={() => setShowRejectForm(true)}
                     disabled={processing}
-                    className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-4 px-6 rounded-lg transition text-lg"
+                    className="flex-1 font-bold py-4 px-6 rounded-lg transition text-lg text-white"
+                    style={{
+                      backgroundColor: processing ? '#D1D5DB' : '#EF4444',
+                      cursor: processing ? 'not-allowed' : 'pointer',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!processing) e.currentTarget.style.backgroundColor = '#DC2626'
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!processing) e.currentTarget.style.backgroundColor = '#EF4444'
+                    }}
                   >
                     ❌ Deny Request
                   </button>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div>
-                    <label className="block text-white font-semibold mb-2">Reason for Denial (Optional)</label>
+                    <label className="block font-semibold mb-3" style={{ color: '#111827' }}>Reason for Denial (Optional)</label>
                     <textarea
                       value={rejectionReason}
                       onChange={(e) => setRejectionReason(e.target.value)}
                       placeholder="Explain why you're denying this request..."
-                      className="w-full px-4 py-2 bg-slate-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-red-400"
+                      className="w-full px-4 py-3 rounded-lg border-2 text-gray-900 placeholder-gray-400 focus:outline-none transition"
+                      style={{
+                        backgroundColor: '#F9FAFB',
+                        borderColor: '#E5E7EB',
+                      }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = '#EF4444')}
+                      onBlur={(e) => (e.currentTarget.style.borderColor = '#E5E7EB')}
                       rows={4}
                     />
                   </div>
@@ -293,14 +337,35 @@ function ApprovalContent() {
                     <button
                       onClick={handleReject}
                       disabled={processing}
-                      className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition"
+                      className="flex-1 font-bold py-3 px-6 rounded-lg transition text-white"
+                      style={{
+                        backgroundColor: processing ? '#D1D5DB' : '#EF4444',
+                        cursor: processing ? 'not-allowed' : 'pointer',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!processing) e.currentTarget.style.backgroundColor = '#DC2626'
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!processing) e.currentTarget.style.backgroundColor = '#EF4444'
+                      }}
                     >
                       {processing ? 'Processing...' : 'Confirm Denial'}
                     </button>
                     <button
                       onClick={() => setShowRejectForm(false)}
                       disabled={processing}
-                      className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-lg transition"
+                      className="flex-1 font-bold py-3 px-6 rounded-lg transition"
+                      style={{
+                        backgroundColor: '#E5E7EB',
+                        color: '#1F2937',
+                        cursor: processing ? 'not-allowed' : 'pointer',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!processing) e.currentTarget.style.backgroundColor = '#D1D5DB'
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!processing) e.currentTarget.style.backgroundColor = '#E5E7EB'
+                      }}
                     >
                       Cancel
                     </button>
@@ -319,8 +384,8 @@ export default function ApprovalPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-          <p className="text-white">Loading approval page...</p>
+        <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFFFFF' }}>
+          <p style={{ color: '#6B7280' }}>Loading approval page...</p>
         </div>
       }
     >
