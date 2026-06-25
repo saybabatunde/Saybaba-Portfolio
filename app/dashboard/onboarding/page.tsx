@@ -52,7 +52,7 @@ export default function AWSOboardingPage() {
       <main className="max-w-7xl mx-auto px-4 py-12">
         {/* Demo Mode Banner */}
         <div className="mb-8 p-4 rounded-lg" style={{ backgroundColor: '#F8F8FF', border: '2px solid #E8E8F8' }}>
-          <p className="text-base" style={{ color: '#333333' }}>
+          <p className="text-base font-bold" style={{ color: '#333333' }}>
             <span>📋 Demo Mode:</span> This is a test environment. Feel free to supply your username and email to test the system and receive a confirmation notification. You'll be able to verify the onboarding flow works end-to-end.
           </p>
         </div>
@@ -69,26 +69,26 @@ export default function AWSOboardingPage() {
             <h3 className="text-xl font-bold mb-4" style={{ color: '#8B4513' }}>How It Works</h3>
             <div className="space-y-4 text-base" style={{ color: '#333333' }}>
               <div>
-                <p className="font-semibold mb-1" style={{ color: '#8B4513' }}>1. Fill the Form</p>
-                <p className="text-base" style={{ color: '#555555' }}>Enter the user's full name, email, and assign them to a group.</p>
+                <p className="font-bold mb-1" style={{ color: '#8B4513' }}>1. Fill the Form</p>
+                <p className="text-base font-semibold" style={{ color: '#333333' }}>Enter the user's full name, email, and assign them to a group.</p>
               </div>
               <div>
-                <p className="font-semibold mb-1" style={{ color: '#8B4513' }}>2. Approve & Create</p>
-                <p className="text-base" style={{ color: '#555555' }}>Click the button to create the user through the API in real-time.</p>
+                <p className="font-bold mb-1" style={{ color: '#8B4513' }}>2. Approve & Create</p>
+                <p className="text-base font-semibold" style={{ color: '#333333' }}>Click the button to create the user through the API in real-time.</p>
               </div>
               <div>
-                <p className="font-semibold mb-1" style={{ color: '#8B4513' }}>3. Monitor Audit Logs</p>
-                <p className="text-base" style={{ color: '#555555' }}>Watch the audit logs below to see exactly what API calls were made and their status.</p>
+                <p className="font-bold mb-1" style={{ color: '#8B4513' }}>3. Monitor Audit Logs</p>
+                <p className="text-base font-semibold" style={{ color: '#333333' }}>Watch the audit logs below to see exactly what API calls were made and their status.</p>
               </div>
               <div>
-                <p className="font-semibold mb-1" style={{ color: '#8B4513' }}>4. Multi-Cloud Architecture</p>
-                <p className="text-base" style={{ color: '#555555' }}>This demo showcases AWS Lambda for hosting modern serverless applications.</p>
+                <p className="font-bold mb-1" style={{ color: '#8B4513' }}>4. Multi-Cloud Architecture</p>
+                <p className="text-base font-semibold" style={{ color: '#333333' }}>This demo showcases AWS Lambda for hosting modern serverless applications.</p>
               </div>
             </div>
 
             {/* Tech Stack */}
             <div className="mt-8 pt-8" style={{ borderTop: '2px solid #E8E8F8' }}>
-              <h4 className="font-semibold mb-3 text-base" style={{ color: '#8B4513' }}>Tech Stack</h4>
+              <h4 className="font-bold mb-3 text-base" style={{ color: '#8B4513' }}>Tech Stack</h4>
               <div className="flex flex-wrap gap-2">
                 {['AWS Lambda', 'Next.js', 'TypeScript', 'Terraform', 'Serverless', 'REST API'].map((tech) => (
                   <span
