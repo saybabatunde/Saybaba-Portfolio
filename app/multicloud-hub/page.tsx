@@ -280,13 +280,15 @@ export default function MultiCloudHub() {
                         <p className="text-sm" style={{ color: '#6B5B7C' }}>{activity.resource}</p>
                       </div>
                       <span
-                        className={`text-xs font-semibold px-2 py-1 rounded ${
-                          activity.status === 'success'
-                            ? 'bg-green-900/30 text-green-400'
-                            : activity.status === 'pending'
-                              ? 'bg-yellow-900/30 text-yellow-400'
-                              : 'bg-red-900/30 text-red-400'
-                        }`}
+                        className="text-xs font-bold px-3 py-1 rounded text-white"
+                        style={{
+                          backgroundColor:
+                            activity.status === 'success'
+                              ? '#10B981'
+                              : activity.status === 'pending'
+                                ? '#F59E0B'
+                                : '#EF4444',
+                        }}
                       >
                         {activity.status.toUpperCase()}
                       </span>
