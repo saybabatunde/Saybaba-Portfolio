@@ -35,7 +35,7 @@ export default function MonitoringDashboard() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F9FAFB' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#D5EEFD' }}>
       {/* Header */}
       <header style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }} className="sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-8">
