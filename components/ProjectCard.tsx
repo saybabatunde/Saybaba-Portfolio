@@ -14,7 +14,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <p className="mb-4 font-bold" style={{ color: '#000000' }}>{project.description}</p>
       <Link
         href={`/dashboard/projects/${project.slug}`}
-        className="inline-block font-semibold transition duration-200" style={{ color: '#D4A17A' }}
+        className="inline-block font-bold transition duration-200" style={{ color: '#1A1A1A' }}
       >
         View Project →
       </Link>

@@ -88,7 +88,7 @@ export default function DashboardPage() {
                 <p className="mb-4 font-medium" style={{ color: '#000000' }}>
                   Create real IAM users with a single click. See real AWS API calls, audit logs, and infrastructure in action. Built with Lambda, API Gateway, and DynamoDB.
                 </p>
-                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#D4A17A' }}>
+                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#1A1A1A' }}>
                   Open Demo <span>→</span>
                 </div>
               </div>
@@ -107,7 +107,7 @@ export default function DashboardPage() {
                 <p className="mb-4 font-medium" style={{ color: '#000000' }}>
                   Experience Azure cloud deployment. Frontend hosted on Azure Static Web Apps with serverless architecture. See multi-cloud infrastructure in action.
                 </p>
-                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#D4A17A' }}>
+                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#1A1A1A' }}>
                   Open Demo <span>→</span>
                 </div>
               </div>
@@ -126,7 +126,7 @@ export default function DashboardPage() {
                 <p className="mb-4 font-medium" style={{ color: '#000000' }}>
                   Enterprise IAM automation dashboard with onboarding workflows, role mapping matrix, provisioning simulation, and multi-cloud compliance tracking. Azure + AWS + Vercel.
                 </p>
-                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#D4A17A' }}>
+                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#1A1A1A' }}>
                   Open Dashboard <span>→</span>
                 </div>
               </div>
@@ -145,7 +145,7 @@ export default function DashboardPage() {
                 <p className="mb-4 font-medium" style={{ color: '#000000' }}>
                   Monitor all connected services in real-time. Track GitHub, Supabase, Vercel, Resend, AWS, and Azure health. View CPU/RAM metrics and uptime percentages.
                 </p>
-                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#D4A17A' }}>
+                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#1A1A1A' }}>
                   Open Dashboard <span>→</span>
                 </div>
               </div>
@@ -164,7 +164,7 @@ export default function DashboardPage() {
                 <p className="mb-4 font-medium" style={{ color: '#000000' }}>
                   Request and provision Azure infrastructure on-demand. Select VM size, region, and compliance level. Automated deployment via Terraform with cost controls and budget alerts.
                 </p>
-                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#D4A17A' }}>
+                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#1A1A1A' }}>
                   Request Infrastructure <span>→</span>
                 </div>
               </div>
@@ -183,7 +183,7 @@ export default function DashboardPage() {
                 <p className="mb-4 font-medium" style={{ color: '#000000' }}>
                   Complete DevOps pipeline from code to production. GitHub Actions → Docker → Azure ACR → Kubernetes (AKS) → Azure Monitor. 5 phases of production-ready infrastructure.
                 </p>
-                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#D4A17A' }}>
+                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#1A1A1A' }}>
                   View Project <span>→</span>
                 </div>
               </div>
