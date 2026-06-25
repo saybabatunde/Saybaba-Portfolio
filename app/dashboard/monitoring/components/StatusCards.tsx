@@ -13,11 +13,19 @@ interface ServiceStatus {
 export default function StatusCards() {
   const [services, setServices] = useState<ServiceStatus[]>([])
   const [loading, setLoading] = useState(true)
+  const [countdown, setCountdown] = useState(60)
 
   useEffect(() => {
     fetchServiceStatus()
     const interval = setInterval(fetchServiceStatus, 60000) // Refresh every 60 seconds
     return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      setCountdown((prev) => (prev > 0 ? prev - 1 : 60))
+    }, 1000)
+    return () => clearInterval(countdownInterval)
   }, [])
 
   const fetchServiceStatus = async () => {
@@ -85,12 +93,24 @@ export default function StatusCards() {
         return (
           <div
             key={service.name}
-            className="rounded-lg border-2 p-6 hover:shadow-lg transition"
+            className="rounded-lg border-2 p-6 hover:shadow-lg transition relative"
             style={{
               backgroundColor: colors.bg,
               borderColor: colors.border,
             }}
           >
+            {/* Countdown Timer */}
+            <div
+              className="absolute top-3 right-3 text-xs font-mono px-2 py-1 rounded"
+              style={{
+                backgroundColor: colors.border,
+                color: '#FFFFFF',
+                opacity: 0.8,
+              }}
+            >
+              {countdown}s
+            </div>
+
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
                 <span className="text-3xl">{service.icon}</span>
