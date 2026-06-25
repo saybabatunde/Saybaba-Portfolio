@@ -42,9 +42,9 @@ export default function DashboardPage() {
   const categories = Array.from(new Set(projects.map((p) => p.category)))
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#6B6256' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#3A3A3A' }}>
       {/* Header */}
-      <header className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: '#8A7E73' }}>
+      <header className="sticky top-0 z-50 shadow-lg" style={{ backgroundColor: '#2A2A2A', borderBottom: '2px solid #4A4A4A' }}>
         <div className="max-w-7xl mx-auto px-4 py-8 flex justify-between items-center">
           <div>
             <h1 className="text-4xl font-bold text-white">Saybaba Portfolio</h1>
@@ -292,7 +292,7 @@ export default function DashboardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-20" style={{ backgroundColor: '#8A7E73', borderTop: '2px solid #D4A17A' }}>
+      <footer className="mt-20" style={{ backgroundColor: '#2A2A2A', borderTop: '2px solid #4A4A4A' }}>
         <div className="max-w-7xl mx-auto px-4 py-8 text-center text-white text-sm opacity-90">
           <p>&copy; 2024 Saybaba. Built with Next.js and Tailwind CSS.</p>
         </div>
