@@ -216,8 +216,8 @@ export default function RequestDetail() {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-        <p className="text-white">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFFFFF' }}>
+        <p style={{ color: '#6B7280' }}>Loading...</p>
       </div>
     )
   }
@@ -706,8 +706,8 @@ export default function RequestDetail() {
             </div>
           </div>
         ) : !loading ? (
-          <div className="bg-slate-900 rounded-lg border border-gray-600 p-12 text-center">
-            <p className="text-gray-400 text-lg">Request not found</p>
+          <div className="rounded-lg border p-12 text-center" style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E7EB' }}>
+            <p className="text-lg" style={{ color: '#6B7280' }}>Request not found</p>
           </div>
         ) : null}
       </main>
