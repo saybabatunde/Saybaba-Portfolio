@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import { ClientSecretCredential } from '@azure/identity'
 import { Client } from '@microsoft/microsoft-graph-client'
-import { IAM } from 'aws-sdk'
+import { IAMClient, DeleteUserCommand } from '@aws-sdk/client-iam'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -96,21 +96,18 @@ export async function POST(request: NextRequest) {
         throw new Error('AWS credentials not configured')
       }
 
-      const iam = new IAM({
-        accessKeyId: awsAccessKeyId,
-        secretAccessKey: awsSecretAccessKey,
+      const iam = new IAMClient({
+        credentials: {
+          accessKeyId: awsAccessKeyId,
+          secretAccessKey: awsSecretAccessKey,
+        },
         region: process.env.AWS_REGION || 'us-east-1',
       })
 
       const username = onboardingRequest.employee_name.toLowerCase().replace(/\s+/g, '-')
 
       // Attempt to delete the user directly
-      await new Promise((resolve, reject) => {
-        iam.deleteUser({ UserName: username }, (err: any) => {
-          if (err) reject(err)
-          else resolve(null)
-        })
-      })
+      await iam.send(new DeleteUserCommand({ UserName: username }))
 
       steps[1] = { name: 'Delete AWS IAM User', status: 'completed', message: 'User deleted from AWS' }
     } catch (error: any) {

@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 import { ClientSecretCredential } from '@azure/identity'
 import { Client } from '@microsoft/microsoft-graph-client'
-import { IAM } from 'aws-sdk'
+import { IAMClient, CreateUserCommand, CreateAccessKeyCommand } from '@aws-sdk/client-iam'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -135,20 +135,22 @@ export async function POST(request: NextRequest) {
         throw new Error(`AWS credentials missing: accessKeyId=${!!awsAccessKeyId}, secretAccessKey=${!!awsSecretAccessKey}`)
       }
 
-      const iam = new IAM({
-        accessKeyId: awsAccessKeyId,
-        secretAccessKey: awsSecretAccessKey,
+      const iam = new IAMClient({
+        credentials: {
+          accessKeyId: awsAccessKeyId,
+          secretAccessKey: awsSecretAccessKey,
+        },
         region: process.env.AWS_REGION || 'us-east-1',
       })
 
       const username = onboardingRequest.employee_name.toLowerCase().replace(/\s+/g, '-')
       console.log('Creating AWS user:', username)
 
-      await iam.createUser({ UserName: username }).promise()
+      await iam.send(new CreateUserCommand({ UserName: username }))
       console.log('AWS user created:', username)
 
       // Create access keys
-      await iam.createAccessKey({ UserName: username }).promise()
+      await iam.send(new CreateAccessKeyCommand({ UserName: username }))
 
       steps[3] = { name: 'Create AWS IAM User', status: 'completed', message: 'User created in AWS' }
     } catch (error) {
