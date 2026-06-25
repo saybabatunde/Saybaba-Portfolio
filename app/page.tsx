@@ -32,7 +32,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#0077BE' }}>
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ backgroundColor: '#4DA6FF' }}>
       <div className="w-full max-w-md animate-fade-in">
         {/* Logo/Header */}
         <div className="text-center mb-12">
