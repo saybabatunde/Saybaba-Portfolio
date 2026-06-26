@@ -6,21 +6,22 @@ export default function CICDPipelinePage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'architecture' | 'features' | 'tech'>('overview')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700">
+    <div className="min-h-screen" style={{ backgroundColor: '#1A3A52' }}>
       {/* Header */}
-      <header className="bg-gray-950/80 border-b border-gray-700 sticky top-0 z-50">
+      <header className="sticky top-0 z-50" style={{ backgroundColor: '#8B9FD9', borderBottom: '2px solid #6B87D0' }}>
         <div className="max-w-6xl mx-auto px-4 py-6">
           <button
             onClick={() => window.history.back()}
-            className="text-gray-400 hover:text-white flex items-center gap-2 mb-4"
+            className="flex items-center gap-2 mb-4 font-semibold transition"
+            style={{ color: '#FFFFFF' }}
           >
             ← Back
           </button>
           <div>
-            <h1 className="text-4xl font-bold text-white flex items-center gap-3">
+            <h1 className="text-4xl font-bold flex items-center gap-3" style={{ color: '#FFFFFF' }}>
               <span>🔄</span> CI/CD Pipeline on Azure Kubernetes
             </h1>
-            <p className="text-gray-300 text-lg mt-2">
+            <p className="text-lg mt-2" style={{ color: '#E8EDFF' }}>
               Production-ready DevOps project: GitHub Actions → ACR → AKS → Azure Monitor
             </p>
           </div>
@@ -35,33 +36,35 @@ export default function CICDPipelinePage() {
             href="https://github.com/saybabatunde/azure-k8s-cicd-demo"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gray-800/50 border border-gray-600 rounded-lg p-6 hover:border-blue-500 transition"
+            className="rounded-lg p-6 hover:shadow-lg transition border-2"
+            style={{ backgroundColor: '#2D5A6F', borderColor: '#4A7BA7', color: '#E8EDFF' }}
           >
-            <p className="text-white text-sm mb-2">📦 GitHub Repository</p>
-            <p className="text-white font-semibold">azure-k8s-cicd-demo</p>
-            <p className="text-xs text-gray-500 mt-2">View full source code</p>
+            <p className="text-sm mb-2">📦 GitHub Repository</p>
+            <p className="font-semibold" style={{ color: '#FFFFFF' }}>azure-k8s-cicd-demo</p>
+            <p className="text-xs mt-2" style={{ color: '#B0C4DE' }}>View full source code</p>
           </a>
 
           <a
             href="https://github.com/saybabatunde/azure-k8s-cicd-demo/actions"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gray-800/50 border border-gray-600 rounded-lg p-6 hover:border-green-500 transition"
+            className="rounded-lg p-6 hover:shadow-lg transition border-2"
+            style={{ backgroundColor: '#2D5A6F', borderColor: '#4A7BA7', color: '#E8EDFF' }}
           >
-            <p className="text-white text-sm mb-2">⚡ GitHub Actions</p>
-            <p className="text-white font-semibold">CI/CD Workflows</p>
-            <p className="text-xs text-gray-500 mt-2">Watch builds in real-time</p>
+            <p className="text-sm mb-2">⚡ GitHub Actions</p>
+            <p className="font-semibold" style={{ color: '#FFFFFF' }}>CI/CD Workflows</p>
+            <p className="text-xs mt-2" style={{ color: '#B0C4DE' }}>Watch builds in real-time</p>
           </a>
 
-          <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-6">
-            <p className="text-white text-sm mb-2">🎯 Project Status</p>
-            <p className="text-white font-semibold">5 Phases Complete</p>
-            <p className="text-xs text-green-400 mt-2">✓ Production Ready</p>
+          <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#2D5A6F', borderColor: '#4A7BA7', color: '#E8EDFF' }}>
+            <p className="text-sm mb-2">🎯 Project Status</p>
+            <p className="font-semibold" style={{ color: '#FFFFFF' }}>5 Phases Complete</p>
+            <p className="text-xs mt-2" style={{ color: '#7FFF7F' }}>✓ Production Ready</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="mb-8 border-b border-gray-600">
+        <div className="mb-8" style={{ borderBottom: '2px solid #4A7BA7' }}>
           <div className="flex gap-4 overflow-x-auto">
             {(['overview', 'architecture', 'features', 'tech'] as const).map((tab) => (
               <button
@@ -69,9 +72,13 @@ export default function CICDPipelinePage() {
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-3 font-semibold border-b-2 transition ${
                   activeTab === tab
-                    ? 'text-gray-300 border-blue-500'
-                    : 'text-white border-transparent hover:text-white'
+                    ? 'border-b-2'
+                    : 'border-transparent hover:text-white'
                 }`}
+                style={{
+                  color: activeTab === tab ? '#FFFFFF' : '#B0C4DE',
+                  borderBottomColor: activeTab === tab ? '#8B9FD9' : 'transparent',
+                }}
               >
                 {tab === 'overview' && '📋 Overview'}
                 {tab === 'architecture' && '🏗️ Architecture'}
@@ -83,24 +90,24 @@ export default function CICDPipelinePage() {
         </div>
 
         {/* Tab Content */}
-        <div className="bg-gray-800/50 border border-gray-600 rounded-lg p-8">
+        <div className="rounded-lg p-8 border-2" style={{ backgroundColor: '#2D5A6F', borderColor: '#4A7BA7' }}>
           {/* Overview Tab */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-bold text-white mb-4">Project Overview</h2>
-                <p className="text-white text-lg mb-4">
+                <h2 className="text-2xl font-bold mb-4" style={{ color: '#FFFFFF' }}>Project Overview</h2>
+                <p className="text-lg mb-4" style={{ color: '#E8EDFF' }}>
                   A complete, production-ready CI/CD pipeline demonstrating modern DevOps practices and cloud-native architecture on Azure.
                 </p>
-                <p className="text-white mb-4">
+                <p className="mb-4" style={{ color: '#E8EDFF' }}>
                   This project showcases the entire DevOps lifecycle: from code commit through automated testing, containerization, infrastructure provisioning, Kubernetes orchestration, and observability.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-gray-700/40 rounded-lg p-6 border border-gray-600">
-                  <h3 className="text-lg font-semibold text-gray-300 mb-3">🎯 What It Demonstrates</h3>
-                  <ul className="space-y-2 text-white">
+                <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#1A3A52', borderColor: '#4A7BA7' }}>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: '#B0C4DE' }}>🎯 What It Demonstrates</h3>
+                  <ul className="space-y-2" style={{ color: '#E8EDFF' }}>
                     <li>✓ CI/CD Pipeline automation</li>
                     <li>✓ Infrastructure as Code (Terraform)</li>
                     <li>✓ Container orchestration (Kubernetes)</li>
@@ -110,9 +117,9 @@ export default function CICDPipelinePage() {
                   </ul>
                 </div>
 
-                <div className="bg-gray-700/40 rounded-lg p-6 border border-gray-600">
-                  <h3 className="text-lg font-semibold text-green-400 mb-3">🚀 Key Capabilities</h3>
-                  <ul className="space-y-2 text-white">
+                <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#1A3A52', borderColor: '#4A7BA7' }}>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: '#7FFF7F' }}>🚀 Key Capabilities</h3>
+                  <ul className="space-y-2" style={{ color: '#E8EDFF' }}>
                     <li>✓ Automated code quality checks</li>
                     <li>✓ Multi-stage Docker builds</li>
                     <li>✓ Automatic deployment to K8s</li>
@@ -123,9 +130,9 @@ export default function CICDPipelinePage() {
                 </div>
               </div>
 
-              <div className="bg-gray-700/40 border border-gray-600 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-300 mb-2">💡 Why This Project</h3>
-                <p className="text-white">
+              <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#1A3A52', borderColor: '#4A7BA7' }}>
+                <h3 className="text-lg font-semibold mb-2" style={{ color: '#B0C4DE' }}>💡 Why This Project</h3>
+                <p style={{ color: '#E8EDFF' }}>
                   This project is one of the strongest portfolio pieces for cloud engineering roles because it demonstrates that you can actually build and deploy production systems, not just talk about them. It shows real-world skills that companies need.
                 </p>
               </div>
