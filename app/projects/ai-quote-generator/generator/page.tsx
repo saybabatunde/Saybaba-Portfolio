@@ -203,7 +203,7 @@ export default function GeneratorPage() {
               <button
                 onClick={clearQuote}
                 className="font-semibold py-4 rounded-lg transition flex items-center justify-center gap-2 text-white"
-                style={{ backgroundColor: '#7C3AED' }}
+                style={{ backgroundColor: '#64748B' }}
               >
                 🗑️ Clear
               </button>
@@ -215,21 +215,21 @@ export default function GeneratorPage() {
                 <button
                   onClick={copyToClipboard}
                   className="text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                  style={{ backgroundColor: '#7C3AED' }}
+                  style={{ backgroundColor: '#06B6D4' }}
                 >
                   {copied ? '✓ Copied!' : '📋 Copy'}
                 </button>
                 <button
                   onClick={exportAsImage}
                   className="text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                  style={{ backgroundColor: '#7C3AED' }}
+                  style={{ backgroundColor: '#FB923C' }}
                 >
                   🖼️ Export
                 </button>
                 <button
                   onClick={shareToTwitter}
                   className="text-white font-semibold py-3 rounded-lg transition flex items-center justify-center gap-2"
-                  style={{ backgroundColor: '#7C3AED' }}
+                  style={{ backgroundColor: '#3B82F6' }}
                 >
                   𝕏 Share
                 </button>
