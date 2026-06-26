@@ -86,15 +86,19 @@ export default function AboutMePage() {
               {/* Bio Paragraphs */}
               <div className="space-y-5 border-t pt-6" style={{ borderColor: '#E5E7EB' }}>
                 <p style={{ color: '#374151', lineHeight: '1.7', fontSize: '0.95rem', textAlign: 'justify' }}>
-                  I build secure, automated, cloud-native infrastructure that scales without the chaos. Over seven-plus years, I've architected and operated multi-cloud platforms across Azure and AWS the kind that provision themselves, heal themselves, and tell you something's wrong before it becomes an incident.
+                  I build secure, automated, cloud-native infrastructure that scales without the chaos. Over seven-plus years, I've architected and operated multi-cloud platforms across Azure and AWS the kind that provision themselves, heal themselves, and tell you when something's wrong before it becomes an incident.
                 </p>
 
                 <p style={{ color: '#374151', lineHeight: '1.7', fontSize: '0.95rem', textAlign: 'justify' }}>
-                  My work lives in the cloud and the disciplines that make it dependable: Infrastructure-as-Code, CI/CD, automation, monitoring, identity, and security built on Zero Trust principles. I design environments that are secure by default, automated end to end, and repeatable enough that the right way becomes the easy way. Behind that sits a deep infrastructure foundation of Windows Server, VMware and Hyper-V virtualization, networking, and Active Directory and the production-support instincts you only earn by being the person who gets the 2 a.m. page. It's why my cloud designs hold up under real-world pressure, not just on a whiteboard.
+                  My work lives in the cloud and the disciplines that make it dependable: Infrastructure-as-Code, CI/CD, automation, monitoring, identity, and security built on Zero Trust principles. I design environments that are secure by default, automated end to end, and repeatable enough that the right way becomes the easy way. Behind that sits a deep infrastructure foundation of Windows Server, VMware and Hyper-V virtualization, networking, and Active Directory, and the production-support instincts you only earn by being the person who gets the 2 a.m page. It's why my cloud designs hold up under real-world pressure, not just on a whiteboard.
                 </p>
 
                 <p style={{ color: '#374151', lineHeight: '1.7', fontSize: '0.95rem', textAlign: 'justify' }}>
                   Day to day, I work across Azure, AWS, VMware, Terraform, ARM/Bicep, Ansible, PowerShell, Python, Azure DevOps, GitHub Actions, Intune, and Microsoft Defender. But the tools are just the means. What I care about is the outcome: cutting manual toil, tightening access control, turning fragile setups into self-running systems, and leading VMware-to-Azure migrations that move legacy environments into the cloud without breaking what already works.
+                </p>
+
+                <p style={{ color: '#374151', lineHeight: '1.7', fontSize: '0.95rem', textAlign: 'justify' }}>
+                  Increasingly, that means putting AI to work on the infrastructure itself. I build AI agents and tooling that handle routine ops provisioning access, running simple changes, drafting and reviewing IaC so those tasks don't burn engineering hours, and I use AI daily to reason through harder problems faster: debugging, design trade-offs, and turning messy requirements into working automation. It's the same goal I've always had, just with a sharper tool: let the machine handle the repeatable work so engineers can focus on the decisions that actually need judgment.
                 </p>
 
                 <p style={{ color: '#374151', lineHeight: '1.7', fontSize: '0.95rem', textAlign: 'justify' }}>
