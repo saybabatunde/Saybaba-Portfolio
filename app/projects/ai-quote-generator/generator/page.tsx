@@ -60,8 +60,10 @@ export default function GeneratorPage() {
       }
     } catch (error) {
       console.error('Error generating quote:', error)
-      setQuote('The only way to do great work is to love what you do.')
-      setAuthor('Steve Jobs')
+      const errorMsg = error instanceof Error ? error.message : 'Unknown error'
+      setQuote(`Error: ${errorMsg}`)
+      setAuthor('Check browser console for details')
+      alert(`Quote Generation Failed:\n\n${errorMsg}\n\nMake sure ANTHROPIC_API_KEY is set in Vercel environment variables.`)
     } finally {
       setLoading(false)
     }

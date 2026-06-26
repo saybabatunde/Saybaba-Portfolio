@@ -75,12 +75,17 @@ Make sure the quote is unique and original. Create something new that you haven'
   } catch (error) {
     console.error('Error generating quote:', error)
 
-    // Fallback quote if Claude API fails
-    return NextResponse.json({
-      quote: 'The best time to plant a tree was 20 years ago. The second best time is now.',
-      author: 'Chinese Proverb',
-      theme: 'motivational',
-    })
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    console.error('Error details:', errorMessage)
+
+    return NextResponse.json(
+      {
+        error: 'Failed to generate quote',
+        details: errorMessage,
+        fallback: true,
+      },
+      { status: 500 }
+    )
   }
 }
 
