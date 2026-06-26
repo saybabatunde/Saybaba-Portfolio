@@ -156,15 +156,15 @@ export default function InfrastructureDashboard() {
 
       <main className="max-w-7xl mx-auto px-6 py-12">
         {/* Warning Banner */}
-        <div className="mb-8 rounded-lg p-6" style={{ backgroundColor: '#FEF3C7', borderLeft: '4px solid #F59E0B' }}>
+        <div className="mb-8 rounded-lg p-6" style={{ backgroundColor: '#3BFE4FA', borderLeft: '4px solid #0078D4' }}>
           <div className="flex items-start gap-4">
             <span className="text-3xl">⚠️</span>
             <div>
-              <h3 className="font-bold mb-2" style={{ color: '#92400E' }}>Important: Delete Resources to Avoid Billing</h3>
-              <p className="text-sm mb-3" style={{ color: '#92400E' }}>
+              <h3 className="font-bold mb-2" style={{ color: '#0C4A6E' }}>Important: Delete Resources to Avoid Billing</h3>
+              <p className="text-sm mb-3" style={{ color: '#0C4A6E' }}>
                 Kindly delete the resources created to avoid unexpected charges. Each resource incurs real costs to your Azure subscription.
               </p>
-              <ul className="text-sm space-y-1 list-disc list-inside" style={{ color: '#92400E' }}>
+              <ul className="text-sm space-y-1 list-disc list-inside" style={{ color: '#0C4A6E' }}>
                 <li><strong>⏱️ Auto-delete:</strong> Resources automatically deleted after 1 hour</li>
                 <li><strong>💰 Manual delete:</strong> Click "🗑 Delete Resource" button to delete immediately</li>
                 <li><strong>📧 Notifications:</strong> Email confirmation sent when resource is deleted</li>
