@@ -337,18 +337,19 @@ indicates rapid return on investment.
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen" style={{ backgroundColor: '#F0F9FF' }}>
       {/* Header */}
-      <header className="bg-slate-900 shadow-lg sticky top-0 z-50 border-b border-slate-700">
+      <header className="shadow-lg sticky top-0 z-50" style={{ backgroundColor: '#0E7C86', borderBottom: '3px solid #006B76' }}>
         <div className="max-w-7xl mx-auto px-6 py-8">
           <button
             onClick={() => window.history.back()}
-            className="text-gray-400 hover:text-white flex items-center gap-2 mb-4 font-semibold text-sm"
+            className="flex items-center gap-2 mb-4 font-semibold text-sm transition"
+            style={{ color: '#FFFFFF' }}
           >
             ← Back
           </button>
-          <h1 className="text-4xl font-bold text-white">💰 Cloud Cost ROI Calculator</h1>
-          <p className="text-gray-300 mt-2">Calculate your cloud infrastructure return on investment with precision</p>
+          <h1 className="text-4xl font-bold" style={{ color: '#FFFFFF' }}>💰 Cloud Cost ROI Calculator</h1>
+          <p className="mt-2" style={{ color: '#E0F7FF' }}>Calculate your cloud infrastructure return on investment with precision</p>
         </div>
       </header>
 
@@ -357,12 +358,12 @@ indicates rapid return on investment.
           {/* Input Section */}
           <div className="lg:col-span-1 space-y-6">
             {/* Infrastructure Costs */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-400">
+            <div className="rounded-2xl shadow-lg p-8 border-2" style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86' }}>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gray-500 to-gray-400 flex items-center justify-center text-gray-800 font-bold">1</div>
-                <h2 className="text-xl font-bold text-gray-800">Infrastructure Costs</h2>
+                <div className="w-10 h-10 rounded-lg font-bold flex items-center justify-center text-white" style={{ backgroundColor: '#0E7C86' }}>1</div>
+                <h2 className="text-xl font-bold" style={{ color: '#006B76' }}>Infrastructure Costs</h2>
               </div>
-              <p className="text-sm text-slate-500 mb-6">Monthly costs for cloud resources</p>
+              <p className="text-sm mb-6" style={{ color: '#4A9FA5' }}>Monthly costs for cloud resources</p>
               <div className="space-y-5">
                 {[
                   { label: 'Compute (VMs, etc)', value: monthlyCompute, setter: setMonthlyCompute, icon: '⚙️' },
@@ -371,34 +372,35 @@ indicates rapid return on investment.
                   { label: 'Other', value: monthlyOther, setter: setMonthlyOther, icon: '📦' },
                 ].map((item: { label: string; value: number; setter: (val: number) => void; icon: string }) => (
                   <div key={item.label}>
-                    <label className="text-sm font-semibold text-gray-800 mb-2 block flex items-center gap-2">
+                    <label className="text-sm font-semibold mb-2 block flex items-center gap-2" style={{ color: '#006B76' }}>
                       <span>{item.icon}</span> {item.label}
                     </label>
-                    <div className="flex items-center gap-3 bg-gradient-to-r from-gray-100 to-gray-50 border border-gray-400 rounded-lg px-4 py-3">
-                      <span className="text-slate-500 font-semibold">$</span>
+                    <div className="flex items-center gap-3 border-2 rounded-lg px-4 py-3" style={{ backgroundColor: '#F0F9FF', borderColor: '#4A9FA5' }}>
+                      <span className="font-semibold" style={{ color: '#4A9FA5' }}>$</span>
                       <input
                         type="number"
                         value={item.value}
                         onChange={(e) => item.setter(Number(e.target.value))}
-                        className="flex-1 bg-transparent text-gray-800 font-semibold outline-none"
+                        className="flex-1 bg-transparent font-semibold outline-none"
+                        style={{ color: '#006B76' }}
                       />
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 pt-6 border-t border-gray-400">
-                <p className="text-sm text-gray-800 mb-2">Monthly Total</p>
-                <p className="text-3xl font-bold text-gray-700">${monthlyInfraCost.toLocaleString()}</p>
+              <div className="mt-6 pt-6" style={{ borderTop: '2px solid #4A9FA5' }}>
+                <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Monthly Total</p>
+                <p className="text-3xl font-bold" style={{ color: '#0E7C86' }}>${monthlyInfraCost.toLocaleString()}</p>
               </div>
             </div>
 
             {/* Business Benefits */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-400">
+            <div className="rounded-2xl shadow-lg p-8 border-2" style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86' }}>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-gray-500 to-gray-400 flex items-center justify-center text-gray-800 font-bold">2</div>
-                <h2 className="text-xl font-bold text-gray-800">Business Benefits</h2>
+                <div className="w-10 h-10 rounded-lg font-bold flex items-center justify-center text-white" style={{ backgroundColor: '#0E7C86' }}>2</div>
+                <h2 className="text-xl font-bold" style={{ color: '#006B76' }}>Business Benefits</h2>
               </div>
-              <p className="text-sm text-slate-500 mb-6">Monthly value generated</p>
+              <p className="text-sm mb-6" style={{ color: '#4A9FA5' }}>Monthly value generated</p>
               <div className="space-y-5">
                 {[
                   { label: 'Revenue Increase', value: revenueIncrease, setter: setRevenueIncrease, icon: '📈' },
@@ -406,37 +408,38 @@ indicates rapid return on investment.
                   { label: 'Productivity Gain', value: productivityGain, setter: setProductivityGain, icon: '⚡' },
                 ].map((item: { label: string; value: number; setter: (val: number) => void; icon: string }) => (
                   <div key={item.label}>
-                    <label className="text-sm font-semibold text-gray-800 mb-2 block flex items-center gap-2">
+                    <label className="text-sm font-semibold mb-2 block flex items-center gap-2" style={{ color: '#006B76' }}>
                       <span>{item.icon}</span> {item.label}
                     </label>
-                    <div className="flex items-center gap-3 bg-gradient-to-r from-gray-100 to-gray-50 border border-gray-300 rounded-lg px-4 py-3">
-                      <span className="text-slate-500 font-semibold">$</span>
+                    <div className="flex items-center gap-3 border-2 rounded-lg px-4 py-3" style={{ backgroundColor: '#F0F9FF', borderColor: '#4A9FA5' }}>
+                      <span className="font-semibold" style={{ color: '#4A9FA5' }}>$</span>
                       <input
                         type="number"
                         value={item.value}
                         onChange={(e) => item.setter(Number(e.target.value))}
-                        className="flex-1 bg-transparent text-gray-800 font-semibold outline-none"
+                        className="flex-1 bg-transparent font-semibold outline-none"
+                        style={{ color: '#006B76' }}
                       />
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 pt-6 border-t border-gray-300">
-                <p className="text-sm text-gray-800 mb-2">Monthly Total</p>
-                <p className="text-3xl font-bold text-cyan-600">${monthlyBenefit.toLocaleString()}</p>
+              <div className="mt-6 pt-6" style={{ borderTop: '2px solid #4A9FA5' }}>
+                <p className="text-sm mb-2" style={{ color: '#6B7280' }}>Monthly Total</p>
+                <p className="text-3xl font-bold" style={{ color: '#0E7C86' }}>${monthlyBenefit.toLocaleString()}</p>
               </div>
             </div>
 
             {/* Analysis Period */}
-            <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-400">
+            <div className="rounded-2xl shadow-lg p-8 border-2" style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86' }}>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-sky-600 to-blue-600 flex items-center justify-center text-gray-800 font-bold">3</div>
-                <h2 className="text-xl font-bold text-gray-800">Analysis Period</h2>
+                <div className="w-10 h-10 rounded-lg font-bold flex items-center justify-center text-white" style={{ backgroundColor: '#0E7C86' }}>3</div>
+                <h2 className="text-xl font-bold" style={{ color: '#006B76' }}>Analysis Period</h2>
               </div>
-              <p className="text-sm text-slate-500 mb-6">Select timeframe for ROI analysis</p>
+              <p className="text-sm mb-6" style={{ color: '#4A9FA5' }}>Select timeframe for ROI analysis</p>
               <div className="flex items-center justify-between mb-4">
-                <span className="text-sm font-semibold text-gray-800">Years: </span>
-                <span className="text-3xl font-bold text-cyan-700">{years}</span>
+                <span className="text-sm font-semibold" style={{ color: '#006B76' }}>Years: </span>
+                <span className="text-3xl font-bold" style={{ color: '#0E7C86' }}>{years}</span>
               </div>
               <input
                 type="range"
@@ -444,7 +447,8 @@ indicates rapid return on investment.
                 max="5"
                 value={years}
                 onChange={(e) => setYears(Number(e.target.value))}
-                className="w-full h-2 bg-sky-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                className="w-full h-2 rounded-lg appearance-none cursor-pointer"
+                style={{ backgroundColor: '#E0F7FF', accentColor: '#0E7C86' }}
               />
               <div className="flex justify-between text-xs text-slate-500 mt-3">
                 <span>1 year</span>
