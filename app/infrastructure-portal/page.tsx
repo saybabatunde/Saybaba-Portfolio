@@ -76,160 +76,288 @@ export default function InfrastructurePortal() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
-      <header className="bg-slate-900 border-b border-cyan-500 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
-          <Link
-            href="/infrastructure-portal/dashboard"
-            className="text-blue-400 hover:text-blue-300 font-semibold transition duration-200 flex items-center gap-2"
-          >
-            ← View My Resources
-          </Link>
+    <div className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
+      {/* Header */}
+      <header className="sticky top-0 z-50" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }}>
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <div>
+            <Link
+              href="/infrastructure-portal/dashboard"
+              className="font-semibold transition duration-200 flex items-center gap-2"
+              style={{ color: '#0078D4' }}
+            >
+              ← View My Resources
+            </Link>
+          </div>
           <Link
             href="/dashboard"
-            className="text-gray-400 hover:text-gray-300 font-semibold transition duration-200 flex items-center gap-2 text-sm"
+            className="font-semibold transition duration-200 flex items-center gap-2 text-sm"
+            style={{ color: '#6B7280' }}
           >
             Back to Main Dashboard
           </Link>
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-4 py-12">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Infrastructure Request Portal</h1>
-          <p className="text-gray-300 text-lg">
-            Request Azure infrastructure. Select your requirements below, review the cost, and submit for approval.
+      <main className="max-w-6xl mx-auto px-6 py-12">
+        {/* Page Header */}
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold mb-2" style={{ color: '#111827' }}>Create Virtual Machine</h1>
+          <p className="text-lg" style={{ color: '#6B7280' }}>
+            Configure your Azure infrastructure. Choose VM size, region, and compliance level.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8 bg-slate-900 rounded-lg border border-cyan-500 p-8">
-          {/* VM Size Selection */}
-          <div>
-            <label className="block text-white font-semibold mb-4">Virtual Machine Size</label>
-            <div className="space-y-3">
-              {VM_SIZES.map((vm) => (
-                <label key={vm.id} className="flex items-center p-4 border border-gray-600 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                  <input
-                    type="radio"
-                    name="vmSize"
-                    value={vm.id}
-                    checked={vmSize === vm.id}
-                    onChange={(e) => setVmSize(e.target.value)}
-                    className="w-4 h-4 mr-4"
-                  />
-                  <div className="flex-1">
-                    <p className="text-white font-medium">{vm.name}</p>
-                    <p className="text-gray-400 text-sm">
-                      {vm.free ? '✅ Free for 12 months, then ' : ''}${vm.monthlyCost}/month
-                    </p>
-                  </div>
-                </label>
-              ))}
-            </div>
-          </div>
+        <div className="grid grid-cols-3 gap-8">
+          {/* Main Form - Left Side */}
+          <form onSubmit={handleSubmit} className="col-span-2 space-y-8">
+            {/* VM Size Section */}
+            <div className="rounded-lg" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }} className="p-6">
+              <h2 className="text-2xl font-bold mb-2" style={{ color: '#111827' }}>
+                Instance Details
+              </h2>
+              <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
+                Choose the virtual machine size that fits your workload requirements.
+              </p>
 
-          {/* Region Selection */}
-          <div>
-            <label className="block text-white font-semibold mb-4">Region</label>
-            <select
-              value={region}
-              onChange={(e) => setRegion(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-800 border border-gray-600 rounded-lg text-white focus:outline-none focus:border-cyan-400"
+              <label className="block font-bold mb-4" style={{ color: '#111827' }}>
+                Virtual Machine Size
+              </label>
+              <div className="space-y-3">
+                {VM_SIZES.map((vm) => (
+                  <label
+                    key={vm.id}
+                    className="flex items-center p-4 border-2 rounded-lg cursor-pointer transition"
+                    style={{
+                      backgroundColor: vmSize === vm.id ? '#E0F2FE' : '#FFFFFF',
+                      borderColor: vmSize === vm.id ? '#0078D4' : '#E5E7EB',
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name="vmSize"
+                      value={vm.id}
+                      checked={vmSize === vm.id}
+                      onChange={(e) => setVmSize(e.target.value)}
+                      className="w-4 h-4 mr-4"
+                    />
+                    <div className="flex-1">
+                      <p className="font-bold" style={{ color: '#111827' }}>
+                        {vm.name}
+                      </p>
+                      <p className="text-sm" style={{ color: '#6B7280' }}>
+                        {vm.free ? '✅ Free for 12 months, then ' : ''}${vm.monthlyCost}/month
+                      </p>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Region Section */}
+            <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }}>
+              <h2 className="text-2xl font-bold mb-2" style={{ color: '#111827' }}>
+                Geography
+              </h2>
+              <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
+                Select the Azure region where your resources will be deployed.
+              </p>
+
+              <label className="block font-bold mb-4" style={{ color: '#111827' }}>
+                Region
+              </label>
+              <select
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+                className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderColor: '#E5E7EB',
+                  color: '#111827',
+                }}
+              >
+                {REGIONS.map((r) => (
+                  <option key={r.id} value={r.id}>
+                    {r.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Compliance Section */}
+            <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }}>
+              <h2 className="text-2xl font-bold mb-2" style={{ color: '#111827' }}>
+                Compliance & Services
+              </h2>
+              <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
+                Select your compliance level. Additional services will be added based on requirements.
+              </p>
+
+              <label className="block font-bold mb-4" style={{ color: '#111827' }}>
+                Workload Level
+              </label>
+              <div className="space-y-3">
+                {COMPLIANCE_LEVELS.map((level) => (
+                  <label
+                    key={level.id}
+                    className="flex items-start p-4 border-2 rounded-lg cursor-pointer transition"
+                    style={{
+                      backgroundColor: complianceLevel === level.id ? '#E0F2FE' : '#FFFFFF',
+                      borderColor: complianceLevel === level.id ? '#0078D4' : '#E5E7EB',
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name="complianceLevel"
+                      value={level.id}
+                      checked={complianceLevel === level.id}
+                      onChange={(e) => setComplianceLevel(e.target.value)}
+                      className="w-4 h-4 mr-4 mt-1"
+                    />
+                    <div className="flex-1">
+                      <p className="font-bold" style={{ color: '#111827' }}>
+                        {level.name}
+                      </p>
+                      <p className="text-sm" style={{ color: '#6B7280' }}>
+                        {level.description}
+                      </p>
+                      <p className="text-sm font-semibold mt-2" style={{ color: '#0078D4' }}>
+                        +${COMPLIANCE_COST[level.id as keyof typeof COMPLIANCE_COST]}/month
+                      </p>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Notification Section */}
+            <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }}>
+              <h2 className="text-2xl font-bold mb-2" style={{ color: '#111827' }}>
+                Notification
+              </h2>
+              <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
+                We'll send deployment confirmation and access details to your email.
+              </p>
+
+              <label className="block font-bold mb-2" style={{ color: '#111827' }}>
+                Email Address
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="your@email.com"
+                className="w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderColor: '#E5E7EB',
+                  color: '#111827',
+                }}
+              />
+              <p className="text-sm mt-2" style={{ color: '#6B7280' }}>
+                Confirmation and deployment details will be sent here
+              </p>
+            </div>
+
+            {error && (
+              <div className="rounded-lg border-l-4 border-red-500 p-4" style={{ backgroundColor: '#FEF2F2', color: '#991B1B' }}>
+                <p className="font-semibold">{error}</p>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading || !email}
+              className="w-full font-bold py-3 px-6 rounded-lg transition duration-200 text-white text-lg"
+              style={{
+                backgroundColor: loading || !email ? '#D1D5DB' : '#0078D4',
+              }}
             >
-              {REGIONS.map((r) => (
-                <option key={r.id} value={r.id}>
-                  {r.name}
-                </option>
-              ))}
-            </select>
-          </div>
+              {loading ? 'Submitting...' : 'Review & Approve →'}
+            </button>
+          </form>
 
-          {/* Compliance Level */}
+          {/* Cost Summary - Right Sidebar */}
           <div>
-            <label className="block text-white font-semibold mb-4">Compliance & Workload Level</label>
-            <div className="space-y-3">
-              {COMPLIANCE_LEVELS.map((level) => (
-                <label key={level.id} className="flex items-start p-4 border border-gray-600 rounded-lg cursor-pointer hover:bg-slate-800 transition">
-                  <input
-                    type="radio"
-                    name="complianceLevel"
-                    value={level.id}
-                    checked={complianceLevel === level.id}
-                    onChange={(e) => setComplianceLevel(e.target.value)}
-                    className="w-4 h-4 mr-4 mt-1"
-                  />
-                  <div className="flex-1">
-                    <p className="text-white font-medium">{level.name}</p>
-                    <p className="text-gray-400 text-sm">{level.description}</p>
-                    <p className="text-cyan-400 text-sm mt-1">
-                      +${COMPLIANCE_COST[level.id as keyof typeof COMPLIANCE_COST]}/month
-                    </p>
-                  </div>
-                </label>
-              ))}
+            <div className="rounded-lg p-6 sticky top-20" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #10B981' }}>
+              <h3 className="text-2xl font-bold mb-6" style={{ color: '#111827' }}>
+                Estimated Cost
+              </h3>
+
+              <div className="space-y-4 mb-6" style={{ borderBottom: '1px solid #E5E7EB', paddingBottom: '1.5rem' }}>
+                <div className="flex justify-between">
+                  <span style={{ color: '#6B7280' }}>Virtual Machine (B1s)</span>
+                  <span className="font-bold" style={{ color: '#111827' }}>
+                    ${vmCost.toFixed(2)}/mo
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span style={{ color: '#6B7280' }}>Compliance Services</span>
+                  <span className="font-bold" style={{ color: '#111827' }}>
+                    ${complianceCost.toFixed(2)}/mo
+                  </span>
+                </div>
+              </div>
+
+              <div className="mb-6 pb-6" style={{ borderBottom: '1px solid #E5E7EB' }}>
+                <div className="flex justify-between items-center">
+                  <span className="text-lg font-bold" style={{ color: '#111827' }}>
+                    Total Monthly
+                  </span>
+                  <span
+                    className="text-2xl font-bold"
+                    style={{ color: isFree12Months ? '#10B981' : '#0078D4' }}
+                  >
+                    {isFree12Months ? '✅ $0' : `$${totalMonthlyCost.toFixed(2)}`}
+                  </span>
+                </div>
+              </div>
+
+              {isFree12Months && (
+                <div className="rounded p-3 mb-6" style={{ backgroundColor: '#DCFCE7', borderLeft: '4px solid #10B981' }}>
+                  <p className="text-sm font-semibold" style={{ color: '#166534' }}>
+                    ✅ Free for 12 months
+                  </p>
+                  <p className="text-xs mt-1" style={{ color: '#166534' }}>
+                    This selection qualifies for the Azure free tier. After 12 months, standard rates apply.
+                  </p>
+                </div>
+              )}
+
+              <div className="rounded p-4" style={{ backgroundColor: '#F0F9FF' }}>
+                <p className="text-xs" style={{ color: '#1E40AF' }}>
+                  💡 <span className="font-semibold">Tip:</span> You can delete resources anytime to stop charges.
+                </p>
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Email */}
-          <div>
-            <label className="block text-white font-semibold mb-2">Email Address</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="your@email.com"
-              className="w-full px-4 py-3 bg-slate-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400"
-            />
-            <p className="text-gray-400 text-sm mt-2">Confirmation and deployment details will be sent here</p>
+        {/* About Section */}
+        <div className="mt-12 rounded-lg p-8" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }}>
+          <h3 className="text-2xl font-bold mb-4" style={{ color: '#111827' }}>
+            ℹ️ How This Works
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {[
+              { num: '1️⃣', title: 'Select Configuration', desc: 'Choose VM size, region, and compliance' },
+              { num: '2️⃣', title: 'Review Estimate', desc: 'See cost breakdown before approval' },
+              { num: '3️⃣', title: 'Auto Provision', desc: 'Terraform deploys your infrastructure' },
+              { num: '4️⃣', title: 'Access Resources', desc: 'View deployed resources in dashboard' },
+              { num: '5️⃣', title: 'Manage Anytime', desc: 'Delete to stop costs (30-day cleanup)' },
+            ].map((step, i) => (
+              <div key={i}>
+                <p className="text-2xl mb-2">{step.num}</p>
+                <p className="font-bold mb-1" style={{ color: '#111827' }}>
+                  {step.title}
+                </p>
+                <p className="text-sm" style={{ color: '#6B7280' }}>
+                  {step.desc}
+                </p>
+              </div>
+            ))}
           </div>
-
-          {/* Cost Summary */}
-          <div className="bg-slate-800 border border-cyan-400 rounded-lg p-6">
-            <h3 className="text-white font-bold mb-4">Cost Summary</h3>
-            <div className="space-y-2 mb-4 text-white">
-              <div className="flex justify-between">
-                <span>Virtual Machine:</span>
-                <span>${vmCost.toFixed(2)}/month</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Compliance + Services:</span>
-                <span>${complianceCost.toFixed(2)}/month</span>
-              </div>
-              <div className="border-t border-gray-600 pt-2 mt-2 flex justify-between font-bold text-lg">
-                <span>Total Monthly Cost:</span>
-                <span className={isFree12Months ? 'text-green-400' : 'text-cyan-400'}>
-                  {isFree12Months ? '✅ $0 (Free Tier)' : `$${totalMonthlyCost.toFixed(2)}`}
-                </span>
-              </div>
-            </div>
-            <p className="text-gray-400 text-sm">
-              {isFree12Months
-                ? 'Your selection qualifies for Azure free tier for 12 months. After that, costs apply.'
-                : 'Costs apply immediately. You can delete resources anytime.'}
-            </p>
-          </div>
-
-          {error && <div className="bg-red-900/50 border border-red-500 text-red-300 px-4 py-3 rounded-lg">{error}</div>}
-
-          <button
-            type="submit"
-            disabled={loading || !email}
-            className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200"
-          >
-            {loading ? 'Submitting...' : 'Review & Approve →'}
-          </button>
-        </form>
-
-        <div className="mt-12 bg-blue-900/20 border border-blue-500 rounded-lg p-6 text-blue-100">
-          <h3 className="font-bold mb-2">About This Portal</h3>
-          <ul className="list-disc list-inside space-y-1 text-sm">
-            <li>Select infrastructure requirements (VM size, region, compliance level)</li>
-            <li>Review cost estimate before approval</li>
-            <li>Infrastructure provisioned automatically via Terraform</li>
-            <li>Access deployed resources in your dashboard</li>
-            <li>Delete anytime to stop costs (30-day auto-cleanup available)</li>
-          </ul>
         </div>
       </main>
     </div>
