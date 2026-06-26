@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 
-const client = new Anthropic()
-
 const THEME_PROMPTS: Record<string, string> = {
   motivational: 'Generate an inspiring and motivational quote that encourages personal growth, perseverance, and achieving goals. Make it original and impactful.',
   business: 'Generate a professional and insightful business quote about leadership, entrepreneurship, innovation, or success. Make it thought-provoking and actionable.',
@@ -31,6 +29,13 @@ export async function POST(request: NextRequest) {
     }
 
     const themePrompt = THEME_PROMPTS[theme] || THEME_PROMPTS.motivational
+
+    const apiKey = process.env.ANTHROPIC_API_KEY
+    if (!apiKey) {
+      throw new Error('ANTHROPIC_API_KEY environment variable is not set')
+    }
+
+    const client = new Anthropic({ apiKey })
 
     const message = await client.messages.create({
       model: 'claude-opus-4-8',
