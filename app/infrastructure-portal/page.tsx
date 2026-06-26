@@ -112,7 +112,7 @@ export default function InfrastructurePortal() {
           {/* Main Form - Left Side */}
           <form onSubmit={handleSubmit} className="col-span-2 space-y-8">
             {/* VM Size Section */}
-            <div className="rounded-lg" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }} className="p-6">
+            <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }}>
               <h2 className="text-2xl font-bold mb-2" style={{ color: '#111827' }}>
                 Instance Details
               </h2>
