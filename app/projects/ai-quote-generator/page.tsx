@@ -7,21 +7,22 @@ export default function AIQuoteGeneratorPage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'features' | 'tech'>('overview')
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen" style={{ backgroundColor: '#F0F9FF' }}>
       {/* Header */}
-      <header className="bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
+      <header className="sticky top-0 z-50" style={{ backgroundColor: '#0E7C86', borderBottom: '3px solid #006B76' }}>
         <div className="max-w-6xl mx-auto px-4 py-6">
           <button
             onClick={() => window.history.back()}
-            className="text-gray-400 hover:text-white flex items-center gap-2 mb-4"
+            className="flex items-center gap-2 mb-4 font-semibold transition"
+            style={{ color: '#FFFFFF' }}
           >
             ← Back
           </button>
           <div>
-            <h1 className="text-4xl font-bold text-white flex items-center gap-3">
+            <h1 className="text-4xl font-bold flex items-center gap-3" style={{ color: '#FFFFFF' }}>
               <span>✨</span> AI-Powered Quote Generator
             </h1>
-            <p className="text-gray-300 text-lg mt-2">
+            <p className="text-lg mt-2" style={{ color: '#E0F7FF' }}>
               Generate unique quotes with Claude AI • Select themes • Save & export • Built with Claude API
             </p>
           </div>
@@ -34,43 +35,45 @@ export default function AIQuoteGeneratorPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
           <Link
             href="/projects/ai-quote-generator/generator"
-            className="bg-white border border-gray-400 rounded-lg p-6 hover:border-blue-500 transition"
+            className="rounded-lg p-6 hover:shadow-lg transition border-2"
+            style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86', color: '#0E7C86' }}
           >
-            <p className="text-gray-800 text-sm mb-2">🚀 Open Generator</p>
-            <p className="text-gray-800 font-semibold">Start Generating</p>
-            <p className="text-xs text-gray-500 mt-2">Interactive quote generator</p>
+            <p className="text-sm mb-2">🚀 Open Generator</p>
+            <p className="font-semibold" style={{ color: '#006B76' }}>Start Generating</p>
+            <p className="text-xs mt-2" style={{ color: '#4A9FA5' }}>Interactive quote generator</p>
           </Link>
 
           <a
             href="https://github.com/saybabatunde/ai-quote-generator"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white border border-gray-400 rounded-lg p-6 hover:border-green-500 transition"
+            className="rounded-lg p-6 hover:shadow-lg transition border-2"
+            style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86', color: '#0E7C86' }}
           >
-            <p className="text-gray-800 text-sm mb-2">📦 GitHub</p>
-            <p className="text-gray-800 font-semibold">View Source</p>
-            <p className="text-xs text-gray-500 mt-2">Full code + documentation</p>
+            <p className="text-sm mb-2">📦 GitHub</p>
+            <p className="font-semibold" style={{ color: '#006B76' }}>View Source</p>
+            <p className="text-xs mt-2" style={{ color: '#4A9FA5' }}>Full code + documentation</p>
           </a>
 
-          <div className="bg-white border border-gray-400 rounded-lg p-6">
-            <p className="text-gray-800 text-sm mb-2">🤖 AI Engine</p>
-            <p className="text-gray-800 font-semibold">Claude API</p>
-            <p className="text-xs text-green-400 mt-2">✓ AI-Generated Content</p>
+          <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86', color: '#0E7C86' }}>
+            <p className="text-sm mb-2">🤖 AI Engine</p>
+            <p className="font-semibold" style={{ color: '#006B76' }}>Claude API</p>
+            <p className="text-xs mt-2" style={{ color: '#10B981' }}>✓ AI-Generated Content</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="mb-8 border-b border-slate-700">
+        <div className="mb-8" style={{ borderBottom: '2px solid #0E7C86' }}>
           <div className="flex gap-4 overflow-x-auto">
             {(['overview', 'features', 'tech'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-3 font-semibold border-b-2 transition ${
-                  activeTab === tab
-                    ? 'text-white border-blue-500'
-                    : 'text-gray-300 border-transparent hover:text-white'
-                }`}
+                className={`px-4 py-3 font-semibold border-b-2 transition`}
+                style={{
+                  color: activeTab === tab ? '#0E7C86' : '#4A9FA5',
+                  borderBottomColor: activeTab === tab ? '#0E7C86' : 'transparent',
+                }}
               >
                 {tab === 'overview' && '📋 Overview'}
                 {tab === 'features' && '✨ Features'}
@@ -81,24 +84,24 @@ export default function AIQuoteGeneratorPage() {
         </div>
 
         {/* Tab Content */}
-        <div className="bg-white border border-gray-400 rounded-lg p-8">
+        <div className="rounded-lg p-8 border-2" style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86' }}>
           {/* Overview Tab */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">About This Project</h2>
-                <p className="text-gray-800 text-lg mb-4">
+                <h2 className="text-2xl font-bold mb-4" style={{ color: '#006B76' }}>About This Project</h2>
+                <p className="text-lg mb-4" style={{ color: '#1A5A63' }}>
                   An intelligent quote generator powered by Claude AI. Users select themes and receive uniquely generated quotes instantly, with options to save favorites and export as images.
                 </p>
-                <p className="text-gray-800 mb-4">
+                <p className="mb-4" style={{ color: '#1A5A63' }}>
                   This project showcases integration with Claude API and demonstrates real-world AI application development with a polished, professional user interface.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-lg p-6 border border-gray-400">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-3">🎯 Use Cases</h3>
-                  <ul className="space-y-2 text-gray-800">
+                <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#F0F9FF', borderColor: '#0E7C86' }}>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: '#006B76' }}>🎯 Use Cases</h3>
+                  <ul className="space-y-2" style={{ color: '#1A5A63' }}>
                     <li>✓ Daily inspiration</li>
                     <li>✓ Content creation</li>
                     <li>✓ Social media sharing</li>
@@ -106,9 +109,9 @@ export default function AIQuoteGeneratorPage() {
                   </ul>
                 </div>
 
-                <div className="bg-white rounded-lg p-6 border border-gray-400">
-                  <h3 className="text-lg font-semibold text-green-400 mb-3">💡 Key Capability</h3>
-                  <ul className="space-y-2 text-gray-800">
+                <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#F0F9FF', borderColor: '#0E7C86' }}>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: '#10B981' }}>💡 Key Capability</h3>
+                  <ul className="space-y-2" style={{ color: '#1A5A63' }}>
                     <li>✓ AI-generated unique content</li>
                     <li>✓ Theme-based customization</li>
                     <li>✓ Save & organize favorites</li>
@@ -117,9 +120,9 @@ export default function AIQuoteGeneratorPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-900/20 border border-gray-400 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-300 mb-2">🤖 Claude API Integration</h3>
-                <p className="text-gray-800">
+              <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#E0F7FF', borderColor: '#0E7C86' }}>
+                <h3 className="text-lg font-semibold mb-2" style={{ color: '#006B76' }}>🤖 Claude API Integration</h3>
+                <p style={{ color: '#1A5A63' }}>
                   Demonstrates practical Claude API usage for content generation. Shows how to integrate AI language models into production applications with prompt engineering and real-time generation.
                 </p>
               </div>
