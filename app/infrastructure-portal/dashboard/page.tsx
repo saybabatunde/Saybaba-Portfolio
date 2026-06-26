@@ -115,34 +115,38 @@ export default function InfrastructureDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
-      <header className="bg-slate-900 border-b border-cyan-500 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="min-h-screen" style={{ backgroundColor: '#F5F5F5' }}>
+      {/* Header */}
+      <header className="sticky top-0 z-50" style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }}>
+        <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center mb-4">
             <Link
               href="/dashboard"
-              className="text-gray-400 hover:text-gray-300 font-semibold transition duration-200 flex items-center gap-2 text-sm"
+              className="font-semibold transition duration-200 flex items-center gap-2 text-sm"
+              style={{ color: '#0078D4' }}
             >
               ← Main Portfolio
             </Link>
             <Link
               href="/infrastructure-portal"
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+              className="font-semibold py-2 px-4 rounded-lg transition duration-200 text-white"
+              style={{ backgroundColor: '#10B981' }}
             >
               + Request Infrastructure
             </Link>
           </div>
 
-          {/* Infrastructure Dashboard Navigation */}
-          <div className="flex items-center gap-3 bg-cyan-900/30 border border-cyan-600 rounded-lg p-3">
-            <span className="text-cyan-400 text-2xl">📊</span>
-            <div className="flex-1">
-              <h2 className="text-white font-bold text-lg">Infrastructure Dashboard</h2>
-              <p className="text-gray-400 text-xs">Manage your deployed Azure resources</p>
+          {/* Dashboard Header */}
+          <div className="flex items-center gap-4">
+            <span className="text-3xl">📊</span>
+            <div>
+              <h2 className="text-2xl font-bold" style={{ color: '#111827' }}>Infrastructure Dashboard</h2>
+              <p className="text-sm" style={{ color: '#6B7280' }}>Manage your deployed Azure resources</p>
             </div>
             <button
               onClick={() => window.location.href = '/infrastructure-portal/dashboard'}
-              className="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 text-sm"
+              className="ml-auto font-semibold py-2 px-4 rounded-lg transition duration-200 text-white"
+              style={{ backgroundColor: '#0078D4' }}
             >
               ↻ Refresh
             </button>
@@ -150,17 +154,17 @@ export default function InfrastructureDashboard() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-12">
+      <main className="max-w-7xl mx-auto px-6 py-12">
         {/* Warning Banner */}
-        <div className="mb-8 bg-red-900/30 border-l-4 border-red-600 rounded-lg p-6">
+        <div className="mb-8 rounded-lg p-6" style={{ backgroundColor: '#FEF3C7', borderLeft: '4px solid #F59E0B' }}>
           <div className="flex items-start gap-4">
             <span className="text-3xl">⚠️</span>
             <div>
-              <h3 className="text-xl font-bold text-red-300 mb-2">Important: Delete Resources to Avoid Billing</h3>
-              <p className="text-red-200 mb-3">
+              <h3 className="font-bold mb-2" style={{ color: '#92400E' }}>Important: Delete Resources to Avoid Billing</h3>
+              <p className="text-sm mb-3" style={{ color: '#92400E' }}>
                 Kindly delete the resources created to avoid unexpected charges. Each resource incurs real costs to your Azure subscription.
               </p>
-              <ul className="text-red-200 text-sm space-y-1 list-disc list-inside">
+              <ul className="text-sm space-y-1 list-disc list-inside" style={{ color: '#92400E' }}>
                 <li><strong>⏱️ Auto-delete:</strong> Resources automatically deleted after 1 hour</li>
                 <li><strong>💰 Manual delete:</strong> Click "🗑 Delete Resource" button to delete immediately</li>
                 <li><strong>📧 Notifications:</strong> Email confirmation sent when resource is deleted</li>
@@ -169,42 +173,37 @@ export default function InfrastructureDashboard() {
           </div>
         </div>
 
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Infrastructure Dashboard</h1>
-          <p className="text-gray-300">Manage your deployed Azure resources and monitor costs</p>
-        </div>
-
-        {/* Cost Summary */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <div className="bg-slate-900 border border-cyan-500 rounded-lg p-6">
-            <p className="text-gray-400 text-sm mb-2">Total Resources</p>
-            <p className="text-4xl font-bold text-cyan-400">{resources.length}</p>
-            <p className="text-gray-500 text-xs mt-2">Active deployments</p>
+        {/* Cost Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }}>
+            <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Total Resources</p>
+            <p className="text-4xl font-bold" style={{ color: '#0078D4' }}>{resources.length}</p>
+            <p className="text-xs mt-2" style={{ color: '#6B7280' }}>Active deployments</p>
           </div>
 
-          <div className="bg-slate-900 border border-green-500 rounded-lg p-6">
-            <p className="text-gray-400 text-sm mb-2">Monthly Cost</p>
-            <p className="text-4xl font-bold text-green-400">${totalCost.toFixed(2)}</p>
-            <p className="text-gray-500 text-xs mt-2">Estimated total</p>
+          <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #10B981' }}>
+            <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Monthly Cost</p>
+            <p className="text-4xl font-bold" style={{ color: '#10B981' }}>${totalCost.toFixed(2)}</p>
+            <p className="text-xs mt-2" style={{ color: '#6B7280' }}>Estimated total</p>
           </div>
 
-          <div className="bg-slate-900 border border-blue-500 rounded-lg p-6">
-            <p className="text-gray-400 text-sm mb-2">Budget Alert</p>
-            <p className="text-4xl font-bold text-blue-400">$50</p>
-            <p className="text-gray-500 text-xs mt-2">Monthly limit</p>
+          <div className="rounded-lg p-6" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #F59E0B' }}>
+            <p className="text-sm font-semibold mb-2" style={{ color: '#6B7280' }}>Budget Alert</p>
+            <p className="text-4xl font-bold" style={{ color: '#F59E0B' }}>$50</p>
+            <p className="text-xs mt-2" style={{ color: '#6B7280' }}>Monthly limit</p>
           </div>
         </div>
 
         {error && (
-          <div className="bg-red-900/50 border border-red-500 text-red-300 px-6 py-4 rounded-lg mb-8">
-            {error}
+          <div className="rounded-lg border-l-4 border-red-500 p-6 mb-8" style={{ backgroundColor: '#FEE2E2', color: '#991B1B' }}>
+            <p className="font-semibold">{error}</p>
           </div>
         )}
 
         {!email ? (
-          <div className="bg-slate-900 rounded-lg border border-gray-600 p-12">
-            <h2 className="text-2xl font-bold text-white mb-6">Enter Your Email</h2>
-            <p className="text-gray-300 mb-6">Enter the email you used to request infrastructure to view your resources:</p>
+          <div className="rounded-lg p-12" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }}>
+            <h2 className="text-2xl font-bold mb-6" style={{ color: '#111827' }}>Enter Your Email</h2>
+            <p className="mb-6" style={{ color: '#6B7280' }}>Enter the email you used to request infrastructure to view your resources:</p>
 
             <div className="flex gap-4">
               <input
@@ -212,7 +211,12 @@ export default function InfrastructureDashboard() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="flex-1 px-4 py-3 bg-slate-800 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400"
+                className="flex-1 px-4 py-3 border-2 rounded-lg focus:outline-none transition"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                  borderColor: '#E5E7EB',
+                  color: '#111827',
+                }}
               />
               <button
                 onClick={() => {
@@ -221,7 +225,8 @@ export default function InfrastructureDashboard() {
                     fetchResources(email)
                   }
                 }}
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition"
+                className="font-bold py-3 px-6 rounded-lg transition text-white"
+                style={{ backgroundColor: '#0078D4' }}
               >
                 Load Resources
               </button>
@@ -229,14 +234,15 @@ export default function InfrastructureDashboard() {
           </div>
         ) : loading ? (
           <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">Loading resources...</p>
+            <p style={{ color: '#6B7280' }} className="text-lg">Loading resources...</p>
           </div>
         ) : resources.length === 0 ? (
-          <div className="bg-slate-900 rounded-lg border border-gray-600 p-12 text-center">
-            <p className="text-gray-400 text-lg mb-6">No deployed resources yet</p>
+          <div className="rounded-lg p-12 text-center" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }}>
+            <p className="text-lg mb-6" style={{ color: '#6B7280' }}>No deployed resources yet</p>
             <Link
               href="/infrastructure-portal"
-              className="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200"
+              className="inline-block font-semibold py-3 px-6 rounded-lg transition duration-200 text-white"
+              style={{ backgroundColor: '#10B981' }}
             >
               Request Infrastructure →
             </Link>
@@ -244,52 +250,68 @@ export default function InfrastructureDashboard() {
         ) : (
           <div className="space-y-6">
             {resources.map((resource) => {
-              const daysRemaining = calculateDaysRemaining(resource.expires_at)
-              const isExpiringSoon = daysRemaining <= 5
+              const minutesRemaining = calculateTimeUntilAutoDelete(resource.created_at)
 
               return (
-                <div key={resource.id} className="bg-slate-900 rounded-lg border border-cyan-500 p-6 hover:border-cyan-400 transition">
-                  <div className="flex justify-between items-start mb-4">
+                <div
+                  key={resource.id}
+                  className="rounded-lg p-6 hover:shadow-lg transition"
+                  style={{
+                    backgroundColor: '#FFFFFF',
+                    borderLeft: '4px solid #0078D4',
+                  }}
+                >
+                  <div className="flex justify-between items-start mb-6">
                     <div>
-                      <h3 className="text-2xl font-bold text-white">{resource.resource_name}</h3>
-                      <p className="text-gray-400 text-sm mt-1">
+                      <h3 className="text-2xl font-bold" style={{ color: '#111827' }}>
+                        {resource.resource_name}
+                      </h3>
+                      <p className="text-sm mt-1" style={{ color: '#6B7280' }}>
                         Created: {new Date(resource.created_at).toLocaleDateString()}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-3xl font-bold text-green-400">${resource.monthly_cost.toFixed(2)}</p>
-                      <p className="text-gray-400 text-sm">/month</p>
+                      <p className="text-3xl font-bold" style={{ color: '#10B981' }}>
+                        ${resource.monthly_cost.toFixed(2)}
+                      </p>
+                      <p className="text-sm" style={{ color: '#6B7280' }}>/month</p>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    <div className="bg-slate-800 p-3 rounded">
-                      <p className="text-gray-400 text-xs">Type</p>
-                      <p className="text-white font-semibold capitalize">{resource.resource_type}</p>
+                  {/* Resource Details Grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" style={{ borderBottom: '1px solid #E5E7EB', paddingBottom: '1.5rem' }}>
+                    <div className="rounded p-4" style={{ backgroundColor: '#F9FAFB' }}>
+                      <p className="text-xs font-semibold" style={{ color: '#6B7280' }}>Type</p>
+                      <p className="font-bold mt-1" style={{ color: '#111827' }}>
+                        {resource.resource_type}
+                      </p>
                     </div>
-                    <div className="bg-slate-800 p-3 rounded">
-                      <p className="text-gray-400 text-xs">Size</p>
-                      <p className="text-white font-semibold">{resource.size}</p>
+                    <div className="rounded p-4" style={{ backgroundColor: '#F9FAFB' }}>
+                      <p className="text-xs font-semibold" style={{ color: '#6B7280' }}>Size</p>
+                      <p className="font-bold mt-1" style={{ color: '#111827' }}>
+                        {resource.size}
+                      </p>
                     </div>
-                    <div className="bg-slate-800 p-3 rounded">
-                      <p className="text-gray-400 text-xs">Region</p>
-                      <p className="text-white font-semibold capitalize">{resource.region}</p>
+                    <div className="rounded p-4" style={{ backgroundColor: '#F9FAFB' }}>
+                      <p className="text-xs font-semibold" style={{ color: '#6B7280' }}>Region</p>
+                      <p className="font-bold mt-1" style={{ color: '#111827' }}>
+                        {resource.region}
+                      </p>
                     </div>
-                    <div className="bg-slate-800 p-3 rounded">
-                      <p className="text-gray-400 text-xs">Status</p>
-                      <p className="text-white font-semibold capitalize">
-                        <span className="text-green-400">● </span>
-                        {resource.status}
+                    <div className="rounded p-4" style={{ backgroundColor: '#F9FAFB' }}>
+                      <p className="text-xs font-semibold" style={{ color: '#6B7280' }}>Status</p>
+                      <p className="font-bold mt-1" style={{ color: '#10B981' }}>
+                        ● {resource.status}
                       </p>
                     </div>
                   </div>
 
                   {/* Auto-Delete Warning */}
-                  <div className="p-3 rounded mb-4 bg-red-900/30 border border-red-600">
-                    <p className="text-red-300 font-semibold">
-                      ⏰ Auto-deletes in {calculateTimeUntilAutoDelete(resource.created_at)} minutes
+                  <div className="rounded p-4 mb-6" style={{ backgroundColor: '#FEF3C7', borderLeft: '4px solid #F59E0B' }}>
+                    <p className="font-bold" style={{ color: '#92400E' }}>
+                      ⏰ Auto-deletes in {minutesRemaining} minutes
                     </p>
-                    <p className="text-red-200 text-sm mt-1">
+                    <p className="text-sm mt-2" style={{ color: '#92400E' }}>
                       Delete now to stop charges immediately, or it will auto-delete after 1 hour
                     </p>
                   </div>
@@ -298,13 +320,17 @@ export default function InfrastructureDashboard() {
                     <button
                       onClick={() => handleDelete(resource.id, resource.resource_name)}
                       disabled={deleting === resource.id}
-                      className="flex-1 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+                      className="flex-1 font-bold py-2 px-4 rounded-lg transition duration-200 text-white"
+                      style={{
+                        backgroundColor: deleting === resource.id ? '#D1D5DB' : '#EF4444',
+                      }}
                     >
                       {deleting === resource.id ? 'Deleting...' : '🗑 Delete Resource'}
                     </button>
                     <button
                       onClick={() => router.push(`/infrastructure-portal`)}
-                      className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
+                      className="flex-1 font-bold py-2 px-4 rounded-lg transition duration-200 text-white"
+                      style={{ backgroundColor: '#6B7280' }}
                     >
                       📋 View Details
                     </button>
@@ -315,16 +341,32 @@ export default function InfrastructureDashboard() {
           </div>
         )}
 
-        {/* Budget Alert Info */}
-        <div className="mt-12 bg-blue-900/20 border border-blue-500 rounded-lg p-6 text-blue-100">
-          <h3 className="font-bold mb-2">💡 About Cost Controls</h3>
-          <ul className="list-disc list-inside space-y-1 text-sm">
-            <li>Resources auto-expire after 30 days to prevent unexpected charges</li>
-            <li>Email reminder sent when 5 days remain before expiration</li>
-            <li>Budget alert triggered if monthly costs exceed $50</li>
-            <li>Delete resources immediately to stop charges</li>
-            <li>All cost estimates calculated at deployment time</li>
-          </ul>
+        {/* Cost Controls Info */}
+        <div className="mt-12 rounded-lg p-8" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #0078D4' }}>
+          <h3 className="text-2xl font-bold mb-6" style={{ color: '#111827' }}>💡 About Cost Controls</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            {[
+              { icon: '📅', title: '30-Day Auto-Expiry', desc: 'Resources automatically deleted after 30 days' },
+              { icon: '📧', title: 'Email Reminders', desc: 'Notification sent 5 days before expiration' },
+              { icon: '💰', title: 'Budget Alert', desc: 'Alert triggered if costs exceed $50/month' },
+              { icon: '🗑️', title: 'Immediate Deletion', desc: 'Delete anytime to stop charges instantly' },
+              { icon: '📊', title: 'Cost Estimates', desc: 'Calculated at deployment time' },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="rounded-lg p-4"
+                style={{ backgroundColor: '#F0F9FF', borderLeft: '3px solid #0078D4' }}
+              >
+                <p className="text-2xl mb-2">{item.icon}</p>
+                <p className="font-bold mb-1" style={{ color: '#111827' }}>
+                  {item.title}
+                </p>
+                <p className="text-sm" style={{ color: '#6B7280' }}>
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
     </div>
