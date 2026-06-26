@@ -7,21 +7,22 @@ export default function CloudCostROICalculatorPage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'features' | 'calculator'>('overview')
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen" style={{ backgroundColor: '#F0F9FF' }}>
       {/* Header */}
-      <header className="bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
+      <header className="sticky top-0 z-50" style={{ backgroundColor: '#0E7C86', borderBottom: '3px solid #006B76' }}>
         <div className="max-w-6xl mx-auto px-4 py-6">
           <button
             onClick={() => window.history.back()}
-            className="text-gray-400 hover:text-white flex items-center gap-2 mb-4"
+            className="flex items-center gap-2 mb-4 font-semibold transition"
+            style={{ color: '#FFFFFF' }}
           >
             ← Back
           </button>
           <div>
-            <h1 className="text-4xl font-bold text-white flex items-center gap-3">
+            <h1 className="text-4xl font-bold flex items-center gap-3" style={{ color: '#FFFFFF' }}>
               <span>💰</span> Cloud Cost ROI Calculator
             </h1>
-            <p className="text-gray-300 text-lg mt-2">
+            <p className="text-lg mt-2" style={{ color: '#E0F7FF' }}>
               Calculate return on investment for your cloud infrastructure • Built with Claude AI
             </p>
           </div>
@@ -34,43 +35,45 @@ export default function CloudCostROICalculatorPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
           <Link
             href="/projects/cloud-cost-roi-calculator/calculator"
-            className="bg-white border border-gray-400 rounded-lg p-6 hover:border-blue-500 transition"
+            className="rounded-lg p-6 hover:shadow-lg transition border-2"
+            style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86', color: '#0E7C86' }}
           >
-            <p className="text-gray-800 text-sm mb-2">🚀 Open Calculator</p>
-            <p className="text-gray-800 font-semibold">Start Analysis</p>
-            <p className="text-xs text-gray-500 mt-2">Interactive ROI calculator</p>
+            <p className="text-sm mb-2">🚀 Open Calculator</p>
+            <p className="font-semibold" style={{ color: '#006B76' }}>Start Analysis</p>
+            <p className="text-xs mt-2" style={{ color: '#4A9FA5' }}>Interactive ROI calculator</p>
           </Link>
 
           <a
             href="https://github.com/saybabatunde/cloud-cost-roi-calculator"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white border border-gray-400 rounded-lg p-6 hover:border-green-500 transition"
+            className="rounded-lg p-6 hover:shadow-lg transition border-2"
+            style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86', color: '#0E7C86' }}
           >
-            <p className="text-gray-800 text-sm mb-2">📦 GitHub</p>
-            <p className="text-gray-800 font-semibold">View Source</p>
-            <p className="text-xs text-gray-500 mt-2">Full code + documentation</p>
+            <p className="text-sm mb-2">📦 GitHub</p>
+            <p className="font-semibold" style={{ color: '#006B76' }}>View Source</p>
+            <p className="text-xs mt-2" style={{ color: '#4A9FA5' }}>Full code + documentation</p>
           </a>
 
-          <div className="bg-white border border-gray-400 rounded-lg p-6">
-            <p className="text-gray-800 text-sm mb-2">⚡ Built With</p>
-            <p className="text-gray-800 font-semibold">Claude AI</p>
-            <p className="text-xs text-green-400 mt-2">✓ AI-Assisted Development</p>
+          <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86', color: '#0E7C86' }}>
+            <p className="text-sm mb-2">⚡ Built With</p>
+            <p className="font-semibold" style={{ color: '#006B76' }}>Claude AI</p>
+            <p className="text-xs mt-2" style={{ color: '#10B981' }}>✓ AI-Assisted Development</p>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="mb-8 border-b border-slate-700">
+        <div className="mb-8" style={{ borderBottom: '2px solid #0E7C86' }}>
           <div className="flex gap-4 overflow-x-auto">
             {(['overview', 'features', 'calculator'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 py-3 font-semibold border-b-2 transition ${
-                  activeTab === tab
-                    ? 'text-white border-blue-500'
-                    : 'text-gray-300 border-transparent hover:text-white'
-                }`}
+                className={`px-4 py-3 font-semibold border-b-2 transition`}
+                style={{
+                  color: activeTab === tab ? '#0E7C86' : '#4A9FA5',
+                  borderBottomColor: activeTab === tab ? '#0E7C86' : 'transparent',
+                }}
               >
                 {tab === 'overview' && '📋 Overview'}
                 {tab === 'features' && '✨ Features'}
@@ -81,24 +84,24 @@ export default function CloudCostROICalculatorPage() {
         </div>
 
         {/* Tab Content */}
-        <div className="bg-white border border-gray-400 rounded-lg p-8">
+        <div className="rounded-lg p-8 border-2" style={{ backgroundColor: '#FFFFFF', borderColor: '#0E7C86' }}>
           {/* Overview Tab */}
           {activeTab === 'overview' && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">About This Project</h2>
-                <p className="text-gray-800 text-lg mb-4">
+                <h2 className="text-2xl font-bold mb-4" style={{ color: '#006B76' }}>About This Project</h2>
+                <p className="text-lg mb-4" style={{ color: '#1A5A63' }}>
                   A professional-grade ROI calculator built to help businesses and decision-makers understand the financial impact of cloud infrastructure investments.
                 </p>
-                <p className="text-gray-800 mb-4">
+                <p className="mb-4" style={{ color: '#1A5A63' }}>
                   This project demonstrates AI-assisted development capabilities: built using Claude API and MCP servers for rapid, high-quality delivery.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white rounded-lg p-6 border border-gray-400">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-3">🎯 Problem Solved</h3>
-                  <ul className="space-y-2 text-gray-800">
+                <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#F0F9FF', borderColor: '#0E7C86' }}>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: '#006B76' }}>🎯 Problem Solved</h3>
+                  <ul className="space-y-2" style={{ color: '#1A5A63' }}>
                     <li>✓ Hard to justify cloud investments</li>
                     <li>✓ Complex ROI calculations</li>
                     <li>✓ No clear cost visualization</li>
@@ -106,9 +109,9 @@ export default function CloudCostROICalculatorPage() {
                   </ul>
                 </div>
 
-                <div className="bg-white rounded-lg p-6 border border-gray-400">
-                  <h3 className="text-lg font-semibold text-green-400 mb-3">💡 Solution</h3>
-                  <ul className="space-y-2 text-gray-800">
+                <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#F0F9FF', borderColor: '#0E7C86' }}>
+                  <h3 className="text-lg font-semibold mb-3" style={{ color: '#10B981' }}>💡 Solution</h3>
+                  <ul className="space-y-2" style={{ color: '#1A5A63' }}>
                     <li>✓ Easy-to-use calculator</li>
                     <li>✓ Automatic ROI computation</li>
                     <li>✓ Visual charts & graphs</li>
@@ -117,9 +120,9 @@ export default function CloudCostROICalculatorPage() {
                 </div>
               </div>
 
-              <div className="bg-blue-900/20 border border-gray-400 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-blue-300 mb-2">🤖 AI-Assisted Development</h3>
-                <p className="text-gray-800">
+              <div className="rounded-lg p-6 border-2" style={{ backgroundColor: '#E0F7FF', borderColor: '#0E7C86' }}>
+                <h3 className="text-lg font-semibold mb-2" style={{ color: '#006B76' }}>🤖 AI-Assisted Development</h3>
+                <p style={{ color: '#1A5A63' }}>
                   Built using Claude AI and MCP Servers for rapid prototyping. Demonstrates ability to leverage AI tools for faster, quality development while maintaining professional standards.
                 </p>
               </div>
