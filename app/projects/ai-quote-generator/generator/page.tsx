@@ -48,8 +48,9 @@ export default function GeneratorPage() {
       console.log('API Response:', data, 'Status:', response.status)
 
       if (!response.ok) {
-        console.error('API Error:', data)
-        throw new Error(data.error || 'Failed to generate quote')
+        console.error('API Error Status:', response.status)
+        console.error('API Error Full Response:', JSON.stringify(data, null, 2))
+        throw new Error(data.details || data.error || 'Failed to generate quote')
       }
 
       if (data.quote) {
