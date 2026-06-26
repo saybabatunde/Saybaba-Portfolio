@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     const themePrompt = THEME_PROMPTS[theme] || THEME_PROMPTS.motivational
 
     const message = await client.messages.create({
-      model: 'claude-opus-4-1',
+      model: 'claude-opus-4-8',
       max_tokens: 200,
       messages: [
         {
@@ -44,7 +44,7 @@ Format your response EXACTLY like this:
 QUOTE: [The quote here]
 AUTHOR: [Author name or "Unknown" if original]
 
-Make sure the quote is unique, not a famous quote. Create something original.`,
+Make sure the quote is unique and original. Create something new that you haven't generated before.`,
         },
       ],
     })
