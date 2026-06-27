@@ -49,7 +49,6 @@ interface Assessment {
 }
 
 export default function MigrationPlannerPage() {
-  const router = useRouter()
   const [step, setStep] = useState<'upload' | 'loading' | 'assessment' | 'timeline' | 'results'>('upload')
   const [vms, setVms] = useState<VM[]>([])
   const [assessments, setAssessments] = useState<Assessment[]>([])
