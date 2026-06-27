@@ -14,28 +14,25 @@ interface MigrationData {
 
 export async function POST(request: NextRequest) {
   try {
-    // Check if API key is configured
     if (!process.env.RESEND_API_KEY) {
       console.error('RESEND_API_KEY is not configured')
       return NextResponse.json(
-        { error: 'Email service is not configured. Please check environment variables.' },
+        { error: 'Email service is not configured' },
         { status: 500 }
       )
     }
 
     const { email, format, migrationData } = await request.json()
 
-    console.log('Email request received:', { email, format })
+    console.log('Report request:', { email, format, vmCount: migrationData?.vms?.length })
 
-    // Validation
-    if (!email || !format) {
+    if (!email || !format || !migrationData) {
       return NextResponse.json(
-        { error: 'Email and format are required' },
+        { error: 'Email, format, and migration data are required' },
         { status: 400 }
       )
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -44,19 +41,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Generate report content
-    const reportContent = generateReportContent(migrationData, format)
+    console.log('Sending report to:', email)
 
-    console.log('Sending email to:', email)
-
-    // Send email via Resend
-    let emailResponse: any
-    try {
-      emailResponse = await resend.emails.send({
-        from: 'Migration Planner <onboarding@resend.dev>',
-        to: email,
-        subject: 'Your VMware to Azure Migration Analysis Report',
-        html: `
+    const emailResponse = await resend.emails.send({
+      from: 'Migration Planner <onboarding@resend.dev>',
+      to: email,
+      subject: 'Your VMware to Azure Migration Analysis Report',
+      html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #374151;">
           <div style="background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%); color: white; padding: 40px 20px; border-radius: 8px 8px 0 0; text-align: center;">
             <h1 style="margin: 0; font-size: 28px;">VMware to Azure Migration Planner</h1>
@@ -124,7 +115,7 @@ export async function POST(request: NextRequest) {
             <div style="background: #DCFCE7; border-left: 4px solid #10B981; padding: 20px; border-radius: 4px; margin: 20px 0;">
               <h4 style="margin-top: 0; color: #166534;">✅ Next Steps</h4>
               <ol style="margin: 0; color: #166534;">
-                <li>Review the attached report thoroughly</li>
+                <li>Review the report and summary</li>
                 <li>Share with your IT leadership team</li>
                 <li>Schedule migration planning sessions</li>
                 <li>Set up Azure subscriptions and networking</li>
@@ -133,7 +124,7 @@ export async function POST(request: NextRequest) {
             </div>
 
             <p style="margin-top: 30px; color: #6B7280; font-size: 14px;">
-              Questions? Visit the Migration Planner tool to create additional scenarios or refine your analysis.
+              Need more details? Visit the Migration Planner tool to refine your analysis or create additional scenarios.
             </p>
 
             <p style="margin: 20px 0 0 0; padding-top: 20px; border-top: 1px solid #E5E7EB; color: #6B7280; font-size: 12px;">
@@ -143,22 +134,31 @@ export async function POST(request: NextRequest) {
           </div>
 
           <div style="background: #F9FAFB; padding: 20px; text-align: center; font-size: 12px; color: #9CA3AF; border-radius: 0 0 8px 8px; border: 1px solid #E5E7EB; border-top: none;">
-            <p style="margin: 0;">This report was generated securely and sent via Resend. Your infrastructure data is not stored on our servers. If this email lands in spam, please mark it as "Not Spam" to ensure future reports arrive in your inbox.</p>
+            <p style="margin: 0;">This report was generated securely and sent via Resend. Your infrastructure data is not stored on our servers. If this email lands in spam, please mark it as "Not Spam" to improve delivery.</p>
           </div>
         </div>
       `
     })
 
-    console.log('Email sent successfully:', emailResponse)
+    console.log('Resend response:', { success: !emailResponse.error, error: emailResponse.error })
+
+    if (emailResponse.error) {
+      console.error('Resend error:', emailResponse.error)
+      return NextResponse.json(
+        { error: `Failed to send: ${emailResponse.error.message}` },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({
       success: true,
-      message: `Report sent to ${email}`,
-      format: format
+      message: `Report sent successfully to ${email}`,
+      format: format,
+      emailId: emailResponse.id
     })
 
   } catch (error) {
-    console.error('Error sending email:', error)
+    console.error('API Error:', error)
     return NextResponse.json(
       {
         error: 'Failed to send report',
@@ -187,6 +187,5 @@ function generateReportContent(data: MigrationData, format: string): string {
     return csv
   }
 
-  // For PDF and DOCX, return a summary
   return JSON.stringify(data, null, 2)
 }
