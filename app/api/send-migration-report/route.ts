@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
 
     // Send email via Resend
     const emailResponse = await resend.emails.send({
-      from: 'Migration Planner <noreply@migration-planner.vercel.app>',
+      from: 'Migration Planner <onboarding@resend.dev>',
       to: email,
       subject: 'Your VMware to Azure Migration Analysis Report',
       html: `
@@ -141,7 +141,7 @@ export async function POST(request: NextRequest) {
           </div>
 
           <div style="background: #F9FAFB; padding: 20px; text-align: center; font-size: 12px; color: #9CA3AF; border-radius: 0 0 8px 8px; border: 1px solid #E5E7EB; border-top: none;">
-            <p style="margin: 0;">This report was generated securely and sent via Resend. Your infrastructure data is not stored on our servers.</p>
+            <p style="margin: 0;">This report was generated securely and sent via Resend. Your infrastructure data is not stored on our servers. If this email lands in spam, please mark it as "Not Spam" to ensure future reports arrive in your inbox.</p>
           </div>
         </div>
       `
