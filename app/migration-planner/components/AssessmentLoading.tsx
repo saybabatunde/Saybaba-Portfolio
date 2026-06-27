@@ -30,8 +30,8 @@ export default function AssessmentLoading({ vmCount, onComplete }: AssessmentLoa
   ]
 
   useEffect(() => {
-    // Simulate assessment progress over 120 seconds
-    const totalDuration = 120000 // 120 seconds in ms
+    // Simulate assessment progress over 90 seconds
+    const totalDuration = 90000 // 90 seconds in ms
     const startTime = Date.now()
     const stepDuration = totalDuration / steps.length
 
@@ -120,7 +120,7 @@ export default function AssessmentLoading({ vmCount, onComplete }: AssessmentLoa
             Time Elapsed
           </p>
           <p style={{ color: '#111827' }} className="text-2xl font-bold mt-2">
-            {Math.round((progress / 100) * 120)}s
+            {Math.round((progress / 100) * 90)}s
           </p>
         </div>
         <div className="rounded-lg p-4" style={{ backgroundColor: '#F3F4F6' }}>
@@ -128,7 +128,7 @@ export default function AssessmentLoading({ vmCount, onComplete }: AssessmentLoa
             Time Left
           </p>
           <p style={{ color: '#111827' }} className="text-2xl font-bold mt-2">
-            {Math.max(0, Math.round(120 - (progress / 100) * 120))}s
+            {Math.max(0, Math.round(90 - (progress / 100) * 90))}s
           </p>
         </div>
       </div>
