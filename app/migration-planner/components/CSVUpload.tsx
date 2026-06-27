@@ -124,6 +124,38 @@ export default function CSVUpload({ onUpload, loading }: CSVUploadProps) {
     document.body.removeChild(link)
   }
 
+  const loadHeavySampleCSV = async () => {
+    try {
+      const response = await fetch('/heavy-sample-vmware-inventory.csv')
+      const csvContent = await response.text()
+
+      Papa.parse(csvContent, {
+        header: true,
+        complete: (results) => {
+          const vms = results.data
+            .filter((row: any) => row.name && row.vcpu)
+            .map((row: any) => ({
+              name: row.name,
+              vcpu: parseInt(row.vcpu),
+              memory_gb: parseInt(row.memory_gb),
+              storage_gb: parseInt(row.storage_gb),
+              os: row.os || 'Windows Server 2019',
+              annual_cost_onprem: parseInt(row.annual_cost_onprem) || 5000
+            }))
+
+          if (vms.length > 0) {
+            onUpload(vms)
+          }
+        },
+        error: (error: any) => {
+          alert(`Error parsing CSV: ${error.message}`)
+        }
+      })
+    } catch (error) {
+      alert('Failed to load heavy sample CSV')
+    }
+  }
+
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-8 text-center">
@@ -212,6 +244,23 @@ export default function CSVUpload({ onUpload, loading }: CSVUploadProps) {
             </button>
             <p style={{ color: '#6B7280' }} className="text-xs">
               Download to customize with your own VM data
+            </p>
+
+            {/* Heavy Sample Button (120s Progress) */}
+            <button
+              onClick={loadHeavySampleCSV}
+              disabled={loading}
+              className="w-full font-bold py-3 rounded-lg transition text-white border-2"
+              style={{
+                backgroundColor: loading ? '#D1D5DB' : '#8B5CF6',
+                borderColor: '#7C3AED',
+                opacity: loading ? 0.7 : 1
+              }}
+            >
+              {loading ? 'Loading...' : '⏱️ Load Heavy Sample (100+ VMs)'}
+            </button>
+            <p style={{ color: '#6B7280' }} className="text-xs">
+              Enterprise-scale with progress bar (120s assessment time)
             </p>
 
             {/* Large Demo Button */}

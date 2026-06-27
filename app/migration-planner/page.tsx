@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import CSVUpload from './components/CSVUpload'
+import AssessmentLoading from './components/AssessmentLoading'
 import AssessmentResults from './components/AssessmentResults'
 import MigrationTimeline from './components/MigrationTimeline'
 import ReportDownloadModal from './components/ReportDownloadModal'
@@ -51,7 +52,7 @@ interface Assessment {
 
 export default function MigrationPlannerPage() {
   const router = useRouter()
-  const [step, setStep] = useState<'upload' | 'assessment' | 'timeline' | 'results'>('upload')
+  const [step, setStep] = useState<'upload' | 'loading' | 'assessment' | 'timeline' | 'results'>('upload')
   const [vms, setVms] = useState<VM[]>([])
   const [assessments, setAssessments] = useState<Assessment[]>([])
   const [showReportModal, setShowReportModal] = useState(false)
@@ -59,18 +60,15 @@ export default function MigrationPlannerPage() {
 
   const handleCSVUpload = async (uploadedVMs: VM[]) => {
     setVms(uploadedVMs)
-    setLoading(true)
+    setStep('loading')
+    setLoading(false) // Loading component handles its own progress
+  }
 
-    try {
-      // Simulate assessment analysis
-      const results = uploadedVMs.map((vm) => analyzeVM(vm))
-      setAssessments(results)
-      setStep('assessment')
-    } catch (error) {
-      console.error('Error analyzing VMs:', error)
-    } finally {
-      setLoading(false)
-    }
+  const handleAssessmentComplete = () => {
+    // Perform the actual analysis
+    const results = vms.map((vm) => analyzeVM(vm))
+    setAssessments(results)
+    setStep('assessment')
   }
 
   const analyzeVM = (vm: VM): Assessment => {
@@ -207,6 +205,10 @@ export default function MigrationPlannerPage() {
         {/* Content */}
         {step === 'upload' && (
           <CSVUpload onUpload={handleCSVUpload} loading={loading} />
+        )}
+
+        {step === 'loading' && vms.length > 0 && (
+          <AssessmentLoading vmCount={vms.length} onComplete={handleAssessmentComplete} />
         )}
 
         {step === 'assessment' && assessments.length > 0 && (
