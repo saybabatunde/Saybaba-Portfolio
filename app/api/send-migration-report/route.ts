@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
     console.log('Sending report to:', email)
 
     const emailResponse = await resend.emails.send({
-      from: 'Migration Planner <onboarding@resend.dev>',
+      from: 'Migration Planner <noreply@babatundeportfolio.com>',
       to: email,
       subject: 'Your VMware to Azure Migration Analysis Report',
       html: `
