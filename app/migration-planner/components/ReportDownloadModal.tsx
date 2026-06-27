@@ -29,6 +29,12 @@ export default function ReportDownloadModal({ data, onClose }: ReportDownloadMod
     setMessage('')
 
     try {
+      console.log('Sending report to:', email)
+
+      // Add timeout to prevent hanging
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), 30000) // 30 second timeout
+
       const response = await fetch('/api/send-migration-report', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -36,27 +42,40 @@ export default function ReportDownloadModal({ data, onClose }: ReportDownloadMod
           email: email.trim(),
           format: format,
           migrationData: data
-        })
+        }),
+        signal: controller.signal
       })
 
-      const result = await response.json()
+      clearTimeout(timeout)
+
+      console.log('Response status:', response.status)
+
+      let result: any
+      try {
+        result = await response.json()
+      } catch (jsonError) {
+        console.error('Failed to parse JSON:', jsonError)
+        setMessage('Error: Invalid response from server')
+        setLoading(false)
+        return
+      }
 
       console.log('API Response:', { status: response.status, result })
 
-      if (response.ok) {
+      if (response.ok && result.success) {
         setEmailSent(true)
         setMessage(`✓ Report sent to ${email}`)
         setTimeout(() => onClose(), 3000)
       } else {
-        const errorMsg = result.error || result.details || 'Failed to send report'
+        const errorMsg = result?.error || result?.details || 'Failed to send report. Please try again.'
         console.error('API Error:', errorMsg)
         setMessage(`Error: ${errorMsg}`)
+        setLoading(false)
       }
     } catch (error) {
       console.error('Network Error:', error)
-      const errorMsg = error instanceof Error ? error.message : 'Failed to send report'
+      const errorMsg = error instanceof Error ? error.message : 'Network error. Please check your connection and try again.'
       setMessage(`Error: ${errorMsg}`)
-    } finally {
       setLoading(false)
     }
   }
