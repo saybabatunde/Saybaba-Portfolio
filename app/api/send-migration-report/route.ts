@@ -154,12 +154,15 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    console.error('API Error:', error)
-    const errorMsg = error instanceof Error ? error.message : 'Unknown error'
+    console.error('API Catch Error:', error)
+    const errorMsg = error instanceof Error ? error.message : String(error)
+    const errorStack = error instanceof Error ? error.stack : 'No stack trace'
+    console.error('Error Details:', { errorMsg, errorStack })
     return NextResponse.json(
       {
-        error: 'Failed to send report',
-        details: errorMsg
+        error: `Failed to send report: ${errorMsg}`,
+        details: errorMsg,
+        type: error instanceof Error ? error.name : 'Unknown'
       },
       { status: 500 }
     )
