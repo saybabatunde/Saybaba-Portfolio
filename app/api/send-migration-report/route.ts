@@ -50,11 +50,13 @@ export async function POST(request: NextRequest) {
     console.log('Sending email to:', email)
 
     // Send email via Resend
-    const emailResponse = await resend.emails.send({
-      from: 'Migration Planner <onboarding@resend.dev>',
-      to: email,
-      subject: 'Your VMware to Azure Migration Analysis Report',
-      html: `
+    let emailResponse: any
+    try {
+      emailResponse = await resend.emails.send({
+        from: 'Migration Planner <onboarding@resend.dev>',
+        to: email,
+        subject: 'Your VMware to Azure Migration Analysis Report',
+        html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; line-height: 1.6; color: #374151;">
           <div style="background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%); color: white; padding: 40px 20px; border-radius: 8px 8px 0 0; text-align: center;">
             <h1 style="margin: 0; font-size: 28px;">VMware to Azure Migration Planner</h1>

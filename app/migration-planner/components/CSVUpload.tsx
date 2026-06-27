@@ -212,38 +212,28 @@ export default function CSVUpload({ onUpload, loading }: CSVUploadProps) {
           </p>
 
           <div className="space-y-3">
-            {/* Sample CSV Button */}
+            {/* Download Sample Button (100+ VMs) */}
             <button
-              onClick={loadSampleCSV}
-              disabled={loading}
-              className="w-full font-bold py-3 rounded-lg transition text-white border-2"
-              style={{
-                backgroundColor: loading ? '#D1D5DB' : '#10B981',
-                borderColor: '#059669',
-                opacity: loading ? 0.7 : 1
+              onClick={() => {
+                const link = document.createElement('a')
+                link.href = '/heavy-sample-vmware-inventory.csv'
+                link.download = 'vmware-inventory-100vms.csv'
+                document.body.appendChild(link)
+                link.click()
+                document.body.removeChild(link)
               }}
-            >
-              {loading ? 'Loading...' : '📥 Load Sample (15 VMs)'}
-            </button>
-            <p style={{ color: '#6B7280' }} className="text-xs">
-              Real enterprise setup with web, app, and database servers
-            </p>
-
-            {/* Download Sample Button */}
-            <button
-              onClick={downloadSampleCSV}
               disabled={loading}
-              className="w-full font-semibold py-2 rounded-lg transition border-2"
+              className="w-full font-semibold py-3 rounded-lg transition border-2"
               style={{
                 backgroundColor: '#FFFFFF',
                 borderColor: '#2563EB',
                 color: '#2563EB'
               }}
             >
-              📄 Download Sample CSV
+              📄 Download Sample CSV (100+ VMs)
             </button>
             <p style={{ color: '#6B7280' }} className="text-xs">
-              Download to customize with your own VM data
+              Enterprise-scale template with realistic infrastructure to customize with your own data
             </p>
 
             {/* Heavy Sample Button (120s Progress) */}
