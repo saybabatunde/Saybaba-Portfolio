@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import FormData from 'form-data'
-import Mailgun from 'mailgun.js'
+import { Resend } from 'resend'
 
-const mailgun = new Mailgun(FormData)
-const client = mailgun.client({
-  username: 'api',
-  key: process.env.MAILGUN_API_KEY || ''
-})
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 interface MigrationData {
   vms: any[]
@@ -19,8 +14,8 @@ interface MigrationData {
 
 export async function POST(request: NextRequest) {
   try {
-    if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN) {
-      console.error('Mailgun credentials not configured')
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not configured')
       return NextResponse.json(
         { error: 'Email service is not configured' },
         { status: 500 }
@@ -48,9 +43,8 @@ export async function POST(request: NextRequest) {
 
     console.log('Sending report to:', email)
 
-    const domain = process.env.MAILGUN_DOMAIN || ''
-    const emailResponse = await client.messages.create(domain, {
-      from: `Migration Planner <postmaster@${domain}>`,
+    const emailResponse = await resend.emails.send({
+      from: 'Migration Planner <onboarding@resend.dev>',
       to: email,
       subject: 'Your VMware to Azure Migration Analysis Report',
       html: `
@@ -140,13 +134,21 @@ export async function POST(request: NextRequest) {
           </div>
 
           <div style="background: #F9FAFB; padding: 20px; text-align: center; font-size: 12px; color: #9CA3AF; border-radius: 0 0 8px 8px; border: 1px solid #E5E7EB; border-top: none;">
-            <p style="margin: 0;">This report was generated securely and sent via Mailgun. Your infrastructure data is not stored on our servers.</p>
+            <p style="margin: 0;">This report was generated securely and sent via Resend. Your infrastructure data is not stored on our servers. If this email lands in spam, please mark it as "Not Spam" to improve delivery.</p>
           </div>
         </div>
       `
     })
 
-    console.log('Mailgun response:', { success: true, messageId: emailResponse.id })
+    console.log('Resend response:', { success: !emailResponse.error, error: emailResponse.error })
+
+    if (emailResponse.error) {
+      console.error('Resend error:', emailResponse.error)
+      return NextResponse.json(
+        { error: `Failed to send: ${emailResponse.error.message}` },
+        { status: 500 }
+      )
+    }
 
     return NextResponse.json({
       success: true,
