@@ -250,7 +250,7 @@ export default function CSVUpload({ onUpload, loading }: CSVUploadProps) {
               {loading ? 'Loading...' : '⏱️ Load Heavy Sample (100+ VMs)'}
             </button>
             <p style={{ color: '#6B7280' }} className="text-xs">
-              Enterprise-scale with progress bar (90s assessment time)
+              Enterprise-scale with progress bar (30s assessment time)
             </p>
 
             {/* Large Demo Button */}

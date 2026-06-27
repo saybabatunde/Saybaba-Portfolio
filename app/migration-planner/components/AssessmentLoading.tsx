@@ -30,8 +30,8 @@ export default function AssessmentLoading({ vmCount, onComplete }: AssessmentLoa
   ]
 
   useEffect(() => {
-    // Simulate assessment progress over 90 seconds
-    const totalDuration = 90000 // 90 seconds in ms
+    // Simulate assessment progress over 30 seconds
+    const totalDuration = 30000 // 30 seconds in ms
     const startTime = Date.now()
     const stepDuration = totalDuration / steps.length
 
