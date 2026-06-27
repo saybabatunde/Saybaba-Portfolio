@@ -14,7 +14,18 @@ interface MigrationData {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if API key is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not configured')
+      return NextResponse.json(
+        { error: 'Email service is not configured. Please check environment variables.' },
+        { status: 500 }
+      )
+    }
+
     const { email, format, migrationData } = await request.json()
+
+    console.log('Email request received:', { email, format })
 
     // Validation
     if (!email || !format) {
@@ -35,6 +46,8 @@ export async function POST(request: NextRequest) {
 
     // Generate report content
     const reportContent = generateReportContent(migrationData, format)
+
+    console.log('Sending email to:', email)
 
     // Send email via Resend
     const emailResponse = await resend.emails.send({

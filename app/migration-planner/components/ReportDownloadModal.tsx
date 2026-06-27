@@ -41,16 +41,21 @@ export default function ReportDownloadModal({ data, onClose }: ReportDownloadMod
 
       const result = await response.json()
 
+      console.log('API Response:', { status: response.status, result })
+
       if (response.ok) {
         setEmailSent(true)
         setMessage(`✓ Report sent to ${email}`)
         setTimeout(() => onClose(), 3000)
       } else {
-        setMessage(`Error: ${result.error || 'Failed to send report'}`)
+        const errorMsg = result.error || result.details || 'Failed to send report'
+        console.error('API Error:', errorMsg)
+        setMessage(`Error: ${errorMsg}`)
       }
     } catch (error) {
-      console.error('Error:', error)
-      setMessage('Failed to send report. Please try again.')
+      console.error('Network Error:', error)
+      const errorMsg = error instanceof Error ? error.message : 'Failed to send report'
+      setMessage(`Error: ${errorMsg}`)
     } finally {
       setLoading(false)
     }
