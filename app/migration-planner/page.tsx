@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import CSVUpload from './components/CSVUpload'
 import AssessmentLoading from './components/AssessmentLoading'
 import AssessmentResults from './components/AssessmentResults'
@@ -49,6 +50,7 @@ interface Assessment {
 }
 
 export default function MigrationPlannerPage() {
+  const router = useRouter()
   const [step, setStep] = useState<'upload' | 'loading' | 'assessment' | 'timeline' | 'results'>('upload')
   const [vms, setVms] = useState<VM[]>([])
   const [assessments, setAssessments] = useState<Assessment[]>([])
@@ -146,15 +148,21 @@ export default function MigrationPlannerPage() {
             <div>
               <button
                 onClick={() => {
-                  setStep('upload')
-                  setVms([])
-                  setAssessments([])
-                  setShowReportModal(false)
+                  if (step === 'upload') {
+                    // Exit to dashboard when on upload page
+                    router.push('/dashboard')
+                  } else {
+                    // Reset to upload for other steps
+                    setStep('upload')
+                    setVms([])
+                    setAssessments([])
+                    setShowReportModal(false)
+                  }
                 }}
                 className="text-sm font-semibold flex items-center gap-2 mb-2 hover:opacity-70 transition"
                 style={{ color: '#2563EB', background: 'none', border: 'none', cursor: 'pointer' }}
               >
-                ← Back to Upload
+                ← {step === 'upload' ? 'Back to Dashboard' : 'Back to Upload'}
               </button>
               <h1 className="text-3xl font-bold" style={{ color: '#111827' }}>
                 VMware to Azure Migration Planner
