@@ -67,8 +67,8 @@ export default function ReportDownloadModal({ data, onClose }: ReportDownloadMod
         setMessage(`✓ Report sent to ${email}`)
         setTimeout(() => onClose(), 3000)
       } else {
-        const errorMsg = result?.error || result?.details || 'Failed to send report. Please try again.'
-        console.error('API Error:', errorMsg)
+        const errorMsg = result?.error || result?.details || JSON.stringify(result) || 'Failed to send report. Please try again.'
+        console.error('API Error Details:', { status: response.status, error: errorMsg, fullResponse: result })
         setMessage(`Error: ${errorMsg}`)
         setLoading(false)
       }
