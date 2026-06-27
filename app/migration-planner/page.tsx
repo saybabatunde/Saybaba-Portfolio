@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
 import CSVUpload from './components/CSVUpload'
 import AssessmentLoading from './components/AssessmentLoading'
 import AssessmentResults from './components/AssessmentResults'
@@ -147,9 +145,18 @@ export default function MigrationPlannerPage() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <Link href="/dashboard" className="text-sm font-semibold flex items-center gap-2 mb-2" style={{ color: '#2563EB' }}>
-                ← Back to Dashboard
-              </Link>
+              <button
+                onClick={() => {
+                  setStep('upload')
+                  setVms([])
+                  setAssessments([])
+                  setShowReportModal(false)
+                }}
+                className="text-sm font-semibold flex items-center gap-2 mb-2 hover:opacity-70 transition"
+                style={{ color: '#2563EB', background: 'none', border: 'none', cursor: 'pointer' }}
+              >
+                ← Back to Upload
+              </button>
               <h1 className="text-3xl font-bold" style={{ color: '#111827' }}>
                 VMware to Azure Migration Planner
               </h1>
