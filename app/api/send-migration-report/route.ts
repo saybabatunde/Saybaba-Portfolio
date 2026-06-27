@@ -48,8 +48,9 @@ export async function POST(request: NextRequest) {
 
     console.log('Sending report to:', email)
 
-    const emailResponse = await client.messages.create(process.env.MAILGUN_DOMAIN || '', {
-      from: `Migration Planner <noreply@${process.env.MAILGUN_DOMAIN}>`,
+    const domain = process.env.MAILGUN_DOMAIN || ''
+    const emailResponse = await client.messages.create(domain, {
+      from: `Migration Planner <postmaster@${domain}>`,
       to: email,
       subject: 'Your VMware to Azure Migration Analysis Report',
       html: `
