@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { Resend } from 'resend'
+import FormData from 'form-data'
+import Mailgun from 'mailgun.js'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const mailgun = new Mailgun(FormData)
+const client = mailgun.client({ key: process.env.MAILGUN_API_KEY || '' })
 
 interface MigrationData {
   vms: any[]
@@ -14,8 +16,8 @@ interface MigrationData {
 
 export async function POST(request: NextRequest) {
   try {
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY is not configured')
+    if (!process.env.MAILGUN_API_KEY || !process.env.MAILGUN_DOMAIN) {
+      console.error('Mailgun credentials not configured')
       return NextResponse.json(
         { error: 'Email service is not configured' },
         { status: 500 }
@@ -43,8 +45,10 @@ export async function POST(request: NextRequest) {
 
     console.log('Sending report to:', email)
 
-    const emailResponse = await resend.emails.send({
-      from: 'Migration Planner <onboarding@resend.dev>',
+    const mg = client.domains.domain(process.env.MAILGUN_DOMAIN || '')
+
+    const emailResponse = await mg.messages.create(process.env.MAILGUN_DOMAIN || '', {
+      from: `Migration Planner <noreply@${process.env.MAILGUN_DOMAIN}>`,
       to: email,
       subject: 'Your VMware to Azure Migration Analysis Report',
       html: `
@@ -134,21 +138,13 @@ export async function POST(request: NextRequest) {
           </div>
 
           <div style="background: #F9FAFB; padding: 20px; text-align: center; font-size: 12px; color: #9CA3AF; border-radius: 0 0 8px 8px; border: 1px solid #E5E7EB; border-top: none;">
-            <p style="margin: 0;">This report was generated securely and sent via Resend. Your infrastructure data is not stored on our servers. If this email lands in spam, please mark it as "Not Spam" to improve delivery.</p>
+            <p style="margin: 0;">This report was generated securely and sent via Mailgun. Your infrastructure data is not stored on our servers.</p>
           </div>
         </div>
       `
     })
 
-    console.log('Resend response:', { success: !emailResponse.error, error: emailResponse.error })
-
-    if (emailResponse.error) {
-      console.error('Resend error:', emailResponse.error)
-      return NextResponse.json(
-        { error: `Failed to send: ${emailResponse.error.message}` },
-        { status: 500 }
-      )
-    }
+    console.log('Mailgun response:', { success: true, messageId: emailResponse.id })
 
     return NextResponse.json({
       success: true,
@@ -158,33 +154,13 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('API Error:', error)
+    const errorMsg = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
       {
         error: 'Failed to send report',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        details: errorMsg
       },
       { status: 500 }
     )
   }
-}
-
-function generateReportContent(data: MigrationData, format: string): string {
-  if (format === 'csv') {
-    let csv = 'VM Name,Current CPU,Current RAM (GB),Storage (GB),Recommended Azure Type,Monthly Cost ($),Annual Savings ($),Savings %\n'
-
-    data.assessments.forEach((assessment: any) => {
-      csv += `${assessment.vm_name},${assessment.current_specs.cpu},${assessment.current_specs.memory_gb},${assessment.current_specs.storage_gb},${assessment.azure_recommendation.vm_type},$${assessment.azure_recommendation.monthly_cost},$${Math.round(assessment.azure_recommendation.annual_savings)},${assessment.azure_recommendation.savings_percentage.toFixed(0)}\n`
-    })
-
-    csv += '\n\nSummary\n'
-    csv += `Total VMs,$${data.totalCurrentCost},$${data.totalAzureCost},$${data.totalSavings}\n`
-    csv += `Current Annual Cost (On-Prem),$${data.totalCurrentCost}\n`
-    csv += `Proposed Annual Cost (Azure),$${data.totalAzureCost}\n`
-    csv += `Annual Savings,$${data.totalSavings}\n`
-    csv += `Savings Percentage,${((data.totalSavings / data.totalCurrentCost) * 100).toFixed(0)}%\n`
-
-    return csv
-  }
-
-  return JSON.stringify(data, null, 2)
 }
