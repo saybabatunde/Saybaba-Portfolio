@@ -3,7 +3,10 @@ import FormData from 'form-data'
 import Mailgun from 'mailgun.js'
 
 const mailgun = new Mailgun(FormData)
-const client = mailgun.client({ key: process.env.MAILGUN_API_KEY || '' })
+const client = mailgun.client({
+  username: 'api',
+  key: process.env.MAILGUN_API_KEY || ''
+})
 
 interface MigrationData {
   vms: any[]
@@ -45,9 +48,7 @@ export async function POST(request: NextRequest) {
 
     console.log('Sending report to:', email)
 
-    const mg = client.domains.domain(process.env.MAILGUN_DOMAIN || '')
-
-    const emailResponse = await mg.messages.create(process.env.MAILGUN_DOMAIN || '', {
+    const emailResponse = await client.messages.create(process.env.MAILGUN_DOMAIN || '', {
       from: `Migration Planner <noreply@${process.env.MAILGUN_DOMAIN}>`,
       to: email,
       subject: 'Your VMware to Azure Migration Analysis Report',
