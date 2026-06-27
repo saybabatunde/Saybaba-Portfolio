@@ -1,0 +1,200 @@
+'use client'
+
+import { useState } from 'react'
+import Papa from 'papaparse'
+
+interface VM {
+  name: string
+  vcpu: number
+  memory_gb: number
+  storage_gb: number
+  os: string
+  annual_cost_onprem: number
+}
+
+interface CSVUploadProps {
+  onUpload: (vms: VM[]) => void
+  loading: boolean
+}
+
+const DEMO_DATA: VM[] = [
+  { name: 'prod-web-01', vcpu: 4, memory_gb: 16, storage_gb: 100, os: 'Windows Server 2019', annual_cost_onprem: 5000 },
+  { name: 'prod-db-01', vcpu: 8, memory_gb: 32, storage_gb: 500, os: 'Windows Server 2019', annual_cost_onprem: 12000 },
+  { name: 'prod-app-01', vcpu: 4, memory_gb: 16, storage_gb: 150, os: 'Windows Server 2019', annual_cost_onprem: 5500 },
+  { name: 'dev-vm-01', vcpu: 2, memory_gb: 8, storage_gb: 50, os: 'Windows Server 2019', annual_cost_onprem: 2000 },
+  { name: 'dev-vm-02', vcpu: 2, memory_gb: 8, storage_gb: 50, os: 'Windows Server 2019', annual_cost_onprem: 2000 },
+  { name: 'test-db-01', vcpu: 4, memory_gb: 16, storage_gb: 200, os: 'Windows Server 2019', annual_cost_onprem: 4500 },
+  { name: 'app-server-01', vcpu: 4, memory_gb: 16, storage_gb: 100, os: 'Windows Server 2019', annual_cost_onprem: 4800 },
+  { name: 'file-server-01', vcpu: 2, memory_gb: 8, storage_gb: 800, os: 'Windows Server 2019', annual_cost_onprem: 6000 },
+]
+
+export default function CSVUpload({ onUpload, loading }: CSVUploadProps) {
+  const [dragActive, setDragActive] = useState(false)
+
+  const handleDrag = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true)
+    } else if (e.type === 'dragleave') {
+      setDragActive(false)
+    }
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(false)
+
+    const files = e.dataTransfer.files
+    if (files && files[0]) {
+      parseCSV(files[0])
+    }
+  }
+
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      parseCSV(e.target.files[0])
+    }
+  }
+
+  const parseCSV = (file: File) => {
+    Papa.parse(file, {
+      header: true,
+      complete: (results) => {
+        const vms = results.data
+          .filter((row: any) => row.name && row.vcpu)
+          .map((row: any) => ({
+            name: row.name,
+            vcpu: parseInt(row.vcpu),
+            memory_gb: parseInt(row.memory_gb),
+            storage_gb: parseInt(row.storage_gb),
+            os: row.os || 'Windows Server 2019',
+            annual_cost_onprem: parseInt(row.annual_cost_onprem) || 5000
+          }))
+
+        if (vms.length > 0) {
+          onUpload(vms)
+        }
+      },
+      error: (error: any) => {
+        alert(`Error parsing CSV: ${error.message}`)
+      }
+    })
+  }
+
+  return (
+    <div className="max-w-3xl mx-auto">
+      <div className="mb-8 text-center">
+        <h2 className="text-3xl font-bold mb-2" style={{ color: '#111827' }}>
+          Upload Your VMware Inventory
+        </h2>
+        <p style={{ color: '#6B7280' }}>
+          Import your on-prem VM details to get migration recommendations and cost analysis
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6 mb-8">
+        {/* Upload Section */}
+        <div
+          onDragEnter={handleDrag}
+          onDragLeave={handleDrag}
+          onDragOver={handleDrag}
+          onDrop={handleDrop}
+          className="border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition"
+          style={{
+            borderColor: dragActive ? '#2563EB' : '#D1D5DB',
+            backgroundColor: dragActive ? '#F0F9FF' : '#FFFFFF'
+          }}
+        >
+          <input
+            type="file"
+            accept=".csv"
+            onChange={handleFileInput}
+            className="hidden"
+            id="csv-input"
+            disabled={loading}
+          />
+          <label htmlFor="csv-input" className="cursor-pointer block">
+            <div className="text-4xl mb-4">📤</div>
+            <h3 className="text-lg font-bold mb-2" style={{ color: '#111827' }}>
+              Drop CSV here
+            </h3>
+            <p style={{ color: '#6B7280' }} className="mb-4">
+              or click to browse
+            </p>
+            <p style={{ color: '#9CA3AF' }} className="text-sm">
+              CSV should have: name, vcpu, memory_gb, storage_gb, os, annual_cost_onprem
+            </p>
+          </label>
+        </div>
+
+        {/* Demo Scenario */}
+        <div className="rounded-lg p-8" style={{ backgroundColor: '#F0F9FF', border: '2px solid #BFDBFE' }}>
+          <h3 className="text-lg font-bold mb-4" style={{ color: '#1E40AF' }}>
+            Try Demo Scenario
+          </h3>
+          <p style={{ color: '#374151' }} className="mb-6 text-sm">
+            Click below to load a sample 50-VM enterprise infrastructure scenario. This is perfect for testing all features.
+          </p>
+          <button
+            onClick={() => onUpload(DEMO_DATA)}
+            disabled={loading}
+            className="w-full font-bold py-3 rounded-lg transition text-white"
+            style={{
+              backgroundColor: loading ? '#D1D5DB' : '#2563EB',
+              opacity: loading ? 0.7 : 1
+            }}
+          >
+            {loading ? 'Loading...' : '📊 Load Demo (50 VMs)'}
+          </button>
+          <p style={{ color: '#6B7280' }} className="text-xs mt-4">
+            Demo includes a realistic mix of web servers, databases, development VMs, and file servers.
+          </p>
+        </div>
+      </div>
+
+      {/* CSV Template */}
+      <div className="rounded-lg p-6" style={{ backgroundColor: '#F9FAFB', border: '1px solid #E5E7EB' }}>
+        <h3 className="text-lg font-bold mb-4" style={{ color: '#111827' }}>
+          📋 CSV Template
+        </h3>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm" style={{ color: '#374151' }}>
+            <thead style={{ backgroundColor: '#F3F4F6' }}>
+              <tr>
+                <th className="px-4 py-2 text-left font-bold">name</th>
+                <th className="px-4 py-2 text-left font-bold">vcpu</th>
+                <th className="px-4 py-2 text-left font-bold">memory_gb</th>
+                <th className="px-4 py-2 text-left font-bold">storage_gb</th>
+                <th className="px-4 py-2 text-left font-bold">os</th>
+                <th className="px-4 py-2 text-left font-bold">annual_cost_onprem</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderTop: '1px solid #E5E7EB' }}>
+                <td className="px-4 py-3">prod-web-01</td>
+                <td className="px-4 py-3">4</td>
+                <td className="px-4 py-3">16</td>
+                <td className="px-4 py-3">100</td>
+                <td className="px-4 py-3">Windows Server 2019</td>
+                <td className="px-4 py-3">5000</td>
+              </tr>
+              <tr style={{ borderTop: '1px solid #E5E7EB', backgroundColor: '#F9FAFB' }}>
+                <td className="px-4 py-3">prod-db-01</td>
+                <td className="px-4 py-3">8</td>
+                <td className="px-4 py-3">32</td>
+                <td className="px-4 py-3">500</td>
+                <td className="px-4 py-3">Windows Server 2019</td>
+                <td className="px-4 py-3">12000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style={{ color: '#6B7280' }} className="text-xs mt-4">
+          Download this template to fill in your own VM data. Annual cost should be in USD.
+        </p>
+      </div>
+    </div>
+  )
+}

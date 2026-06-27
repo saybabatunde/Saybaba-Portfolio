@@ -132,6 +132,25 @@ export default function DashboardPage() {
               </div>
             </Link>
 
+            {/* VMware to Azure Migration Planner */}
+            <Link href="/migration-planner">
+              <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-3xl">🔄</span>
+                  <div>
+                    <h4 className="text-xl font-bold group-hover:text-gray-700" style={{ color: '#6B6256' }}>VMware to Azure Migration Planner</h4>
+                    <p className="text-sm font-semibold" style={{ color: '#8A7E73' }}>Infrastructure Migration Assessment</p>
+                  </div>
+                </div>
+                <p className="mb-4 font-medium" style={{ color: '#000000' }}>
+                  Plan your VMware to Azure migration with AI-powered analysis. Upload VM inventory, get sizing recommendations, cost analysis, phased migration timeline, and detailed reports. Email-based reporting.
+                </p>
+                <div className="flex items-center gap-2 font-bold group-hover:gap-3" style={{ color: '#1A1A1A' }}>
+                  Start Assessment <span>→</span>
+                </div>
+              </div>
+            </Link>
+
             {/* Infrastructure Health Dashboard */}
             <Link href="/dashboard/monitoring">
               <div className="rounded-lg border-2 transition duration-300 p-6 cursor-pointer group hover:shadow-lg" style={{ backgroundColor: '#FFFFFF', borderColor: '#D4A17A', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
