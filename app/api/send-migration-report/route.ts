@@ -153,8 +153,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: `Report sent successfully to ${email}`,
-      format: format,
-      emailId: emailResponse.id
+      format: format
     })
 
   } catch (error) {
