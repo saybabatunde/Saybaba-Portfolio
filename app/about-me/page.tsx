@@ -32,7 +32,7 @@ export default function AboutMePage() {
     <div className="min-h-screen" style={{ backgroundColor: '#FFFFFF' }}>
       {/* Header */}
       <header style={{ backgroundColor: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }}>
-        <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 py-12">
           <h1 className="text-4xl md:text-5xl font-bold" style={{ color: '#2563EB' }}>
             About Me
           </h1>
@@ -41,7 +41,7 @@ export default function AboutMePage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-6 py-16">
+      <main className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 items-start">
           {/* Picture Section */}
           <div className="md:col-span-2 flex justify-center md:justify-start">
@@ -94,7 +94,7 @@ export default function AboutMePage() {
                 </p>
 
                 <p style={{ color: '#374151', lineHeight: '1.7', fontSize: '0.95rem', textAlign: 'justify' }}>
-                  My strength is bridging traditional infrastructure with modern cloud operations. I understand the foundation—servers, networking, virtualization, Active Directory, DNS, identity, backup, monitoring, and security—but I also build for where infrastructure is going: automated, repeatable, secure by default, and easier to operate at scale.
+                  My strength is bridging traditional infrastructure with modern cloud operations. I understand the foundation, which includes servers, networking, virtualization, Active Directory, DNS, identity, backup, monitoring, and security. I also build for where infrastructure is going: automated, repeatable, secure by default, and easier to operate at scale.
                 </p>
 
                 <p style={{ color: '#374151', lineHeight: '1.7', fontSize: '0.95rem', textAlign: 'justify' }}>
