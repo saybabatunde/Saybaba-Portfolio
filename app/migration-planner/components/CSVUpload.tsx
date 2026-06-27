@@ -83,6 +83,47 @@ export default function CSVUpload({ onUpload, loading }: CSVUploadProps) {
     })
   }
 
+  const loadSampleCSV = async () => {
+    try {
+      const response = await fetch('/sample-vmware-inventory.csv')
+      const csvContent = await response.text()
+
+      Papa.parse(csvContent, {
+        header: true,
+        complete: (results) => {
+          const vms = results.data
+            .filter((row: any) => row.name && row.vcpu)
+            .map((row: any) => ({
+              name: row.name,
+              vcpu: parseInt(row.vcpu),
+              memory_gb: parseInt(row.memory_gb),
+              storage_gb: parseInt(row.storage_gb),
+              os: row.os || 'Windows Server 2019',
+              annual_cost_onprem: parseInt(row.annual_cost_onprem) || 5000
+            }))
+
+          if (vms.length > 0) {
+            onUpload(vms)
+          }
+        },
+        error: (error: any) => {
+          alert(`Error parsing CSV: ${error.message}`)
+        }
+      })
+    } catch (error) {
+      alert('Failed to load sample CSV')
+    }
+  }
+
+  const downloadSampleCSV = () => {
+    const link = document.createElement('a')
+    link.href = '/sample-vmware-inventory.csv'
+    link.download = 'sample-vmware-inventory.csv'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-8 text-center">
@@ -132,25 +173,63 @@ export default function CSVUpload({ onUpload, loading }: CSVUploadProps) {
         {/* Demo Scenario */}
         <div className="rounded-lg p-8" style={{ backgroundColor: '#F0F9FF', border: '2px solid #BFDBFE' }}>
           <h3 className="text-lg font-bold mb-4" style={{ color: '#1E40AF' }}>
-            Try Demo Scenario
+            Quick Start Options
           </h3>
           <p style={{ color: '#374151' }} className="mb-6 text-sm">
-            Click below to load a sample 50-VM enterprise infrastructure scenario. This is perfect for testing all features.
+            Choose how you want to get started with your migration analysis.
           </p>
-          <button
-            onClick={() => onUpload(DEMO_DATA)}
-            disabled={loading}
-            className="w-full font-bold py-3 rounded-lg transition text-white"
-            style={{
-              backgroundColor: loading ? '#D1D5DB' : '#2563EB',
-              opacity: loading ? 0.7 : 1
-            }}
-          >
-            {loading ? 'Loading...' : '📊 Load Demo (50 VMs)'}
-          </button>
-          <p style={{ color: '#6B7280' }} className="text-xs mt-4">
-            Demo includes a realistic mix of web servers, databases, development VMs, and file servers.
-          </p>
+
+          <div className="space-y-3">
+            {/* Sample CSV Button */}
+            <button
+              onClick={loadSampleCSV}
+              disabled={loading}
+              className="w-full font-bold py-3 rounded-lg transition text-white border-2"
+              style={{
+                backgroundColor: loading ? '#D1D5DB' : '#10B981',
+                borderColor: '#059669',
+                opacity: loading ? 0.7 : 1
+              }}
+            >
+              {loading ? 'Loading...' : '📥 Load Sample (15 VMs)'}
+            </button>
+            <p style={{ color: '#6B7280' }} className="text-xs">
+              Real enterprise setup with web, app, and database servers
+            </p>
+
+            {/* Download Sample Button */}
+            <button
+              onClick={downloadSampleCSV}
+              disabled={loading}
+              className="w-full font-semibold py-2 rounded-lg transition border-2"
+              style={{
+                backgroundColor: '#FFFFFF',
+                borderColor: '#2563EB',
+                color: '#2563EB'
+              }}
+            >
+              📄 Download Sample CSV
+            </button>
+            <p style={{ color: '#6B7280' }} className="text-xs">
+              Download to customize with your own VM data
+            </p>
+
+            {/* Large Demo Button */}
+            <button
+              onClick={() => onUpload(DEMO_DATA)}
+              disabled={loading}
+              className="w-full font-bold py-3 rounded-lg transition text-white"
+              style={{
+                backgroundColor: loading ? '#D1D5DB' : '#6366F1',
+                opacity: loading ? 0.7 : 1
+              }}
+            >
+              {loading ? 'Loading...' : '📊 Load Full Demo (50 VMs)'}
+            </button>
+            <p style={{ color: '#6B7280' }} className="text-xs">
+              Large enterprise scenario with all VM types included
+            </p>
+          </div>
         </div>
       </div>
 

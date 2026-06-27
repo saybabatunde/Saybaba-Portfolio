@@ -1,0 +1,16 @@
+name,vcpu,memory_gb,storage_gb,os,annual_cost_onprem
+prod-web-01,4,16,100,Windows Server 2019,5000
+prod-web-02,4,16,100,Windows Server 2019,5000
+prod-app-01,4,16,150,Windows Server 2019,5500
+prod-app-02,4,16,150,Windows Server 2019,5500
+prod-db-01,8,32,500,Windows Server 2019,12000
+prod-db-02,8,32,500,Windows Server 2019,12000
+prod-db-backup,4,16,800,Windows Server 2019,8000
+dev-web-01,2,8,50,Windows Server 2019,2000
+dev-web-02,2,8,50,Windows Server 2019,2000
+dev-db-01,4,16,200,Windows Server 2019,4500
+test-vm-01,2,8,50,Windows Server 2019,2000
+test-vm-02,2,8,50,Windows Server 2019,2000
+file-server-01,4,16,800,Windows Server 2019,6000
+file-server-02,4,16,800,Windows Server 2019,6000
+backup-server-01,4,16,1000,Windows Server 2019,7000
